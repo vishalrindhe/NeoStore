@@ -49,11 +49,23 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { FooterComponent } from './pages/footer/footer.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { HomepageCardComponent } from './pages/homepage-card/homepage-card.component';
 
+import { RatingModule } from 'ng-starrating';
+import { LoginComponent } from './pages/login/login.component'
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {GoogleLoginProvider,  FacebookLoginProvider} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent,
+    RegistrationComponent,
+    HomepageCardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -104,8 +116,29 @@ import {OverlayModule} from '@angular/cdk/overlay';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    RatingModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '36798735464-gn4v96ut2u7bobb7idabnnn5138k4p86.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1764853540358961')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    } 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

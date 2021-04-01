@@ -1,0 +1,51 @@
+//   .example-container .mat-form-field + .mat-form-field {
+//     margin-left: 8px;
+//   }
+  
+  .example-right-align {
+    text-align: center;
+  }
+  
+//   input.example-right-align::-webkit-outer-spin-button,
+//   input.example-right-align::-webkit-inner-spin-button {
+//     display: none;
+//   }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  
+  mat-form-field{
+    width: 50vh;
+  }
+
+  .orSpan{
+    position: absolute;
+    margin-top: -1.3rem;
+    margin-left:auto;
+    padding:0 5px;
+    background-color: white;
+  }
+
+  // OR part
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: large;
+  }
+  
+  .separator::before,
+  .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.548);
+  }
+  
+  .separator:not(:empty)::before {
+  margin-right: .25em;
+  }
+  
+  .separator:not(:empty)::after {
+  margin-left: .25em;
+  }
