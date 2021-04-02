@@ -11,7 +11,7 @@ export class AppComponent {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  name:string='Vishal'
+  name:string='vishal'
   cartValue:number=5
   panelOpenState = false;
 

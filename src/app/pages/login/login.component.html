@@ -1,31 +1,37 @@
-<div class="container  " style="align-items: center;" >
+<div class="container  mt-5" style="align-items: center;" >
     <div class="row">
       <div class="col-sm-12 col-lg-*  mb-4 " style="text-align: center;">
             <mat-card class="example-card">
                 <mat-card-header >
                     <!-- <h1 style="text-align: center;">Login</h1> -->
                     <!-- <mat-card-title style="text-align: center;"><p style="text-align: center;">Shiba Inu</p></mat-card-title> -->
+                    
                 </mat-card-header>
                 <!-- <mat-form-field appearance="fill" > -->
-                    <mat-label><h1>Login to your account</h1></mat-label>
+                    <p class="mb-2 mt-3">
+                        <span style="color: black; font-size: 6vh;">Neo</span>
+                        <span style="color: red; font-size: 6vh;">Store</span>
+                        </p>
+                    <mat-label class="mb-3"><h1>Login to your account</h1></mat-label>
+
                     <mat-form-field  >
                     
                 <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" required>
+                <input matInput placeholder="pat@example.com" required #email>
                 <mat-icon matSuffix>email</mat-icon>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
                 </mat-form-field>
                 <br>
                 <mat-form-field >
                     <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" required>
+                    <input matInput [type]="hide ? 'password' : 'text'" required #password>
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
             <br>
             <!-- <mat-form-field> -->
-                <button mat-raised-button color="primary">Login</button>
+                <button mat-raised-button color="primary" (click)="check(email.value,password.value)">Login</button>
                 <!-- <mat-icon matSuffix>email</mat-icon> -->
                 <br><br>
                 <mat-label style="color: blue;"><a href="">Forgot Password ?</a></mat-label>
@@ -41,7 +47,7 @@
                         <span class="text-white">Login with Facebook</span>
                         </button>       
            
-                 <button class="m-2"  mat-raised-button style="border-radius: 30px; background-color: #E94235;" (click)="signInWithGoogle()">
+                 <button class="m-2"  mat-raised-button style="border-radius: 30px; background-color: #E94235;" (click)="signInWithGoogle()" >
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                             width="50" height="50"
                             viewBox="0 0 172 172"
@@ -52,7 +58,7 @@
                     </div>
                     <button mat-raised-button (click)="signOut()" >Sign Out</button>
             </div>
-
+            {{getData.name}}
             <div>
                 <!-- <img src="{{ user.photoUrl }}">
                     <div>
@@ -60,6 +66,7 @@
                     <p>{{ user.email }}</p>
                     </div> -->
             </div>
+            
 
             </mat-card>
             

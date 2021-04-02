@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -58,6 +58,9 @@ import { LoginComponent } from './pages/login/login.component'
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {GoogleLoginProvider,  FacebookLoginProvider} from 'angularx-social-login';
+import { CarouselComponent } from './pages/carousel/carousel.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +68,11 @@ import {GoogleLoginProvider,  FacebookLoginProvider} from 'angularx-social-login
     FooterComponent,
     RegistrationComponent,
     HomepageCardComponent,
-    LoginComponent
+    LoginComponent,
+    CarouselComponent,
+    DashboardComponent,
+    routingComponents
+
   ],
   imports: [
     BrowserModule,
