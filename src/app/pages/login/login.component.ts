@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
             this.service.setData(user.name)
             this.getData = this.service.data()
             this.router.navigate(['/dashboard']);
-          } else if(this.output == true)
+          } else(this.output == true)
             {
              this.service.setData(localStorage.getItem("username"))
             } 
@@ -103,9 +103,10 @@ export class LoginComponent implements OnInit {
     if(output == true)
     {
       this.output = output
+      this.service.setData(localStorage.getItem("username"))
       this.router.navigate(['/dashboard']);
     } 
-    else if(this.loggedIn = (this.user != null)){
+    else if(this.loggedIn == (this.user != null)){
       this.router.navigate(['/dashboard']);
     }
     else{

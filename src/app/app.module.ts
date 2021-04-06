@@ -60,6 +60,10 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import {GoogleLoginProvider,  FacebookLoginProvider} from 'angularx-social-login';
 import { CarouselComponent } from './pages/carousel/carousel.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { OrderComponent } from './pages/order/order.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 @NgModule({
@@ -71,7 +75,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     LoginComponent,
     CarouselComponent,
     DashboardComponent,
-    routingComponents
+    routingComponents,
+    ProductsComponent,
+    OrderComponent,
+    ProfileComponent,
+    CartComponent
 
   ],
   imports: [

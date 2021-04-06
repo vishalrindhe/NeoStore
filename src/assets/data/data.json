@@ -1,0 +1,19 @@
+[
+    {"first_name":"Amol",
+        "last_name":"Borkar",
+        "email":"amol.borkar@neosofttech.com",
+        "Pass":"amolb123",
+        "confirmPass":"amolb123",
+        "Phone_no":"8899007766",
+        "Gender":"male"
+    },
+    {"first_name":"Vishal",
+        "last_name":"Rindhe",
+        "email":"vishal.rindhe@neosofttech.com",
+        "Pass":"vishalr123",
+        "confirmPass":"vishalr123",
+        "Phone_no":"9769673645",
+        "Gender":"male"
+    }
+
+]

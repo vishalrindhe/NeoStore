@@ -12,9 +12,9 @@
   
           <!-- The following menu items will be hidden on both SM and XS screen sizes -->
         <div fxShow="true" fxHide.lt-md>
-          <a href="#" mat-button>Home</a>
-          <a href="#" mat-button>Product</a>
-          <a href="#" mat-button>Order</a>
+          <a  mat-button>Home</a>
+          <a (click)="onProductClick()" mat-button>Product</a>
+          <a (click)="onOrderClick()" mat-button>Order</a>
             <mat-form-field appearance="outline" class="input-search border-red"  >
               <!-- <mat-label>Outline form field</mat-label> -->
               <input matInput placeholder="Search" #input>
@@ -57,7 +57,7 @@
               <li><a class="dropdown-item" href="#">Order</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li><a class="dropdown-item"  (click)="signOut()">Logout</a></li>
             </ul>
           </div>
       </div>
@@ -70,7 +70,7 @@
         <mat-nav-list>
           <!-- <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
           <a href="#" mat-list-item >Home</a>
-          <a href="#" mat-list-item >Product</a>
+          <a (click)="onProductClick()" mat-list-item >Product</a>
           <a href="#" mat-list-item >Order</a>
             <mat-form-field mat-list-item appearance="outline" class="input-search"  >
               <!-- <mat-label>Outline form field</mat-label> -->
@@ -98,7 +98,7 @@
               <li><a class="dropdown-item" href="#">Order</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#" onclick="signOut()">Logout</a></li>
+              <li><a class="dropdown-item" href="#" (click)="signOut()">Logout</a></li>
             </ul>
           </div>
         </mat-nav-list>
