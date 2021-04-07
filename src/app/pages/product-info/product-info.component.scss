@@ -1,0 +1,45 @@
+// .img-fluid{
+//     //  max-width: 50%;
+// }
+
+.min hr {
+    display: block;
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .headFont{
+      font-size: 4vh;
+  }
+
+  .colorBox {
+    width: 4vh;
+    height: 5vh;  
+    padding: -px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: red
+  }
+
+  .addToCartButton{
+      background-color: yellow;    
+  }
+
+  .rateProductButton{
+    background-color: rgba(16, 217, 232, 0.946);    
+}
+// .zoom {
+//   transition: transform .2s; /* Animation */
+//   margin: 0 auto;
+// }
+
+// .zoom:hover {
+//   transform: scale(1.5); 
+// }
+
+// img:hover {
+//   transform: scale(1.3);
+//   }
+

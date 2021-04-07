@@ -64,7 +64,21 @@ import { ProductsComponent } from './pages/products/products.component';
 import { OrderComponent } from './pages/order/order.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProductInfoComponent } from './pages/product-info/product-info.component';
+// import {ShareModule} from 'ng2share/share.module'
 
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ShareModule } from 'ngx-sharebuttons';
+
+// image zoom
+// import { NgxImgZoomModule  } from 'ngx-img-zoom';
+// import { NgMagnizoomModule } from 'ng-magnizoom';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
+
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -79,7 +93,8 @@ import { CartComponent } from './pages/cart/cart.component';
     ProductsComponent,
     OrderComponent,
     ProfileComponent,
-    CartComponent
+    CartComponent,
+    ProductInfoComponent
 
   ],
   imports: [
@@ -131,9 +146,22 @@ import { CartComponent } from './pages/cart/cart.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    
     RatingModule,
-    SocialLoginModule
-  ],
+    SocialLoginModule,
+    // ShareModule ,
+    ShareButtonsModule,
+    ShareIconsModule ,
+    FontAwesomeModule,
+    ShareModule,
+    // NgMagnizoomModule
+    // NgxImgZoomModule
+    PinchZoomModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    
+    ],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',

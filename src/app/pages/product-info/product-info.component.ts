@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { StarRatingComponent } from 'ng-starrating';
-import { DataService } from 'src/assets/services/data.service';
+// import { NgxImgZoomService } from 'ngx-img-zoom';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
+
 
 
 @Component({
-  selector: 'app-homepage-card',
-  templateUrl: './homepage-card.component.html',
-  styleUrls: ['./homepage-card.component.scss']
+  selector: 'app-product-info',
+  templateUrl: './product-info.component.html',
+  styleUrls: ['./product-info.component.scss']
 })
-export class HomepageCardComponent implements OnInit {
-  rating =  5
-  value = 5
-  constructor(private data: DataService) { }
+export class ProductInfoComponent implements OnInit {
+
+  public color:string = "black"
 
   ngOnInit(): void {
   }
-
-  public dataFromDataservice = this.data.get()
 
   onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
     alert(`Old Value:${$event.oldValue}, 
@@ -24,4 +23,6 @@ export class HomepageCardComponent implements OnInit {
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
+
 }
+

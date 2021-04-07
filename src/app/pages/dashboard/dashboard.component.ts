@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { CheckingService } from 'src/assets/services/checking.service';
 
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -25,6 +27,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   // console the text inside entered in search bar
   abc(input:string){
