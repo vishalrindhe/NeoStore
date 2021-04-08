@@ -48,3 +48,4 @@ Thumbs.db
 #social share
 node_modules
 ngx-social-share
+ngx-custom-validators

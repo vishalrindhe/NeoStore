@@ -21,7 +21,7 @@
               <mat-icon matPrefix (click)="abc(input.value)" style="cursor: pointer;">search</mat-icon>
               <!-- <mat-hint>Hint</mat-hint> -->
             </mat-form-field>
-          <a href="#" mat-button><mat-icon matBadge={{cartValue}} matBadgeColor="warn">shopping_cart</mat-icon></a>
+          <a  mat-button><mat-icon matBadge={{cartValue}} matBadgeColor="warn" (click)="onCartClick()">shopping_cart</mat-icon></a>
           
           <!-- <mat-accordion style="position: relative;">
             <mat-expansion-panel (opened)="panelOpenState = true"
@@ -53,9 +53,9 @@
             <!-- content inside dropdown button -->
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Home</a></li>
-              <li><a class="dropdown-item" href="#">Product</a></li>
-              <li><a class="dropdown-item" href="#">Order</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" (click)="onProductClick()">Product</a></li>
+              <li><a class="dropdown-item" (click)="onOrderClick()">Order</a></li>
+              <li><a class="dropdown-item" (click)="onProfileClick()">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item"  (click)="signOut()">Logout</a></li>
             </ul>
@@ -71,14 +71,14 @@
           <!-- <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
           <a href="#" mat-list-item >Home</a>
           <a (click)="onProductClick()" mat-list-item >Product</a>
-          <a href="#" mat-list-item >Order</a>
+          <a  mat-list-item >Order</a>
             <mat-form-field mat-list-item appearance="outline" class="input-search"  >
               <!-- <mat-label>Outline form field</mat-label> -->
               <input matInput placeholder="Search" #input>
               <mat-icon matPrefix (click)="abc(input.value)" style="cursor: pointer;">search</mat-icon>
               <!-- <mat-hint>Hint</mat-hint> -->
             </mat-form-field>
-          <a href="#" mat-list-item><mat-icon matBadge={{cartValue}} matBadgeColor="warn">shopping_cart</mat-icon></a>
+          <a mat-list-item  ><mat-icon matBadge={{cartValue}} matBadgeColor="warn" (click)="onCartClick()">shopping_cart</mat-icon></a>
            
           <!-- dropdown button -->
           <div class="btn-group">
@@ -93,12 +93,12 @@
             </button>
             <!-- content inside dropdown button in sidenav bar -->
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Home</a></li>
-              <li><a class="dropdown-item" href="#">Product</a></li>
-              <li><a class="dropdown-item" href="#">Order</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item">Home</a></li>
+              <li><a class="dropdown-item">Product</a></li>
+              <li><a class="dropdown-item">Order</a></li>
+              <li><a class="dropdown-item">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#" (click)="signOut()">Logout</a></li>
+              <li><a class="dropdown-item" (click)="signOut()">Logout</a></li>
             </ul>
           </div>
         </mat-nav-list>

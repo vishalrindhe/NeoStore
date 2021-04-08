@@ -1,77 +1,90 @@
-<div class="container  mt-5" style="align-items: center;" >
+<div class="container mt-5" style="align-items: center">
     <div class="row">
-      <div class="col-sm-12 col-lg-*  mb-4 " style="text-align: center;">
+        <div class="col-sm-12 col-lg-* mb-4" style="text-align: center">
             <mat-card class="example-card">
-                <mat-card-header >
+                <mat-card-header>
                     <!-- <h1 style="text-align: center;">Login</h1> -->
                     <!-- <mat-card-title style="text-align: center;"><p style="text-align: center;">Shiba Inu</p></mat-card-title> -->
-                    
                 </mat-card-header>
                 <!-- <mat-form-field appearance="fill" > -->
-                    <p class="mb-2 mt-3">
-                        <span style="color: black; font-size: 6vh;">Neo</span>
-                        <span style="color: red; font-size: 6vh;">Store</span>
-                        </p>
-                    <mat-label class="mb-3"><h1>Login to your account</h1></mat-label>
+                <p class="mb-2 mt-3">
+                    <span style="color: black; font-size: 6vh">Neo</span>
+                    <span style="color: red; font-size: 6vh">Store</span>
+                </p>
+                <mat-label class="mb-3">
+                    <h1>Login to your account</h1>
+                </mat-label>
 
-                    <mat-form-field  >
-                    
-                <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" required #email>
-                <mat-icon matSuffix>email</mat-icon>
-                <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                <mat-form-field>
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" required #email />
+                    <mat-icon matSuffix>email</mat-icon>
+                    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
                 </mat-form-field>
-                <br>
-                <mat-form-field >
+                <br />
+                <mat-form-field>
                     <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" required #password>
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput [type]="hide ? 'password' : 'text'" required #password />
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
                     </button>
                 </mat-form-field>
-            <br>
-            <!-- <mat-form-field> -->
-                <button mat-raised-button color="primary" (click)="check(email.value,password.value)">Login</button>
+                <br />
+                <!-- <mat-form-field> -->
+                <button mat-raised-button color="primary" (click)="check(email.value, password.value)">
+                    Login
+                </button>
                 <!-- <mat-icon matSuffix>email</mat-icon> -->
-                <br><br>
-                <mat-label style="color: blue;"><a href="">Forgot Password ?</a></mat-label>
-            <!-- </mat-form-field> -->
-            
+                <br /><br />
+                <div class="" style="text-align: center">
+                    <mat-label class="cursor m-2" style="color: blue"><a >Forgot Password ?</a></mat-label>
+                    <mat-label class="cursor m-2" style="color: red"><a (click)="onRegisterClick()">Register Now</a></mat-label>
+                </div>
+                <!-- </mat-form-field> -->
 
-            
-                <br><br><div class="separator text-muted">OR</div><br>
-             <div class="" style="text-align: center;">
-                 <div class=" m-1">
-                    <button class="m-2" mat-raised-button style="border-radius: 30px; background-color: #3F51B5;" (click)="signInWithFB()">
-                        <img alt="svgImg" class="m-1" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzRhOTBlMjsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTExNy41NTQ4Myw2NC41aC0xNy4yMjE1di0xNC4zMzMzM2MwLC03LjM5NiAwLjYwMiwtMTIuMDU0MzMgMTEuMjAxNSwtMTIuMDU0MzNoNi4yMjA2N2MzLjk1NiwwIDcuMTY2NjcsLTMuMjEwNjcgNy4xNjY2NywtNy4xNjY2N3YtOC45ODdjMCwtMy43NDgxNyAtMi44NzM4MywtNi45NTE2NyAtNi42MTQ4MywtNy4yMDI1Yy00LjMyODY3LC0wLjI5MzgzIC04LjY2NDUsLTAuNDMgLTEzLjAwNzUsLTAuNDIyODNjLTE5LjQ0MzE3LDAgLTMzLjYzMzE3LDExLjg3NTE3IC0zMy42MzMxNywzMy42NzYxN3YxNi40OTA1aC0xNC4zMzMzM2MtMy45NTYsMCAtNy4xNjY2NywzLjIxMDY3IC03LjE2NjY3LDcuMTY2Njd2MTQuMzMzMzNjMCwzLjk1NiAzLjIxMDY3LDcuMTY2NjcgNy4xNjY2Nyw3LjE2NjY3bDE0LjMzMzMzLC0wLjAwNzE3djU3LjM0MDVjMCwzLjk1NiAzLjIxMDY3LDcuMTY2NjcgNy4xNjY2Nyw3LjE2NjY3aDE0LjMzMzMzYzMuOTU2LDAgNy4xNjY2NywtMy4yMTA2NyA3LjE2NjY3LC03LjE2NjY3di01Ny4zNTQ4M2wxNS41ODAzMywtMC4wMDcxN2MzLjY0MDY3LDAgNi43MDA4MywtMi43MzA1IDcuMTE2NSwtNi4zNDk2N2wxLjY0MTE3LC0xNC4zMDQ2N2MwLjQ5NDUsLTQuMjQ5ODMgLTIuODMwODMsLTcuOTgzNjcgLTcuMTE2NSwtNy45ODM2N3oiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg=="/>
-                        <span class="text-white">Login with Facebook</span>
-                        </button>       
-           
-                 <button class="m-2"  mat-raised-button style="border-radius: 30px; background-color: #E94235;" (click)="signInWithGoogle()" >
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                            width="50" height="50"
-                            viewBox="0 0 172 172"
-                            style=" fill:#4a90e2;"
-                            class="m-1"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M59.125,37.625c-26.71375,0 -48.375,21.66125 -48.375,48.375c0,26.71375 21.66125,48.375 48.375,48.375c26.71375,0 48.375,-21.66125 48.375,-48.375c0,-3.31906 -0.36281,-6.5575 -0.99437,-9.675l-0.26875,-1.075h-47.11188v16.125h32.25c-2.56656,15.25156 -16.27281,26.875 -32.25,26.875c-17.81812,0 -32.25,-14.43187 -32.25,-32.25c0,-17.81812 14.43188,-32.25 32.25,-32.25c8.0625,0 15.41281,2.98313 21.07,7.87438l11.55625,-11.31438c-8.6,-7.87437 -20.04875,-12.685 -32.62625,-12.685zM134.375,59.125v16.125h-16.125v10.75h16.125v16.125h10.75v-16.125h16.125v-10.75h-16.125v-16.125z"></path></g></g></svg>
-                     <span class="text-white">Login with Google</span>
-                    </button>
+                <br /><br />
+                <div class="separator text-muted">OR</div>
+                <br />
+                <div class="" style="text-align: center">
+                    <div class="m-1">
+                        <button class="m-2" mat-raised-button style="border-radius: 30px; background-color: #3f51b5"
+                            (click)="signInWithFB()">
+                            <img alt="svgImg" class="m-1"
+                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzRhOTBlMjsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTExNy41NTQ4Myw2NC41aC0xNy4yMjE1di0xNC4zMzMzM2MwLC03LjM5NiAwLjYwMiwtMTIuMDU0MzMgMTEuMjAxNSwtMTIuMDU0MzNoNi4yMjA2N2MzLjk1NiwwIDcuMTY2NjcsLTMuMjEwNjcgNy4xNjY2NywtNy4xNjY2N3YtOC45ODdjMCwtMy43NDgxNyAtMi44NzM4MywtNi45NTE2NyAtNi42MTQ4MywtNy4yMDI1Yy00LjMyODY3LC0wLjI5MzgzIC04LjY2NDUsLTAuNDMgLTEzLjAwNzUsLTAuNDIyODNjLTE5LjQ0MzE3LDAgLTMzLjYzMzE3LDExLjg3NTE3IC0zMy42MzMxNywzMy42NzYxN3YxNi40OTA1aC0xNC4zMzMzM2MtMy45NTYsMCAtNy4xNjY2NywzLjIxMDY3IC03LjE2NjY3LDcuMTY2Njd2MTQuMzMzMzNjMCwzLjk1NiAzLjIxMDY3LDcuMTY2NjcgNy4xNjY2Nyw3LjE2NjY3bDE0LjMzMzMzLC0wLjAwNzE3djU3LjM0MDVjMCwzLjk1NiAzLjIxMDY3LDcuMTY2NjcgNy4xNjY2Nyw3LjE2NjY3aDE0LjMzMzMzYzMuOTU2LDAgNy4xNjY2NywtMy4yMTA2NyA3LjE2NjY3LC03LjE2NjY3di01Ny4zNTQ4M2wxNS41ODAzMywtMC4wMDcxN2MzLjY0MDY3LDAgNi43MDA4MywtMi43MzA1IDcuMTE2NSwtNi4zNDk2N2wxLjY0MTE3LC0xNC4zMDQ2N2MwLjQ5NDUsLTQuMjQ5ODMgLTIuODMwODMsLTcuOTgzNjcgLTcuMTE2NSwtNy45ODM2N3oiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPg==" />
+                            <span class="text-white">Login with Facebook</span>
+                        </button>
+
+                        <button class="m-2" mat-raised-button style="border-radius: 30px; background-color: #e94235"
+                            (click)="signInWithGoogle()">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50"
+                                viewBox="0 0 172 172" style="fill: #4a90e2" class="m-1">
+                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray=""
+                                    stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none"
+                                    text-anchor="none" style="mix-blend-mode: normal">
+                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                    <g fill="#ffffff">
+                                        <path
+                                            d="M59.125,37.625c-26.71375,0 -48.375,21.66125 -48.375,48.375c0,26.71375 21.66125,48.375 48.375,48.375c26.71375,0 48.375,-21.66125 48.375,-48.375c0,-3.31906 -0.36281,-6.5575 -0.99437,-9.675l-0.26875,-1.075h-47.11188v16.125h32.25c-2.56656,15.25156 -16.27281,26.875 -32.25,26.875c-17.81812,0 -32.25,-14.43187 -32.25,-32.25c0,-17.81812 14.43188,-32.25 32.25,-32.25c8.0625,0 15.41281,2.98313 21.07,7.87438l11.55625,-11.31438c-8.6,-7.87437 -20.04875,-12.685 -32.62625,-12.685zM134.375,59.125v16.125h-16.125v10.75h16.125v16.125h10.75v-16.125h16.125v-10.75h-16.125v-16.125z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="text-white">Login with Google</span>
+                        </button>
                     </div>
-                    <button mat-raised-button (click)="signOut()" >Sign Out</button>
-            </div>
-            {{getData.name}}
-            <div>
-                <!-- <img src="{{ user.photoUrl }}">
+                    <button mat-raised-button (click)="signOut()">Sign Out</button>
+                </div>
+                {{ getData.name }}
+                <div>
+                    <!-- <img src="{{ user.photoUrl }}">
                     <div>
                     <h4>{{ user.name }}</h4>
                     <p>{{ user.email }}</p>
                     </div> -->
-            </div>
-            
-
+                </div>
             </mat-card>
-            
         </div>
     </div>
 </div>
-    
-  

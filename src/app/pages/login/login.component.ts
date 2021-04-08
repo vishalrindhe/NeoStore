@@ -96,7 +96,14 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  // for checking static emailid and password
+  /**
+   * if user want to enter username and password for login then 
+   * this will check username and password with static data from CheckingService it it is true then output variable will true or false
+   * after that if output var is true then it will send data to setData method from CheckingService and redirect to dashboard
+   * @param {string} uname
+   * @param {string} p
+   * @memberof LoginComponent
+   */
   check(uname: string, p : string)
   {
     var output = this.service.checkusernameandpassword(uname, p);
@@ -115,6 +122,10 @@ export class LoginComponent implements OnInit {
     console.log(this.msg);
     
     }
+  }
+
+  onRegisterClick(){
+    this.router.navigate(['/registration']);
   }
 }
 

@@ -46,27 +46,27 @@ signOut() {
   // if user is logged in then only it will navigate to product page
   onProductClick(){
     // if(this.service.item){
-      this.router.navigate(['/products']);
+      this.router.navigate(['/productInfo']);
     // }
   }
 
   // if user is logged in then only it will navigate to order page
   onOrderClick(){
-    if(this.service.item){
+    // if(this.service.item){
        this.router.navigate(['/order']);
-    }
+    // }
   }
 
   onCartClick(){
-    if(this.service.item){
+    // if(this.service.item){
       this.router.navigate(['/cart']);
-   }
+  //  }
   }
 
   onProfileClick(){
-    if(this.service.item){
+    // if(this.service.item){
       this.router.navigate(['/profile']);
-   }
+  //  }
   }
  
 }

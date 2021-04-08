@@ -80,6 +80,9 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+// custom validator
+
+
 @NgModule({
   declarations: [
     AppComponent,

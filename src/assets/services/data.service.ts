@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import  ProductOnDashboard  from '../data/productOnDashboard.json'
 import  Cart from '../data/cart.json'
+import userProfile from '../data/userProfile.json'
 
 
 @Injectable({
@@ -21,6 +22,24 @@ export class DataService {
                       __v: number;
                   }[];
               } = ProductOnDashboard
+
+
+  public userProfile : {
+          success: boolean; 
+          status_code: number; 
+          customer_proile: { 
+                customer_id: number; 
+                first_name: string; 
+                last_name: string; 
+                email: string; 
+                phone_no: string; 
+                gender: string; 
+                dob: string; 
+                profile_img: string; 
+                otp: string; 
+                createdAt: string; 
+                updatedAt: string; }; 
+       } = userProfile
 
   constructor() { }
   
@@ -68,17 +87,22 @@ public cart : {
       total_productCost: number;
       createdAt: string;
       __v: number
-    }[]
-  
-}= Cart
+    }[]}= Cart
   
 
   get(){
 
     console.log(this.productOnDashboard);
     console.log("cart json",this.cart);
+    console.log("profile", this.userProfile);
     
     return this.productOnDashboard
   }
+
+  getUserProfile(){
+    return this.userProfile
+  }
+
+  
 
 }
