@@ -1,67 +1,119 @@
-<div class="example-container">
-   
-</div>
-
-<div class="container  mt-5" style="align-items: center;" >
-  <div class="row">
-    <div class="col-sm-12 col-lg-*  mb-4 " style="text-align: center;">
-      <mat-card class="example-card">
-        <p class="mb-2 mt-3">
-          <!-- NeoStore heading -->
-          <span style="color: black; font-size: 6vh;">Neo</span>
-          <span style="color: red; font-size: 6vh;">Store</span>
+<form ngForm #registrationForm="ngForm">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-12 col-lg-* mb-4" style="text-align: center"
+        (keyup)="getConfirmPassword(confirmPassword1.value)" (click)="getConfirmPassword(confirmPassword1.value)"
+        (keyup)="passwordcheck()" (click)="passwordcheck()" (keyup)="getPassword(password1.value)"
+        (click)="getPassword(password1.value)">
+        <mat-card class="example-card">
+          <p class="mb-2 mt-3">
+            <!-- NeoStore heading -->
+            <span style="color: black; font-size: 6vh">Neo</span>
+            <span style="color: red; font-size: 6vh">Store</span>
           </p>
           <!-- registration heading -->
-        <h1>Registration</h1>
+          <h1>Registration</h1>
 
-        <!-- first Name -->
-        <mat-form-field >
-          <mat-label>First Name</mat-label>
-          <input matInput placeholder="pat@example.com" [formControl]="name" required>
-          <mat-icon  matSuffix>text_fields</mat-icon>
+          <!-- first Name -->
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" [formControl]="name" required />
+            <mat-icon matSuffix>text_fields</mat-icon>
 
-          <mat-error *ngIf="name.invalid">{{getErrorMessageForName()}}</mat-error>
-        </mat-form-field><br>
+            <mat-error *ngIf="name.invalid">{{
+              getErrorMessageForName()
+              }}</mat-error>
+          </mat-form-field><br />
 
-        <!-- last Name -->
-        <mat-form-field >
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="pat@example.com" [formControl]="lastName" required>
-          <mat-icon  matSuffix>text_fields</mat-icon>
+          <!-- last Name -->
+          <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" [formControl]="lastName" required />
+            <mat-icon matSuffix>text_fields</mat-icon>
 
-          <mat-error *ngIf="lastName.invalid">{{getErrorMessageForLastName()}}</mat-error>
-        </mat-form-field><br>
+            <mat-error *ngIf="lastName.invalid">{{
+              getErrorMessageForLastName()
+              }}</mat-error>
+          </mat-form-field><br />
 
-        <!-- email field -->
-          <mat-form-field >
-            <mat-label>Enter your  email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="email" required>
-            <mat-icon  matSuffix>email</mat-icon>
+          <!-- email field -->
+          <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required />
+            <mat-icon matSuffix>email</mat-icon>
 
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field><br>
-        
-        <!-- password field -->
-      <mat-form-field  >
-        <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" required>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br>
+            <mat-error *ngIf="email.invalid">{{
+              getErrorMessage()
+              }}</mat-error>
+          </mat-form-field><br />
 
-      <!-- confirm password field -->
-      <mat-form-field  >
-        <mat-label>Confirm password</mat-label>
-        <input matInput [type]="hide1 ? 'password' : 'text'" required>
-        <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
-        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
+          <!-- password field -->
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput #password1 [type]="hide ? 'password' : 'text'" maxlength="12" minlength="8" required
+              [formControl]="password" />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-hint align="end">{{ password.value?.length || 0 }}/12</mat-hint>
+            <mat-error *ngIf="password.invalid">{{
+              getErrorMessageForPassword()
+              }}</mat-error>
+          </mat-form-field><br />
 
+          <!-- confirm password field -->
+          <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input #confirmPassword1 matInput [type]="hide1 ? 'password' : 'text'" maxlength="12" required
+              [formControl]="confirmPassword" />
+            <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide1">
+              <mat-icon>{{ hide1 ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-hint align="end">{{ confirmPassword.value?.length || 0 }}/12</mat-hint>
+            <mat-error *ngIf="confirmPassword.invalid">{{ getErrorMessageForConfirmPassword() }}{{ match }}</mat-error>
+            <mat-error *ngIf="confirmPassword.valid">Abc</mat-error>
+            <!-- <mat-error *ngIf="!(password1.value == confirmPassword1.value)">abc</mat-error> -->
+            <mat-error>{{ match }}</mat-error>
+          </mat-form-field><br />
+          <span>
+            <p class="" style="color: red">{{ match }}</p>
+          </span>
 
-      
-      </mat-card>
+          <!-- phone field -->
+          <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput placeholder="9876543210" [formControl]="phone" maxlength="10" required />
+            <mat-icon matSuffix>phone</mat-icon><br />
+            <mat-hint align="end">{{ phone.value?.length || 0 }}/10</mat-hint>
+            <mat-error *ngIf="phone.invalid">{{
+              getErrorMessageForPhone()
+              }}</mat-error>
+          </mat-form-field><br />
+
+          <!-- radio buttons for gender -->
+          <!-- <mat-label><span>Gender</span></mat-label> -->
+          <mat-radio-group aria-label="Gender" [formControl]="gender">
+            <mat-radio-button value="1" checked>Male</mat-radio-button>
+            <mat-radio-button value="2">Female</mat-radio-button>
+            <!-- <mat-error *ngIf="gender.invalid">{{getErrorMessageForGender()}}</mat-error> -->
+          </mat-radio-group>
+          <br />
+
+          <button mat-raised-button color="primary" [disabled]="
+              name.invalid ||
+              lastName.invalid ||
+              email.invalid ||
+              password.invalid ||
+              confirmPassword.invalid ||
+              phone.invalid
+            "
+            (click)="registration()">
+            Registration
+          </button>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>
+</form>
