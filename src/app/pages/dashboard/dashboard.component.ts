@@ -34,7 +34,12 @@ export class DashboardComponent implements OnInit {
     console.log("msg in search bar",input);
   }
 
-  signOut() {
+/**
+ *this signOut functin clear localhost username
+ *
+ * @memberof DashboardComponent
+ */
+signOut() {
     this.service.signOut();
   }
   
