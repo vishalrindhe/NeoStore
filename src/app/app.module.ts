@@ -79,6 +79,12 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RateProductComponent } from './pages/rate-product/rate-product.component';
+import { AddressComponent } from './pages/address/address.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
+import { InvoiceComponent } from './pages/invoice/invoice.component';
+
 
 // custom validator
 
@@ -97,7 +103,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     OrderComponent,
     ProfileComponent,
     CartComponent,
-    ProductInfoComponent
+    ProductInfoComponent,
+    RateProductComponent,
+    AddressComponent,
+    ChangePasswordComponent,
+    OrderDetailsComponent,
+    InvoiceComponent,
+    
 
   ],
   imports: [

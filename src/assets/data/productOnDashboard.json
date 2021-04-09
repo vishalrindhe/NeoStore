@@ -4,10 +4,10 @@
  "message": "All Categories",
  "category_details": [
 {
-     "_id": "5cfe3c5aea821930af69281e",
-    "category_name": "Sofa",
-    "product_image": "../../../assets/images/couch_1_brown_leather.jpeg",
-    "category_id": "5cfe3c5aea821930af69281e",
+     "_id": "5cfe3c65ea821930af69281f",
+    "category_name": "Bed",
+    "product_image": "../../../assets/images/couch_3.png",
+    "category_id": "5cfe3c65ea821930af69281f",
      "created_at": "2019-06-10T11:17:46.699Z",
     "__v": 0
     },
@@ -15,7 +15,7 @@
     "_id": "5cfe3c65ea821930af69281f",
     "category_name": "Bed",
     "category_id": "5cfe3c65ea821930af69281f",
-    "product_image": "../../../assets/images/couch_2_green.jpeg",
+    "product_image": "../../../assets/images/couch_3.png",
      "created_at": "2019-06-10T11:17:57.569Z",
      "__v": 0
  },
@@ -23,7 +23,7 @@
     "_id": "5cfe3c65ea821930af69281f",
     "category_name": "Bed",
     "category_id": "5cfe3c65ea821930af69281f",
-    "product_image": "../../../assets/images/couch_2_green.jpeg",
+    "product_image": "../../../assets/images/couch_3.png",
      "created_at": "2019-06-10T11:17:57.569Z",
      "__v": 0
  }]

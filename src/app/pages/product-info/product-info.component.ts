@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
 // import { NgxImgZoomService } from 'ngx-img-zoom';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { DataService } from 'src/assets/services/data.service';
 
 
 
@@ -14,15 +16,28 @@ export class ProductInfoComponent implements OnInit {
 
   public color:string = "black"
 
+  constructor(private data: DataService, private router: Router){}
+
   ngOnInit(): void {
   }
 
-  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+  public productInfo = this.data.getProductDetail()
+
+/**
+ * copied from official doc of ng-starrating
+ * @param {{oldValue:number, newValue:number, starRating:StarRatingComponent}} $event
+ * @memberof ProductInfoComponent
+ */
+onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
     alert(`Old Value:${$event.oldValue}, 
       New Value: ${$event.newValue}, 
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 
+
+  addToCart(){
+    this.router.navigate(['/cart']);
+  }
 }
 

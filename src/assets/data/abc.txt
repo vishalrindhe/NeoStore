@@ -1,47 +1,49 @@
 {
-    success: boolean;
-    status_code: 200;
-    message: Your Products on cart;
-    product_details: [
+    success: boolean,
+  status_code: number,
+  message: Product by product id,
+  product_details: [
+  {
+      _id: 5cfe40b5b4db0f338946eac1,
+      subImages_id:
+       {
+          product_subImages: [
+              2019-06-24T11-21-06.257ZMou_Mattress_Bed_03.jpg,
+               2019-06-24T11-21-06.269ZMou_Mattress_Bed_02.jpg,
+              2019-06-24T11-21-06.271ZMou_Mattress_Bed_01.jpg
+              ],
+            _id: 5cfe3a9e7b35112d9faa2f6d,
+           subImages_id: 5cfe3a9e7b35112d9faa2f6d,
+           __v: 0
+      },
+       category_id: 
       {
-        _id: 5e09c48658b863edc9e81983;
-        customer_id: 199;
-        product_id: {
-          _id: 5d0b1f354594d26e47774b5e;
-          subImages_id: 5d0b1e0e4594d26e47774b5d;
-          Category_id: {
-            _id: 5cfe3c65ea821930af69281f;
-            category_name: Bed;
-            category_id: 5cfe3c65ea821930af69281f;
-            product_image: 2019-06-14T07-12-38.862Zbed.jpg;
-            created_at: 2019-06-10T11:17:57.569Z;
-            __v: 0
-          };
-          Color_id: {
-            _id: 5cfe247ade89f8148fbd0146;
-            color_name: Rust Brown;
-            color_code: #8B320B;
-            color_id: 5cfe247ade89f8148fbd0146;
-            __v: 0
-          };
-          product_id: 5d0b1f354594d26e47774b5e;
-          product_name: FurnitureKraft Kansas Metal Bed;
-          product_image: 2019-06-20T05-52-53.191Zam2.jpg;
-          product_desc: This Bed Is Ergonomically Sound; Stylish And Offers Superb Value For Money.;
-          product_rating: NaN;
-          product_producer: Engineering Wood;
-          product_cost: 8000;
-          product_stock: 491;
-          product_dimension: 500*900;
-          product_material: Metal;
-          createdAt: 2019-06-20T05:52:53.219Z;
+          _id: 5cfe3c65ea821930af69281f,
+           category_name: Bed,
+          category_id: 5cfe3c65ea821930af69281f,
+          product_image: 2019-06-14T07-12-38.862Zbed.jpg,
+          created_at: 2019-06-10T11:17:57.569Z,
           __v: 0
-        };
-        quantity: 1;
-        product_cost: 8000;
-        total_productCost: 8000;
-        createdAt: 2019-12-30T09:33:58.677Z;
-        __v: 0
-      }
-    ]
-  }
+      },
+      Color_id:
+       {
+           _id: 5cfe228dde89f8148fbd012f,
+          color_name: Blue,
+          color_code: #0074D9,
+           color_id: 5cfe228dde89f8148fbd012f,
+           __v: 0
+       },
+      product_id: 5cfe40b5b4db0f338946eac1,
+      product_name: Mou Bed With Mattress,
+      product_image:    2019-06-24T11-21-22.359ZMou_Mattress_Bed_01.jpg,
+      product_desc: Make your mou. Part bed, part mattress, the Mou mattress bed is,
+       product_rating: 4.50,
+      product_producer: Urban ladder,
+      product_cost: 16000,
+       product_stock: 493,
+      product_dimension: 78 * 8,
+      product_material: Wood, Metal, Fabric,
+      createdAt: 2019-06-10T11:36:21.892Z,
+      __v: 0
+  } ]
+}

@@ -1,33 +1,33 @@
 <div class="container">
-    <mat-card class="mt-5">
-        <div class="row">
+    <mat-card class="mt-5" *ngFor="let item of productInfo.product_details">
+        <div class="row" >
             <div class="col-lg-5 offset-lg-1 col-sm-12 mb-4">
                 <pinch-zoom > 
-                    <img src="../../../assets/images/couch_3.png"  class="img-fluid">
+                    <img src= {{item.product_image}}  class="img-fluid">
                 </pinch-zoom>
                     </div>
             
 
             <div class="col-lg-4 offset-lg-1 col-sm ">
                 <h1 class="col offset-sm-5  headFont">
-                    <b>Anbcvc</b>
+                    <b> {{item.product_name}} </b>
                 </h1>
            
                     <div  class="col offset-sm-0">
-                        <star-rating  [value]="4"   checkedcolor="#ffcc00" uncheckedcolor="#ffff99" size="24px" [readonly]='true' (rate)="onRate($event)"></star-rating>
+                        <star-rating  [value]=item.product_rating   checkedcolor="#ffcc00" uncheckedcolor="#ffff99" size="24px" [readonly]='true' (rate)="onRate($event)"></star-rating>
                     </div>
                     <hr >
 
                     <div class="col col-sm-0">
                         <div class="mb-2">
-                            <span>Price:</span><span>&nbsp; &#8377; 5000</span>
+                            <span>Price:</span><span>&nbsp; &#8377; {{item.product_cost}} </span>
                         </div>
                         <!-- <p> -->
                         <div >
                             <div class="mb-2">
                                 <span>Color: &nbsp;</span>
                                 <!-- <span class="colorBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> -->
-                                <button mat-button   [style.background-color]=color disabled title={{color}}>&nbsp;</button>
+                                <button mat-button   [style.background-color]=item.Color_id.color_code disabled title={{item.Color_id.color_name}}>&nbsp;</button>
                             </div>
                             <div  class="mb-2">
                                 <span> Share:</span> <button mat-button style="background: none;">
@@ -72,7 +72,7 @@
                     </div>
                     <div class="row">
                         <div class="col center">
-                            <button class="addToCartButton" mat-raised-button>Add to Cart</button>&nbsp;
+                            <button class="addToCartButton" (click)="addToCart()" mat-raised-button>Add to Cart</button>&nbsp;
                         <!-- </div> -->
                         <!-- <div class="col"> -->
                             <button class="rateProductButton" mat-raised-button >Rate Product</button>
@@ -85,13 +85,48 @@
         
          <mat-tab-group class="mt-5" dynamicHeight animationDuration="2000ms" mat-align-tabs="center" backgroundColor="accent" >
             <mat-tab label="Description">
-              <div class="example-small-box mat-elevation-z4 center m-1 p-2">
-                Description
+              <div class="example-small-box mat-elevation-z4 m-1 p-2">
+                  <ul>
+                    <li> {{item.category_id.category_name}}</li>
+                    <li>{{item.Color_id.color_name}}</li>
+                    <li>{{item.product_desc}}</li>
+                  </ul>
+               
               </div>
             </mat-tab>
             <mat-tab label="Features">
               <div class="example-large-box mat-elevation-z4 center m-1 p-2">
-                Features
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Type</th>
+                        <td>{{item.category_id.category_name}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Color</th>
+                      <td>{{item.Color_id.color_name}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Produced By</th>
+                      <td>{{item.product_producer}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Material Used</th>
+                          <td>{{item.product_material}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Dimensions</th>
+                              <td>{{item.product_dimension}}</td>
+                              </tr>
+                    </tbody>
+                  </table>
+                   
               </div>
             </mat-tab>
           </mat-tab-group>
