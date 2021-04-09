@@ -30,8 +30,8 @@ onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 
-  onCardClick(){
-    this.router.navigate(['/productInfo'])
+  onCardClick(_id:string){
+    this.router.navigate(['/productInfo/'+_id])
   }
 
 }

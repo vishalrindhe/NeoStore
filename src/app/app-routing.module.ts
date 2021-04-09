@@ -25,6 +25,7 @@ const routes: Routes = [
   {path:'products' , canActivate : [AuthGuard] , component:ProductsComponent},
   {path:'order' , canActivate : [AuthGuard] , component:OrderComponent},
   {path:'productInfo' , canActivate : [AuthGuard] , component:ProductInfoComponent},
+  {path:'productInfo/:_id' , canActivate : [AuthGuard] , component:ProductInfoComponent},
   {path:'rateproduct' , canActivate : [AuthGuard] , component:RateProductComponent},
   {path:'address' , canActivate : [AuthGuard] , component:AddressComponent},
   {path:'changepassword' , canActivate : [AuthGuard] , component:ChangePasswordComponent},

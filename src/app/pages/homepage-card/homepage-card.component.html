@@ -1,7 +1,7 @@
 
  <div class="container  " style="align-items: center;" >
     <div class="row">
-      <div class="col-sm-6 col-lg-4 mb-4 card-margin" *ngFor="let product of dataFromDataservice.category_details" (click)="onCardClick()">
+      <div class="col-sm-6 col-lg-4 mb-4 card-margin" *ngFor="let product of dataFromDataservice.category_details" (click)="onCardClick(product.category_id)">
         <mat-card class="example-card">
             <!-- <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
 // import { NgxImgZoomService } from 'ngx-img-zoom';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
@@ -16,7 +16,7 @@ export class ProductInfoComponent implements OnInit {
 
   public color:string = "black"
 
-  constructor(private data: DataService, private router: Router){}
+  constructor(private data: DataService, private router: Router,private activatedrouter:ActivatedRoute){}
 
   ngOnInit(): void {
   }
@@ -34,7 +34,7 @@ onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
-
+public _id = this.activatedrouter.snapshot.params['_id'];
 
   addToCart(){
     this.router.navigate(['/cart']);

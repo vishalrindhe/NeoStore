@@ -1,5 +1,6 @@
 <div class="container">
     <mat-card class="mt-5" *ngFor="let item of productInfo.product_details">
+     <div *ngIf="_id == item.category_id._id; else elseBlock">
         <div class="row" >
             <div class="col-lg-5 offset-lg-1 col-sm-12 mb-4">
                 <pinch-zoom > 
@@ -130,7 +131,15 @@
               </div>
             </mat-tab>
           </mat-tab-group>
-          
+        </div>
+        <ng-template #elseBlock>
+            <h1 class="textCenter">
+                <img class="oopsImg" src="../../../assets/images/no-product.png">
+                <p class="oops">Oops!</p>
+                <span class="oopstext">Product Category Not Available...</span>
+
+            </h1>
+        </ng-template>
     </mat-card>
     <!--  -->
     
