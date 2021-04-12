@@ -3,6 +3,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { CheckingService } from 'src/assets/services/checking.service';
+import { DataService } from 'src/assets/services/data.service';
 
 
 
@@ -22,12 +23,15 @@ export class DashboardComponent implements OnInit {
 
   title = 'NeoStore';
 
-  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router) { }
+  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router, private cartCount:DataService) { }
 
 
   ngOnInit(): void {
+    console.log("cartcount", this.count);
+    
   }
 
+  public count = this.cartCount.getCartCount()
 
   // console the text inside entered in search bar
   abc(input:string){

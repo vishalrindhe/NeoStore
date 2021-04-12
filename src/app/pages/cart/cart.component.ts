@@ -13,8 +13,9 @@ export class CartComponent implements OnInit {
 total2:number
   ngOnInit() {
     // trying to share quantity to dataservice
-    this.data.setCartCount(this.quantity)
-    
+  this.data.setCartCount(this.cartData.product_details[0].quantity)
+  console.log(this.quantity);
+  
     
   }
 
@@ -22,6 +23,20 @@ total2:number
   public price = this.cartData.product_details[0].product_cost;
   public total = this.cartData.product_details[0].total_productCost;
   public quantity = this.cartData.product_details[0].quantity;
+  public stock = this.cartData.product_details[0].product_id.product_stock
 
+  onAddClick(){
+    this.quantity = this.quantity + 1;
+    this.stock = this.stock - 1;
+  }
   
+  onRemoveClick(){
+    this.quantity = this.quantity - 1;
+    this.stock = this.stock + 1;
+  }
+
+  onDeleteClick(){
+    this.cartData.product_details.splice(0,1)
+    this.quantity = 0
+  }
 }

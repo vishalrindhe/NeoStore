@@ -163,8 +163,11 @@ export class DataService {
    */
   setCartCount(count: number) {
     console.log(this.cartCount);
-
     this.cartCount = count;
+  }
+
+  getCartCount(){
+    return this.cartCount
   }
 
 

@@ -38,12 +38,12 @@
                         <div class="center mb-3">
                             <button mat-fab shareButton="facebook"
                                         #fbBtn="shareButton"
-                                        [style.backgroundColor]="fbBtn?.color">
+                                        style="background-color: #4166B1;">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
                             </button>&nbsp;
                             <button mat-fab shareButton="twitter"
                                         #twtBtn="shareButton"
-                                        [style.backgroundColor]="twtBtn?.color">
+                                        style="background-color:#00ACEE">
                                         <i class="fa fa-twitter" aria-hidden="true"></i>
                             </button>&nbsp;
                             <!-- <button mat-fab shareButton="linkedin"
@@ -53,18 +53,24 @@
                             </button> -->
                             <button mat-fab shareButton="telegram"
                                         #telBtn="shareButton"
-                                        [style.backgroundColor]="telBtn?.color">
+                                        style="background-color:#0088CC">
                                         <i class="fa fa-telegram" aria-hidden="true" size="xl"></i>
                             </button>&nbsp;
                             <button mat-fab shareButton="whatsapp"
                                         #whatsBtn="shareButton"
-                                        [style.backgroundColor]="whatsBtn?.color">
+                                        style="background-color:#24D165">
                                         <i class="fa fa-whatsapp" aria-hidden="true"></i>
                                     </button>&nbsp;
                         
-                            <button mat-fab shareButton="copy"
+                            <!-- <button mat-fab shareButton="copy"
                                     #msgBtn="shareButton"
                                     [style.backgroundColor]="msgBtn?.color">
+                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                            </button> -->
+
+                            <button mat-fab shareButton="copy"
+                                    #msgBtn="shareButton"
+                                    style="background-color:#607D8B">
                                     <i class="fa fa-clipboard" aria-hidden="true"></i>
                             </button>
                     </div>
