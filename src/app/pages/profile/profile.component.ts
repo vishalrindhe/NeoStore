@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/assets/services/data.service';
+import { DialogProfileComponent } from '../dialog-profile/dialog-profile.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface PeriodicElement {
   field: string;
   data: any;
+}
+
+export interface DialogData {
+  animal: string;
+  name: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -18,11 +25,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     console.log(this.userData);
     
+  }
+
+  animal: string;
+  name: string;
+
+  
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogProfileComponent, {
+      width: 'auto'
+      ,
+      data: {name: this.name, animal: this.animal}
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    //   this.animal = result;
+    // });
   }
 
 

@@ -84,6 +84,8 @@ import { AddressComponent } from './pages/address/address.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
+import { DialogProfileComponent } from './pages/dialog-profile/dialog-profile.component';
+
 
 
 // custom validator
@@ -109,6 +111,7 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
     ChangePasswordComponent,
     OrderDetailsComponent,
     InvoiceComponent,
+    DialogProfileComponent,
     
 
   ],

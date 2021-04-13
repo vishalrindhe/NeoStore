@@ -31,8 +31,10 @@ total2:number
   }
   
   onRemoveClick(){
+    if(this.quantity>0){
     this.quantity = this.quantity - 1;
     this.stock = this.stock + 1;
+    }
   }
 
   onDeleteClick(){
