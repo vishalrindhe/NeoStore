@@ -79,7 +79,7 @@ export class CartComponent implements OnInit, OnChanges {
     // this.i = i;
     // public quantity = this.cartData.product_details[0].quantity;
     // this.quantity[i]= this.cartData.product_details[this.i].quantity;
-    if (this.quantity[i] > 0) {
+    if (this.quantity[i] > 1) {
       console.log('before   this.quantity[i] = this.quantity[i] - 1;',i,this.quantity[i]);
       this.quantity[i] = this.quantity[i] - 1;
       this.stock = this.stock + 1;
@@ -95,6 +95,10 @@ export class CartComponent implements OnInit, OnChanges {
           console.log('subtotal', this.subTotal);
         }   
     } else{
+      if(this.quantity.length == 1){
+        console.log("length true");
+        this.subTotal = 0 
+      }
       console.log("array length before splicing",this.quantity.length);
         console.log("quantity array before splicing",this.quantity);
       this.quantity.splice(i,1);
@@ -105,8 +109,8 @@ export class CartComponent implements OnInit, OnChanges {
         console.log("array length",this.quantity.length);
         console.log("quantity array",this.quantity);
       let j = this.quantity.length
+      let subTotal1:number = 0
         for (let y = 0; y < j; y++) {
-        let subTotal1:number = 0
           subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
           this.subTotal = subTotal1
           console.log('subtotal', this.subTotal);
@@ -116,6 +120,11 @@ export class CartComponent implements OnInit, OnChanges {
   }
 
   onDeleteClick(i: number) {
+    if(this.quantity.length == 1){
+      console.log("length true");
+      this.subTotal = 0
+      
+    }
     console.log("array length before splicing",this.quantity.length);
     console.log("quantity array before splicing",this.quantity);
     this.quantity[i] = this.quantity[i] 
