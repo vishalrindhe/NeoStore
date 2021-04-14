@@ -4,8 +4,9 @@ import { DialogData } from '../profile/profile.component';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { EditInfo } from 'src/assets/services/edit-info';
 import { NgForm } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import { DataService } from 'src/assets/services/data.service';
 
 @Component({
   selector: 'app-dialog-profile',
@@ -15,16 +16,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 export class DialogProfileComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private router: Router,
+    private data1: DataService
+  ) {}
+
+  public userData = this.data1.getUserProfile();
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  ngOnInit(): void {
-    
-   }
+  ngOnInit(): void {}
 
   // public userModel = new EditInfo("","");
 
@@ -43,12 +46,13 @@ export class DialogProfileComponent implements OnInit {
   //     ? 'Must include only alphabets'
   //     : 'Must include only alphabets';
   // }
-  firstName = 'vishl';
-  lastName = 'rindhe';
-  email = 'abc@gn.cn';
-  phone = '9876543210';
-  gender = "Male"
-  dob = ""
+  firstName = this.userData.customer_proile.first_name;
+  lastName = this.userData.customer_proile.last_name;
+  email = this.userData.customer_proile.email;
+  phone = this.userData.customer_proile.phone_no;
+  gender = this.userData.customer_proile.gender;
+  dob = this.userData.customer_proile.dob;
+  profilePic = this.userData.customer_proile.profile_img;
 
   firstNameFormControl = new FormControl(this.firstName, [
     Validators.required,
@@ -72,12 +76,15 @@ export class DialogProfileComponent implements OnInit {
     Validators.pattern('^[6-9][0-9]{9}$'),
   ]);
 
-  public genderFormControl = new FormControl(this.gender, [Validators.required]);
-
-  dobFormControl = new FormControl(this.dob, [
-    Validators.required
+  public genderFormControl = new FormControl(this.gender, [
+    Validators.required,
   ]);
 
+  dobFormControl = new FormControl(this.dob, [Validators.required]);
+
+  profilePicFormControl = new FormControl(this.profilePic, [
+    Validators.required,
+  ]);
 
   // public firstName = new FormControl(this.f)
   // public lastName = new FormControl('')
@@ -86,20 +93,57 @@ export class DialogProfileComponent implements OnInit {
   // public email = new FormControl('')
   // public phone = new FormControl('')
 
-  onSubmit(fname: string,lname: string,gender:string,dob:string,email:string,phone:string) {
+  onSubmit(
+    fname: string,
+    lname: string,
+    gender: string,
+    dob: string,
+    email: string,
+    phone: string
+  ) {
     // console.log(data );
     let editInfo = {
-      "first_name":fname,
-      "last_name": lname,
-      "gender": gender,
-      "dob": dob,
-      "email": email,
-      "phone_no": phone
+      first_name: fname,
+      last_name: lname,
+      gender: gender,
+      dob: dob,
+      email: email,
+      phone_no: phone,
       // "profile_img":"image_1574053862482_naveen.jpeg"
-    }
+    };
     console.log(editInfo);
-    
   }
 
-  
+  // url:any = '';
+  // onSelectFile(event:any) {
+  //   if (event.target.files && event.target.files[0]) {
+  //     var reader = new FileReader();
+
+  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+  //     reader.onload = (event) => { // called once readAsDataURL is completed
+  //       this.url = event.target.result;
+  //     }
+  //   }
+  // }
+
+  /**
+   * just redirect to order page
+   * @memberof DialogProfileComponent
+   */
+  onOrderClick() {
+    this.router.navigate(['/order']);
+  }
+
+  onProfileClick() {
+    this.router.navigate(['/profile']);
+  }
+
+  onAddressClick() {
+    this.router.navigate(['/address']);
+  }
+
+  onChangePasswordClick() {
+    this.router.navigate(['/changepassword']);
+  }
 }

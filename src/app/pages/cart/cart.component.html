@@ -23,7 +23,7 @@
                         <span></span>
                     </div>
                 </div>
-                <div *ngFor="let item of cartData.product_details">
+                <div *ngFor="let item of cartData.product_details; let i=index">
                     <hr />
 
                     <div class="row">
@@ -36,22 +36,28 @@
                             <span class="m-1">Status:</span><span class="stock"> {{item.quantity>0? "In Stock" : "Out of Stock"}} </span>
                         </div>
                         <div class="col-4 col-lg-3 col-sm-4 col-md-3 mb-1">
-                            <button mat-mini-fab (click)="onRemoveClick()">
+                            <button mat-mini-fab (click)="onRemoveClick(i)">
                                 <mat-icon>remove</mat-icon>
                             </button>
-                            <span><b>&nbsp; {{quantity}} &nbsp;</b></span>
-                            <button mat-mini-fab (click)="onAddClick()">
+                            <span><b>&nbsp;{{i}} {{quantity[i]}} &nbsp;</b></span>
+                            <button mat-mini-fab (click)="onAddClick(i)">
                                 <mat-icon>add</mat-icon>
                             </button>
                         </div>
+
+                        <!-- price per product -->
                         <div class="col-3 col-lg-1 col-xs-2 col-sm-3 col-md-1">
                             <span> {{item.product_cost}} </span>
                         </div>
+
+                        <!-- total price of single product -->
                         <div class="col-3 col-lg-1 col-xs-2 col-sm-3 col-md-1">
-                            <span #total> {{price*quantity}} </span>
+                            <span #total> {{item.product_cost*(quantity[i])}} </span>
                         </div>
+
+                        <!-- delete product -->
                         <div class="col-2 col-lg-1 col-xs-2 col-sm-2 col-md-1">
-                            <mat-icon (click)="onDeleteClick()">delete_outline</mat-icon>
+                            <mat-icon (click)="onDeleteClick(i)">delete_outline</mat-icon>
                         </div>
                     </div>
                     <!-- <hr /> -->
@@ -69,15 +75,15 @@
                     <tbody>
                         <tr>
                             <td>Subtotal</td>
-                            <td> {{price*quantity}} </td>
+                            <td> {{subTotal}} </td>
                         </tr>
                         <tr>
                             <td>GST(5%)</td>
-                            <td> {{(price*quantity)*0.05}} </td>
+                            <td> {{subTotal*0.05}} </td>
                         </tr>
                         <tr>
                             <td>Order Total</td>
-                            <td>{{ (price*quantity)+((price*quantity)*0.05) }}</td>
+                            <td>{{ (subTotal)+((subTotal)*0.05) }}</td>
                         </tr>   
                     </tbody>
                 </table>

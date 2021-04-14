@@ -1,44 +1,142 @@
-import { Component, OnInit } from '@angular/core';
+import { Input, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { DataService } from 'src/assets/services/data.service';
 // import {} from '../../../assets/services/data.service'
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
-
-  constructor(private data: DataService) { }
-total2:number
-  ngOnInit() {
-    // trying to share quantity to dataservice
-  this.data.setCartCount(this.cartData.product_details[0].quantity)
-  console.log(this.quantity);
-  
-    
-  }
-
+export class CartComponent implements OnInit, OnChanges {
+  // public i: number = 0;
+  @Input() quantity = Array();
+  @Input() subTotal: number = 0;
+  public x = 0;
   public cartData = this.data.getCartData();
   public price = this.cartData.product_details[0].product_cost;
   public total = this.cartData.product_details[0].total_productCost;
-  public quantity = this.cartData.product_details[0].quantity;
-  public stock = this.cartData.product_details[0].product_id.product_stock
+  // public quantity = this.cartData.product_details[this.i].quantity;
+  public stock = this.cartData.product_details[0].product_id.product_stock;
 
-  onAddClick(){
-    this.quantity = this.quantity + 1;
-    this.stock = this.stock - 1;
+  constructor(private data: DataService) { }
+  total2: number;
+  ngOnInit() {
+    // trying to share quantity to dataservice
+    this.data.setCartCount(this.cartData.product_details[0].quantity);
+    console.log(this.quantity);
+    console.log(this.quantity[1]);
+
+    // adding quantities to quantoty Array
+    for (let j of this.cartData.product_details) {
+      this.quantity[this.x] = j.quantity;
+      this.x = this.x + 1;
+    }
+    console.log('x:', this.x);
+
+    let j = this.quantity.length
+        console.log("array length",this.quantity.length);
+        let subTotal1:number = 0
+        for (let y = 0; y < j; y++) {
+          subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+          this.subTotal = subTotal1
+          console.log('subtotal', this.subTotal);
+        }
   }
-  
-  onRemoveClick(){
-    if(this.quantity>0){
-    this.quantity = this.quantity - 1;
-    this.stock = this.stock + 1;
+
+  ngOnChanges(changes: SimpleChanges){
+    // for (let j of this.quantity) {
+    //   console.log('j:', j);
+    //   for (let y = 0; y < j; y++) {
+    //     this.subTotal = this.subTotal + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+    //     console.log('subtotal', this.subTotal);
+    //   }
+    // }
+    console.log("change:",changes);
+    
+  }
+
+  onAddClick(i: number) {
+    // this.i = i;
+    if (this.stock > 0) {
+      this.quantity[i] = this.quantity[i] + 1;
+      // this.quantity = this.quantity + 1;
+      this.stock = this.stock - 1;
+    console.log("array quantity from add method",this.quantity);
+     
+      let j = this.quantity.length
+        console.log("array length",this.quantity.length);
+        let subTotal1:number = 0
+        for (let y = 0; y < j; y++) {
+          subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+          this.subTotal = subTotal1
+          console.log('subtotal', this.subTotal);
+        }
     }
   }
 
-  onDeleteClick(){
-    this.cartData.product_details.splice(0,1)
-    this.quantity = 0
+  onRemoveClick(i: number) {
+    // this.i = i;
+    // public quantity = this.cartData.product_details[0].quantity;
+    // this.quantity[i]= this.cartData.product_details[this.i].quantity;
+    if (this.quantity[i] > 0) {
+      console.log('before   this.quantity[i] = this.quantity[i] - 1;',i,this.quantity[i]);
+      this.quantity[i] = this.quantity[i] - 1;
+      this.stock = this.stock + 1;
+     
+        let j = this.quantity.length
+        console.log("array length from upper remove",this.quantity.length);
+        let subTotal1:number = 0
+        console.log("quantity array",this.quantity);
+          for (let y = 0; y < j; y++) {
+          console.log("p ",i,":",this.quantity[i]);
+          subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+          this.subTotal = subTotal1
+          console.log('subtotal', this.subTotal);
+        }   
+    } else{
+      console.log("array length before splicing",this.quantity.length);
+        console.log("quantity array before splicing",this.quantity);
+      this.quantity.splice(i,1);
+      console.log("array length after splicing",this.quantity.length);
+        console.log("quantity array after splicing",this.quantity);
+        this.cartData.product_details.splice(i, 1);
+        console.log("product json",this.cartData.product_details);
+        console.log("array length",this.quantity.length);
+        console.log("quantity array",this.quantity);
+      let j = this.quantity.length
+        for (let y = 0; y < j; y++) {
+        let subTotal1:number = 0
+          subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+          this.subTotal = subTotal1
+          console.log('subtotal', this.subTotal);
+        }
+        console.log('subtotal', this.subTotal);
+    }
+  }
+
+  onDeleteClick(i: number) {
+    console.log("array length before splicing",this.quantity.length);
+    console.log("quantity array before splicing",this.quantity);
+    this.quantity[i] = this.quantity[i] 
+    this.quantity.splice(i,1)
+    console.log("i inside delete click",i);
+    console.log("array quantity",this.quantity);
+    this.cartData.product_details.splice(i, 1);
+    console.log("product json",this.cartData.product_details);
+
+    // this.quantity = 0
+    console.log("array length",this.quantity.length);
+    let subTotal1:number = 0
+    let j = this.quantity.length
+    for (let y = 0; y < j; y++) {
+      subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+      this.subTotal = subTotal1
+      console.log('subtotal', this.subTotal);
+    }
+    console.log('subtotal', this.subTotal);
+
+    console.log("product json",this.cartData.product_details);
+    
   }
 }

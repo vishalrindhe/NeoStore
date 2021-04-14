@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/assets/services/data.service';
 import { DialogProfileComponent } from '../dialog-profile/dialog-profile.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   field: string;
@@ -9,6 +10,7 @@ export interface PeriodicElement {
 }
 
 export interface DialogData {
+  [x: string]: any;
   animal: string;
   name: string;
 }
@@ -25,7 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private data: DataService, public dialog: MatDialog) { }
+  constructor(private data: DataService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.userData);
@@ -39,8 +41,7 @@ export class ProfileComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogProfileComponent, {
-      width: 'auto'
-      ,
+      width: 'auto',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -65,4 +66,22 @@ export class ProfileComponent implements OnInit {
 
 displayedColumns: string[] = ['field','data'];
 dataSource = ELEMENT_DATA;
+
+
+onOrderClick(){
+  this.router.navigate(['/order']);
+}
+
+onProfileClick(){
+  this.router.navigate(['/profile']);
+}
+
+onAddressClick(){
+  this.router.navigate(['/address']);
+}
+
+onChangePasswordClick(){
+  this.router.navigate(['/changepassword']);
+}
+
 }
