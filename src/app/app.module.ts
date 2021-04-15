@@ -85,7 +85,7 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { DialogProfileComponent } from './pages/dialog-profile/dialog-profile.component';
-
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 // custom validator
@@ -178,6 +178,7 @@ import { DialogProfileComponent } from './pages/dialog-profile/dialog-profile.co
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxImageZoomModule
     
     ],
   providers: [

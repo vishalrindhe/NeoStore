@@ -105,6 +105,8 @@ export class RegistrationComponent implements OnInit {
     //   }
   }
 
+  
+
   //  return this.password.hasError('confirmPassword') ? '' : 'Password does not matched';
 
   // validator for phone
@@ -160,18 +162,29 @@ export class RegistrationComponent implements OnInit {
    * @memberof RegistrationComponent
    */
   passwordcheck() {
-    if (this.pass == this.confirmPass) {
+    if (this.password.value == this.confirmPassword.value) {
       this.match = '';
       console.log('match');
       // return false
-      this.passMatch = false;
-    } else {
       this.passMatch = true;
+    } else {
+      this.passMatch = false;
       this.match = 'password not matching';
       console.log('not');
     }
   }
 
+
+  // passwordcheck() {
+  //   if (this.form.value.password == this.form.value.confirm_password) {
+  //   this.match = '';
+  //   // return false
+  //   this.pass_match = true;
+  //   } else {
+  //   this.pass_match = false;
+  //   this.match = 'password not matching';
+  //   }
+  //   }
   registration() {
     this.router.navigate(['/dashboard']);
   }

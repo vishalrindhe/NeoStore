@@ -1,5 +1,5 @@
-import { Input, SimpleChanges } from '@angular/core';
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Input} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/assets/services/data.service';
 // import {} from '../../../assets/services/data.service'
 
@@ -8,7 +8,7 @@ import { DataService } from 'src/assets/services/data.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit, OnChanges {
+export class CartComponent implements OnInit {
   // public i: number = 0;
   @Input() quantity = Array();
   @Input() subTotal: number = 0;
@@ -44,17 +44,6 @@ export class CartComponent implements OnInit, OnChanges {
         }
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    // for (let j of this.quantity) {
-    //   console.log('j:', j);
-    //   for (let y = 0; y < j; y++) {
-    //     this.subTotal = this.subTotal + (this.quantity[y] * this.cartData.product_details[y].product_cost);
-    //     console.log('subtotal', this.subTotal);
-    //   }
-    // }
-    console.log("change:",changes);
-    
-  }
 
   onAddClick(i: number) {
     // this.i = i;
@@ -94,29 +83,30 @@ export class CartComponent implements OnInit, OnChanges {
           this.subTotal = subTotal1
           console.log('subtotal', this.subTotal);
         }   
-    } else{
-      if(this.quantity.length == 1){
-        console.log("length true");
-        this.subTotal = 0 
-      }
-      console.log("array length before splicing",this.quantity.length);
-        console.log("quantity array before splicing",this.quantity);
-      this.quantity.splice(i,1);
-      console.log("array length after splicing",this.quantity.length);
-        console.log("quantity array after splicing",this.quantity);
-        this.cartData.product_details.splice(i, 1);
-        console.log("product json",this.cartData.product_details);
-        console.log("array length",this.quantity.length);
-        console.log("quantity array",this.quantity);
-      let j = this.quantity.length
-      let subTotal1:number = 0
-        for (let y = 0; y < j; y++) {
-          subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
-          this.subTotal = subTotal1
-          console.log('subtotal', this.subTotal);
-        }
-        console.log('subtotal', this.subTotal);
-    }
+    } 
+    // else{
+    //   if(this.quantity.length == 1){
+    //     console.log("length true");
+    //     this.subTotal = 0 
+    //   }
+    //   console.log("array length before splicing",this.quantity.length);
+    //     console.log("quantity array before splicing",this.quantity);
+    //   this.quantity.splice(i,1);
+    //   console.log("array length after splicing",this.quantity.length);
+    //     console.log("quantity array after splicing",this.quantity);
+    //     this.cartData.product_details.splice(i, 1);
+    //     console.log("product json",this.cartData.product_details);
+    //     console.log("array length",this.quantity.length);
+    //     console.log("quantity array",this.quantity);
+    //   let j = this.quantity.length
+    //   let subTotal1:number = 0
+    //     for (let y = 0; y < j; y++) {
+    //       subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
+    //       this.subTotal = subTotal1
+    //       console.log('subtotal', this.subTotal);
+    //     }
+    //     console.log('subtotal', this.subTotal);
+    // }
   }
 
   onDeleteClick(i: number) {

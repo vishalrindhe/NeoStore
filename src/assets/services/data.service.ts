@@ -3,6 +3,7 @@ import ProductOnDashboard from '../data/productOnDashboard.json';
 import Cart from '../data/cart.json';
 import userProfile from '../data/userProfile.json';
 import productDetail from '../data/productDetail.json';
+import productList from '../data/productList.json';
 
 @Injectable({
   providedIn: 'root',
@@ -130,6 +131,49 @@ export class DataService {
     }[];
   } = productDetail;
 
+  public productList: {
+    success: boolean;
+    status_code: number;
+    message: string;
+    product_details: {
+      _id: string;
+      subImages_id: {
+        product_subImages: string[];
+        _id: string;
+        subImages_id: string;
+        __v: number;
+      };
+      category_id: {
+        _id: string;
+        category_name: string;
+        category_id: string;
+        product_image: string;
+        created_at: string;
+        __v: number;
+      };
+      Color_id: {
+        _id: string;
+        color_name: string;
+        color_code: string;
+        color_id: string;
+        __v: number;
+      };
+      product_id: string;
+      product_name: string;
+      product_image: string;
+      product_desc: string;
+      product_rating: any;
+      product_producer: string;
+      product_cost: number;
+      product_stock: number;
+      product_dimension: string;
+      product_material: string;
+      createdAt: string;
+      __v: number;
+    }[];
+    total_count: number;
+  } = productList;
+
   /**
    * this return products which are seen in cards on DashBoard front page
    * @return {*}
@@ -166,20 +210,22 @@ export class DataService {
     this.cartCount = count;
   }
 
-  getCartCount(){
-    return this.cartCount
+  getCartCount() {
+    return this.cartCount;
   }
-
 
   /**
    *getting single product detail from json
    *
-   * @return {*} 
+   * @return {*}
    * @memberof DataService
    */
-  getProductDetail(){
+  getProductDetail() {
     console.log(this.productDetail);
-    return this.productDetail
-    
+    return this.productDetail;
+  }
+
+  getProductList(){
+    return this.productList;
   }
 }
