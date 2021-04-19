@@ -1,0 +1,5 @@
+<h1 mat-dialog-title>Remove <b>{{data.name}}</b> from Cart ?</h1>
+<div mat-dialog-actions style="text-align:center">
+  <button mat-button (click)="onNoClick()" [mat-dialog-close]>No Thanks</button>
+  <button mat-button color="primary" (click)="onOkClick()" [mat-dialog-close] cdkFocusInitial>Remove</button>
+</div>

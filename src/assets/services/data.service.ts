@@ -40,6 +40,7 @@ export class DataService {
       updatedAt: string;
     };
   } = userProfile;
+  myFirstPromise: string;
 
   constructor() {}
 
@@ -216,7 +217,6 @@ export class DataService {
 
   /**
    *getting single product detail from json
-   *
    * @return {*}
    * @memberof DataService
    */
@@ -225,7 +225,31 @@ export class DataService {
     return this.productDetail;
   }
 
-  getProductList(){
+/**
+ * getting all product list from json 
+ * @return {*} 
+ * @memberof DataService
+ */
+getProductList(){
     return this.productList;
   }
+
+  public r:any
+  public remove:any
+
+// setRemoveCart(remove:string){
+//   let r:string
+//   let myFirstPromise = new Promise((resolve, reject) => {
+//   this.remove = remove
+//   resolve(remove)
+//   })
+  
+//   myFirstPromise.then((successMessage) => {
+//     console.log("Yay! from service :" + successMessage)
+//     this.remove = successMessage
+//     console.log("this.remove from promise service", this.remove);
+//     this.r  = successMessage
+//   });
+// }
+
 }

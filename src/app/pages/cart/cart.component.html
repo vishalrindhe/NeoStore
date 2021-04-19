@@ -36,7 +36,9 @@
                             <span class="m-1">Status:</span><span class="stock"> {{item.quantity>0? "In Stock" : "Out of Stock"}} </span>
                         </div>
                         <div class="col-4 col-lg-3 col-sm-4 col-md-3 mb-1">
-                            <button mat-mini-fab (click)="onRemoveClick(i)">
+                            <button mat-mini-fab (click)="onRemoveClick(i)" 
+                                [disabled]="quantity[i]==1"
+                                >
                                 <mat-icon>remove</mat-icon>
                             </button>
                             <span><b>&nbsp;{{i}} {{quantity[i]}} &nbsp;</b></span>
@@ -57,7 +59,7 @@
 
                         <!-- delete product -->
                         <div class="col-2 col-lg-1 col-xs-2 col-sm-2 col-md-1">
-                            <mat-icon (click)="onDeleteClick(i)">delete_outline</mat-icon>
+                            <mat-icon (click)="onDeleteClick(i) ">delete_outline</mat-icon>
                         </div>
                     </div>
                     <!-- <hr /> -->

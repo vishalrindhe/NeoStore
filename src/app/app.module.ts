@@ -87,9 +87,11 @@ import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { DialogProfileComponent } from './pages/dialog-profile/dialog-profile.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 
-
 // custom validator
 
+// paginator
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DialogCartComponent } from './pages/dialog-cart/dialog-cart.component'; // <-- import the module
 
 @NgModule({
   declarations: [
@@ -112,6 +114,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     OrderDetailsComponent,
     InvoiceComponent,
     DialogProfileComponent,
+    DialogCartComponent,
     
 
   ],
@@ -178,7 +181,8 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxImageZoomModule
+    NgxImageZoomModule,
+    NgxPaginationModule
     
     ],
   providers: [

@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogProfileComponent, {
-      width: 'auto',
+      width: '50vh',
       data: {name: this.name, animal: this.animal}
     });
 
