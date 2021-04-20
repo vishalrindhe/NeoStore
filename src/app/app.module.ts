@@ -91,7 +91,10 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 // paginator
 import {NgxPaginationModule} from 'ngx-pagination';
-import { DialogCartComponent } from './pages/dialog-cart/dialog-cart.component'; // <-- import the module
+import { DialogCartComponent } from './pages/dialog-cart/dialog-cart.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FilterColorPipe } from './pipes/filter-color.pipe'; // <-- import the module
+
 
 @NgModule({
   declarations: [
@@ -115,6 +118,8 @@ import { DialogCartComponent } from './pages/dialog-cart/dialog-cart.component';
     InvoiceComponent,
     DialogProfileComponent,
     DialogCartComponent,
+    FilterPipe,
+    FilterColorPipe,
     
 
   ],
