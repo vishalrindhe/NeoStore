@@ -18,21 +18,22 @@
   
                 <div *ngFor="let subtask of category; let i=index">
                     
-                        <input  type="checkbox" id={{i}} class="categoryClass" (click)="getCategory($event,subtask)">
+                        <!-- <input  type="checkbox" id={{i}} class="categoryClass" (click)="getCategory($event,subtask)"> -->
                         
-                      {{subtask}} {{i}}
+                      <!-- {{subtask}} {{i}} -->
                     
-                </div>
                 <form #myForm='ngForm'>      
                   <mat-checkbox type="checkbox" 
-                       #checkBox="ngModel" 
-                    [(ngModel)]="shown" name="checkBox1"> abc</mat-checkbox> 
+                       #a="ngModel" 
+                    [(ngModel)]="shown[i]" name={{i}} (click)="getCategory(a.value,subtask)">{{subtask}} {{i}} </mat-checkbox> 
                 </form>
+              </div>
+
                   <div *ngIf="shown"> 
                       <p>abc</p>
                   </div>
 
-                <button mat-raised-button (click)="applyCategory(checkBox.value)">Apply</button>
+                <!-- <button mat-raised-button (click)="applyCategory(checkBox.value)">Apply</button> -->
                 
                 
                 <!-- <checkbox-group [(ngModel)]="selectedItems">
@@ -54,12 +55,17 @@
                 <mat-expansion-panel-header>
                   <mat-panel-title > Color </mat-panel-title>
                 </mat-expansion-panel-header>
-  
-                <mat-form-field>
-                  <mat-label>First name</mat-label>
-                  <input matInput />
-                </mat-form-field>
-  
+
+                <div *ngFor="let subtask of categoryColor; let i=index">
+                    
+                  <input  type="checkbox" id={{i}} class="categoryClass" (click)="getColor(subtask)">
+                  
+                {{subtask}} {{i}}
+              
+          </div>
+
+          <button mat-raised-button (click)="applyColor()">Apply</button>
+
                 <mat-form-field>
                   <mat-label>Age</mat-label>
                   <input matInput type="number" min="1" />
@@ -75,48 +81,38 @@
         <div class="row">
         <div class="col-sm-6 col-lg-4 mb-4 card-margin" 
         *ngFor="let product of productList.product_details
-
-        | filterColor : colorCategory:'Color_id':'color_name'
+        | filter: dataCategory:'category_id':'category_name'
+        | filterColor: colorCategory:'Color_id':'color_name'
          | paginate: { itemsPerPage: 4, currentPage: p }">
           <mat-card class="example-card">
-              <!-- <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Shiba Inu</mat-card-title>
-              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-              </mat-card-header> -->
+
               <img mat-card-image src={{product.product_image}} alt="Photo of a Shiba Inu">
               <mat-card-content>
               <h2 style="text-align: center;">
                 {{product.category_id.category_name}}
                           </h2>
-              <h3 style="text-align: center;">
-                  &#8377; 5000
-              </h3>
+              
   
               <div style="text-align:center">
-                  <h1>
-                  
-                  </h1>
                   <star-rating  [value]="4.7"   checkedcolor="#ffcc00" uncheckedcolor="#ffff99" size="24px" [readonly]='true'></star-rating>
+                  <h3 style="text-align: center;">
+                    &#8377; {{product.product_cost}}
+                </h3>
+                  <button mat-raised-button color='primary' style="text-align: center;">Add to Cart</button>
                 </div>
+               
               </mat-card-content>
               <mat-card-actions>
-              <!-- <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button> -->
+
               </mat-card-actions>
+            
           </mat-card>
           
         </div>
       </div>
         <pagination-controls class="textCenter" (pageChange)="p = $event"></pagination-controls>
        
-       
-        <!-- <div class="list">
-          <ul>
-            <li *ngFor="let item of collection | paginate: { itemsPerPage: 4, currentPage: p }">{{ item }}</li>
-          </ul>
-      
-      </div> -->
+
       </div>
     </div>
   </div>

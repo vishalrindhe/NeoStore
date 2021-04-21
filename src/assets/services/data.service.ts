@@ -4,6 +4,8 @@ import Cart from '../data/cart.json';
 import userProfile from '../data/userProfile.json';
 import productDetail from '../data/productDetail.json';
 import productList from '../data/productList.json';
+import Address from '../data/dummy_address.json';
+import  Orders  from '../data/dummy_order_list.json';
 
 @Injectable({
   providedIn: 'root',
@@ -234,22 +236,93 @@ getProductList(){
     return this.productList;
   }
 
-  public r:any
-  public remove:any
+  // public r:any
+  // public remove:any
 
-// setRemoveCart(remove:string){
-//   let r:string
-//   let myFirstPromise = new Promise((resolve, reject) => {
-//   this.remove = remove
-//   resolve(remove)
-//   })
+  public order_list:{
+    success: boolean,
+    status_code: number,
+    message: string,
+    product_details:
+    {
+      _id: string,
+      product_details:
+      {
+        _id: string,
+        total_cartCost: string,
+        isDelivered: boolean,
+        customer_id: number,
+        order_id: string,
+        product_id: string,
+        quantity: number,
+        delivery_address: string,
+        total_productCost: string,
+        createdAt: string,
+        __v: number,
+        product_details: 
+         {
+          _id: string,
+          subImages_id: string,
+          category_id: string,
+          color_id: string,
+          product_id: string,
+          product_name: string,
+          product_image: string,
+                    product_desc: string,
+          product_rating: any,
+          product_producer: string,
+          product_cost: number,
+          product_stock: number,
+          product_dimension: string,
+          product_material: string,
+          createdAt: string,
+          __v: number,
+        } []
+      } []
+    }[]
+  }
+  = Orders;
   
-//   myFirstPromise.then((successMessage) => {
-//     console.log("Yay! from service :" + successMessage)
-//     this.remove = successMessage
-//     console.log("this.remove from promise service", this.remove);
-//     this.r  = successMessage
-//   });
-// }
+  sendOrderData(){
+    return this.order_list;
+  }
+
+
+  // address
+
+  public Address_List:{success:boolean,status_code:number,customer_address:{address_id:number , customer_id:number , address:string , pincode:number , city:string , state:string , country:string , isDeliveryAddress:boolean , createdAt:string , updatedAt:string}[]}= Address;
+  public Filterarray=this.Address_List.customer_address;
+  public address_length= this.Filterarray.length;
+  public userDataId: any
+  public DataId: any
+
+  addItem(event:any){
+    this.Filterarray.push(event)
+    this.address_length = this.Filterarray.length;
+    console.log('filterarray new',this.Filterarray);
+  }
+  public deleteItem(_id: any) {
+    this.Filterarray.splice(_id-1, 1);
+    this.address_length = this.Filterarray.length;
+    console.log(_id);
+}
+editItem(_id: number){
+  let address = this.Filterarray[_id-1].address;
+  let city = this.Filterarray[_id-1].city;
+  let pincode = this.Filterarray[_id-1].pincode;
+  let country = this.Filterarray[_id-1].country;
+  let result1:any = prompt("Edit Address", address);
+  let result2:any = prompt("Edit City", city);
+  // let result3 = prompt("Edit Task Title", pincode);
+  let result4:any = prompt("Edit Country", country);
+  if ((result1 !== null && result1 !== "") || (result2 !== null && result2 !== "") || (result4 !== null && result4 !== "")){
+    this.Filterarray[_id-1].address = result1;
+    this.Filterarray[_id-1].city = result2;
+    this.Filterarray[_id-1].country = result4;
+  }
+}
+senddata(){
+  return this.Filterarray;
+}
 
 }

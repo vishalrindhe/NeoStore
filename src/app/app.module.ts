@@ -93,7 +93,12 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DialogCartComponent } from './pages/dialog-cart/dialog-cart.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import { FilterColorPipe } from './pipes/filter-color.pipe'; // <-- import the module
+import { FilterColorPipe } from './pipes/filter-color.pipe';
+import { ChangeAddressComponent } from './pages/change-address/change-address.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component'; // <-- import the module
 
 
 @NgModule({
@@ -120,6 +125,11 @@ import { FilterColorPipe } from './pipes/filter-color.pipe'; // <-- import the m
     DialogCartComponent,
     FilterPipe,
     FilterColorPipe,
+    ChangeAddressComponent,
+    CheckoutComponent,
+    ForgetPasswordComponent,
+    MyAccountComponent,
+    ThankYouComponent,
     
 
   ],

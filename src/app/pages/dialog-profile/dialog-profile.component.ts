@@ -114,18 +114,27 @@ export class DialogProfileComponent implements OnInit {
     console.log(editInfo);
   }
 
-  // url:any = '';
-  // onSelectFile(event:any) {
-  //   if (event.target.files && event.target.files[0]) {
-  //     var reader = new FileReader();
-
-  //     reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-  //     reader.onload = (event) => { // called once readAsDataURL is completed
-  //       this.url = event.target.result;
-  //     }
-  //   }
-  // }
+   
+  imagePath:any;
+  imgURL: any;
+  public message: string | undefined;
+  preview(files:any) {
+    if (files.length === 0)
+    return;
+    
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+    this.message = "Only images are supported.";
+    return;
+    }
+    
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+    this.imgURL = reader.result;
+    }
+    }
 
   /**
    * just redirect to order page

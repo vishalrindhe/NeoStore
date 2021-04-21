@@ -17,7 +17,7 @@ export class FilterColorPipe implements PipeTransform {
     console.log(filterString, ' ', propName, ' ', propName2);
     for (let i = 0; i < filterString.length; i++) {
       for (const item of value) {
-        if (item[propName][propName2] === filterString) {
+        if (item[propName][propName2] === filterString[i]) {
           console.log('filterString', filterString[i]);
 
           resultArray.push(item);

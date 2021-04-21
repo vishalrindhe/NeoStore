@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/assets/services/data.service';
 
 @Component({
   selector: 'app-order',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  constructor() { }
+  public order_list:any =[]; 
+  public a:any
 
-  ngOnInit(): void {
+  constructor(private service:DataService) { }
+
+  ngOnInit():void{
+    // this.receivedata()
+    this.a = this.service.sendOrderData();
+    this.order_list = this.a.product_details;
   }
+
+// receivedata(){
+//   this.order_list = this.service.sendOrderData();
+//   console.log(this.order_list);
+// }
 
 }

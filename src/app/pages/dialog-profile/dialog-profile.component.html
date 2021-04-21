@@ -18,21 +18,23 @@
 
         <!-- profile pic -->
 
-        <div *ngIf="!profilePic1.value; else defaultPic">
-        <img src={{profilePic}} width="100%" height="100">
-        </div>
-        <ng-template #defaultPic>
-          <img src="C:\fakepath\Screenshot from 2021-01-27 13-50-10.png" width="100%" height="100">
-          <h1> {{profilePic1.value}} </h1>
-        </ng-template>
-
-          <input
-            type="file"
-            #profilePic1
-            
-            placeholder="First Name"
-          />
-          <br>
+        <div *ngIf="!file.value; else defaultPic">  
+          <img src={{profilePic}} width="100%" height="100">
+          </div>
+          <ng-template #defaultPic>
+            <img [src]="imgURL" width="100%" height="100" *ngIf="imgURL">
+            <!-- <h1> {{profilePic1.value}} </h1> -->
+          </ng-template>
+  
+            <input
+              type="file"
+              #file
+              id="file-id"
+              accept='image/*'
+              (change)="preview(file.files)"
+              placeholder="Profile Pic"
+            />
+            <br>
         <!-- first Name -->
         <mat-form-field class="example-full-width">
           <input

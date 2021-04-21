@@ -29,11 +29,13 @@ const desserts: Dessert[] = [
 export class ProductsComponent implements OnInit {
   collection = Array();
   c = Array()
+  c1 = Array()
+
   public dataCategory = Array()
   public colorCategory = Array()
 
   p: number = 1;
-  public shown = false;
+  public shown = Array();
 abc = desserts
 public categories = ['General', 'Exotic', 'Extreme', 'Extreme', 'General' ,'Water', 'Extreme']
 .filter((value, index, categoryArray) => categoryArray.indexOf(value) === index);
@@ -50,6 +52,7 @@ dataSource = new MatTableDataSource(desserts)
   public categoryColor1= Array()
   public categoryColor = Array()
   checkBoxInstance: any;
+  public a: any[]= ['a','b','c','d','e'];
   ngOnInit(){
     console.log(this.productList);
     this.dataSource.sort = this.sort;
@@ -57,6 +60,7 @@ dataSource = new MatTableDataSource(desserts)
     for(let i=0; i< this.productList.product_details.length; i++){
       this.category1.push(this.productList.product_details[i].category_id.category_name)
       this.categoryColor1.push(this.productList.product_details[i].Color_id.color_name)
+      this.shown.push(false)
     }
 
     // taking distinct element from array
@@ -85,51 +89,44 @@ collection1 = [
   {"name":"I", "price": 900},
 ];
 
-getCategory($event: any,category:string){
+getCategory(
+  $event: any,
+  category:string){
 
-  let a = document.getElementById('1')
-  
-
-  console.log();
-  
   console.log($event);
-  if($event.isChecked){
-console.log($event.isChecked);
-
-  }
-
-console.log("isChecked",$event.isChecked);
-
   
-console.log(category);
-// for(let i=0; i< this.c.length; i++){
-  // if(category !== this.c[i]){
-    console.log(this.c.includes(category));
+  let a = document.getElementById('1')
+  // console.log($event);
+  // if($event == true){
+    // console.log("vishal");
+  // }
+    // console.log("isChecked",$event.isChecked);  
+    console.log(category);
+    // console.log(this.c.includes(category));
 
-  this.c.push(category);
-
-    for(let b of this.c){
-      console.log("b",b);
-      
-
-    }
-
+    this.c.push(category);
 }
 
+getColor(color:any){
+  this.c1.push(color)
+}
+
+applyColor(){
+  this.colorCategory = this.c1
+this.router.navigate(['/products']);
+
+}
 
 public az= false
 applyCategory(checkBox: any){
   console.log("h",checkBox);
-  
   let categoryClass = document.getElementsByClassName('categoryClass');
   console.log("categoryClass.length",categoryClass.length);
   console.log("categoryClass.length",categoryClass[0]);
-
   
 for(let i=0; i< categoryClass.length; i++){
   if(categoryClass[0]){
     console.log("true");
-    
   }
 }
 

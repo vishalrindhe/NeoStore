@@ -1,30 +1,30 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators , ValidatorFn, AbstractControl } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss']
+  selector: 'app-forget-password',
+  templateUrl: './forget-password.component.html',
+  styleUrls: ['./forget-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
-
+export class ForgetPasswordComponent implements OnInit {
   error: string = "";
   hide = true;
   hide1 = true;
   
   form: FormGroup = new FormGroup({
+    v_code: new FormControl(''),
     password: new FormControl(''),
-    new_password: new FormControl(''),
     confirm_password: new FormControl(''),
   });
-
+  
   constructor() { }
-  old_password="123kokoko"
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      password: new FormControl('', [Validators.required, Validators.pattern('this.old_password')]),
-      new_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern('[a-zA-Z0-9\s]+')]),
+      v_code: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9\s]+')]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern('[a-zA-Z0-9\s]+')]),
       confirm_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern('[a-zA-Z0-9\s]+')]),
     }
     );
@@ -36,6 +36,5 @@ export class ChangePasswordComponent implements OnInit {
 
   submit(){
     console.log("Saved");
-  }
-
+}
 }
