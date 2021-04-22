@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 
 import { SocialUser } from "angularx-social-login";
 import { CheckingService } from 'src/assets/services/checking.service';
+import { DataService } from 'src/assets/services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router) {
+  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router, private data1: DataService) {
     // console.log("from constructor",this.user)
    }
 
@@ -104,24 +106,48 @@ export class LoginComponent implements OnInit {
    * @param {string} p
    * @memberof LoginComponent
    */
+  public xyz:any
   check(uname: string, p : string)
   {
-    var output = this.service.checkusernameandpassword(uname, p);
-    if(output == true)
-    {
-      this.output = output
-      this.service.setData(localStorage.getItem("username"))
-      this.router.navigate(['/dashboard']);
-    } 
-    else if(this.loggedIn == (this.user != null)){
-      this.router.navigate(['/dashboard']);
+    let data = {
+      email: uname,
+    password: p,
     }
-    else{
-    this.msg ='Invalid username or password';
-    alert(this.msg)
-    console.log(this.msg);
+
+    this.data1.loginPost(data).subscribe((info) =>{
+      // let xyz
+      this.xyz = info
+    console.log('from then',this.xyz.data);
+    localStorage.setItem("firstName",this.xyz.data.firstName)
+    localStorage.setItem("lastName",this.xyz.data.lastName)
+    localStorage.setItem("email",this.xyz.data.email)
+    localStorage.setItem("gender",this.xyz.data.gender)
+    localStorage.setItem("mobile",this.xyz.data.mobile)
+    localStorage.setItem("token",this.xyz.data.token)
+    localStorage.setItem("v","v")
+    this.router.navigate(['/dashboard']);
+    },(error) => {
+      alert('Invalid username or password')
+          console.log('from catch')
+    })
+
+    // this.data1.loginPost(uname,p)
+    // var output = this.service.checkusernameandpassword(uname, p);
+    // if(output == true)
+    // {
+    //   this.output = output
+    //   this.service.setData(localStorage.getItem("username"))
+    //   this.router.navigate(['/dashboard']);
+    // } 
+    // else if(this.loggedIn == (this.user != null)){
+    //   this.router.navigate(['/dashboard']);
+    // }
+    // else{
+    // this.msg ='Invalid username or password';
+    // alert(this.msg)
+    // console.log(this.msg);
     
-    }
+    // }
   }
 
   onRegisterClick(){

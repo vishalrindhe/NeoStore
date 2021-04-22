@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -14,126 +20,191 @@ export interface Dessert {
 }
 
 const desserts: Dessert[] = [
-  {name: 'Frozen yogurt', calories: 159, fat: 6, carbs: 24, protein: 4},
-  {name: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4},
-  {name: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6},
-  {name: 'Cupcake', calories: 305, fat: 4, carbs: 67, protein: 4},
-  {name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4},
+  { name: 'Frozen yogurt', calories: 159, fat: 6, carbs: 24, protein: 4 },
+  { name: 'Ice cream sandwich', calories: 237, fat: 9, carbs: 37, protein: 4 },
+  { name: 'Eclair', calories: 262, fat: 16, carbs: 24, protein: 6 },
+  { name: 'Cupcake', calories: 305, fat: 4, carbs: 67, protein: 4 },
+  { name: 'Gingerbread', calories: 356, fat: 16, carbs: 49, protein: 4 },
 ];
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  collection = Array();
-  c = Array()
-  c1 = Array()
+  form: FormGroup;
 
-  public dataCategory = Array()
-  public colorCategory = Array()
+  collection = Array();
+  c = Array();
+  c1 = Array();
+xyz =Array()
+  public dataCategory = Array();
+  public colorCategory = Array();
 
   p: number = 1;
   public shown = Array();
-abc = desserts
-public categories = ['General', 'Exotic', 'Extreme', 'Extreme', 'General' ,'Water', 'Extreme']
-.filter((value, index, categoryArray) => categoryArray.indexOf(value) === index);
-dataSource = new MatTableDataSource(desserts)
-
+  abc = desserts;
+  public categories = [
+    'General',
+    'Exotic',
+    'Extreme',
+    'Extreme',
+    'General',
+    'Water',
+    'Extreme',
+  ].filter(
+    (value, index, categoryArray) => categoryArray.indexOf(value) === index
+  );
+  dataSource = new MatTableDataSource(desserts);
 
   // sortedData: Dessert[];
 
-
   @ViewChild(MatSort) sort: MatSort;
-  public productList = this.data.getProductList()
-  public category1= Array()
-  public category = Array()
-  public categoryColor1= Array()
-  public categoryColor = Array()
+  public productList = this.data.getProductList();
+  public category1 = Array();
+  public category = Array();
+  public categoryColor1 = Array();
+  public categoryColor = Array();
   checkBoxInstance: any;
-  public a: any[]= ['a','b','c','d','e'];
-  ngOnInit(){
+  public a: any[] = ['a', 'b', 'c', 'd', 'e'];
+  ngOnInit() {
     console.log(this.productList);
     this.dataSource.sort = this.sort;
     // here we are pushing color and category of product in its respective array
-    for(let i=0; i< this.productList.product_details.length; i++){
-      this.category1.push(this.productList.product_details[i].category_id.category_name)
-      this.categoryColor1.push(this.productList.product_details[i].Color_id.color_name)
-      this.shown.push(false)
+    for (let i = 0; i < this.productList.product_details.length; i++) {
+      this.category1.push(
+        this.productList.product_details[i].category_id.category_name
+      );
+      this.categoryColor1.push(
+        this.productList.product_details[i].Color_id.color_name
+      );
+      this.shown.push(false);
     }
 
     // taking distinct element from array
-    this.category = this.category1.filter((value, index, categoryArray) => categoryArray.indexOf(value) === index);
-    console.log(this.category); 
-    this.categoryColor = this.categoryColor1.filter((value, index, categoryArray) => categoryArray.indexOf(value) === index);
-    console.log(this.categoryColor);    
+    this.category = this.category1.filter(
+      (value, index, categoryArray) => categoryArray.indexOf(value) === index
+    );
+    console.log(this.category);
+    this.categoryColor = this.categoryColor1.filter(
+      (value, index, categoryArray) => categoryArray.indexOf(value) === index
+    );
+    console.log(this.categoryColor);
   }
 
-  constructor(private data: DataService, private router: Router) {
+  constructor(
+    private data: DataService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
     for (let i = 1; i <= 10; i++) {
       this.collection.push(`item ${i}`);
     }
-   }
+
+    this.form = this.formBuilder.group({
+      website: this.formBuilder.array([], [Validators.required]),
+      
+    });
+  }
+
+  onCheckboxChange(e: any) {
+    const website = this.form.get('website') as FormArray;
+
+    if (e.target.checked) {
+      website.push(new FormControl(e.target.value));
+      this.xyz.push(new FormControl(e.target.value));
+    } else {
+      const index = website.controls.findIndex(
+        (x) => x.value === e.target.value
+      );
+      
+      website.removeAt(index);
+      this.xyz.splice(index,1)
+    }
+  }
+
+  submit() {
+    // this.dataCategory = this.form.value;
+    console.log('datacategory', this.dataCategory);
+    console.log("xyz",this.xyz.length);
+
+    for(let i=0; i<this.xyz.length;i++){
+      this.dataCategory[i] = this.xyz[i].value
+      console.log('i:', i);
+    }
+
+    console.log(this.form.value);
+    this.dataCategory = this.form.value
+    console.log(this.dataCategory);
+    this.router.navigate(['/products']);
+    
+  }
 
   //  collection = [1,2,3,45]
-collection1 = [
-  {"name":"A", "price": 100},
-  {"name":"B", "price": 200},
-  {"name":"C", "price": 300},
-  {"name":"D", "price": 400},
-  {"name":"E", "price": 500},
-  {"name":"F", "price": 600},
-  {"name":"G", "price": 700},
-  {"name":"H", "price": 800},
-  {"name":"I", "price": 900},
-];
+  collection1 = [
+    { name: 'A', price: 100 },
+    { name: 'B', price: 200 },
+    { name: 'C', price: 300 },
+    { name: 'D', price: 400 },
+    { name: 'E', price: 500 },
+    { name: 'F', price: 600 },
+    { name: 'G', price: 700 },
+    { name: 'H', price: 800 },
+    { name: 'I', price: 900 },
+  ];
 
-getCategory(
-  $event: any,
-  category:string){
+  getCategory($event: any, category: string) {
+    console.log($event);
 
-  console.log($event);
-  
-  let a = document.getElementById('1')
-  // console.log($event);
-  // if($event == true){
+    let a = document.getElementById('1');
+    // console.log($event);
+    // if($event == true){
     // console.log("vishal");
-  // }
-    // console.log("isChecked",$event.isChecked);  
+    // }
+    // console.log("isChecked",$event.isChecked);
     console.log(category);
     // console.log(this.c.includes(category));
 
     this.c.push(category);
-}
-
-getColor(color:any){
-  this.c1.push(color)
-}
-
-applyColor(){
-  this.colorCategory = this.c1
-this.router.navigate(['/products']);
-
-}
-
-public az= false
-applyCategory(checkBox: any){
-  console.log("h",checkBox);
-  let categoryClass = document.getElementsByClassName('categoryClass');
-  console.log("categoryClass.length",categoryClass.length);
-  console.log("categoryClass.length",categoryClass[0]);
-  
-for(let i=0; i< categoryClass.length; i++){
-  if(categoryClass[0]){
-    console.log("true");
   }
-}
 
-console.log("1");
-this.dataCategory = this.c
-this.colorCategory = this.c 
-this.router.navigate(['/products']);
-}
+  getColor(color: any) {
+    this.c1.push(color);
+  }
 
+  applyColor() {
+    this.colorCategory = this.c1;
+    this.router.navigate(['/products']);
+  }
+
+  public az = false;
+  applyCategory(checkBox: any) {
+    console.log('h', checkBox);
+    let categoryClass = document.getElementsByClassName('categoryClass');
+    console.log('categoryClass.length', categoryClass.length);
+    console.log('categoryClass.length', categoryClass[0]);
+
+    for (let i = 0; i < categoryClass.length; i++) {
+      if (categoryClass[0]) {
+        console.log('true');
+      }
+    }
+
+    console.log('1');
+    this.dataCategory = this.c;
+    this.colorCategory = this.c;
+    this.router.navigate(['/products']);
+  }
+
+
+  // websiteList: any = [
+
+  //   { id: 1, name: 'ItSolutionStuff.com' },
+
+  //   { id: 2, name: 'HDTuto.com' },
+
+  //   { id: 3, name: 'NiceSnippets.com' }
+
+  // ];
 }

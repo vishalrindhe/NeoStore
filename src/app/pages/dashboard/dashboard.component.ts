@@ -4,73 +4,83 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { CheckingService } from 'src/assets/services/checking.service';
 import { DataService } from 'src/assets/services/data.service';
-
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
+  // let url = `${this.apiRoot}/get`;
+  // this.http.get(url).subscribe(res => console.log(res.text())); (1)
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  name:string=this.service.data()
-  cartValue:number=5
+  // public url: string = 'http://ce61dbbabdca.ngrok.io';
+  public xyz:any
+  name: any = localStorage.getItem("firstName")
+  cartValue: number = 5;
   panelOpenState = false;
 
   title = 'NeoStore';
 
-  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router, private cartCount:DataService) { }
-
+  constructor(
+    private authService: SocialAuthService,
+    private service: CheckingService,
+    private router: Router,
+    private cartCount: DataService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    console.log("cartcount", this.count);
+     console.log("firstname: ",localStorage.getItem("firstName"));
     
   }
 
-  public count = this.cartCount.getCartCount()
+  public count = this.cartCount.getCartCount();
 
   // console the text inside entered in search bar
-  abc(input:string){
-    console.log("msg in search bar",input);
+  abc(input: string) {
+    console.log('msg in search bar', input);
   }
 
-/**
- *this signOut functin clear localhost username
- *
- * @memberof DashboardComponent
- */
-signOut() {
-    this.service.signOut();
+  /**
+   *this signOut functin clear all localhost 
+   * and reload it
+   * @memberof DashboardComponent
+   */
+  signOut() {
+    // this.service.signOut();
+    localStorage.clear()
+    // this.router.navigate(['/dashboard']);
+    location.reload(); 
+
   }
-  
+
   // if user is logged in then only it will navigate to product page
-  onProductClick(){
+  onProductClick() {
     // if(this.service.item){
-      this.router.navigate(['/productInfo']);
+    this.router.navigate(['/productInfo']);
     // }
   }
 
   // if user is logged in then only it will navigate to order page
-  onOrderClick(){
+  onOrderClick() {
     // if(this.service.item){
-       this.router.navigate(['/order']);
+    this.router.navigate(['/order']);
     // }
   }
 
-  onCartClick(){
+  onCartClick() {
     // if(this.service.item){
-      this.router.navigate(['/cart']);
-  //  }
+    this.router.navigate(['/cart']);
+    //  }
   }
 
-  onProfileClick(){
+  onProfileClick() {
     // if(this.service.item){
-      this.router.navigate(['/profile']);
-  //  }
+    this.router.navigate(['/profile']);
+    //  }
   }
- 
 }

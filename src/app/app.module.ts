@@ -98,7 +98,11 @@ import { ChangeAddressComponent } from './pages/change-address/change-address.co
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { MyAccountComponent } from './pages/my-account/my-account.component';
-import { ThankYouComponent } from './pages/thank-you/thank-you.component'; // <-- import the module
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
+
+// http
+ import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -130,6 +134,7 @@ import { ThankYouComponent } from './pages/thank-you/thank-you.component'; // <-
     ForgetPasswordComponent,
     MyAccountComponent,
     ThankYouComponent,
+    SortPipe,
     
 
   ],
@@ -197,7 +202,10 @@ import { ThankYouComponent } from './pages/thank-you/thank-you.component'; // <-
     ReactiveFormsModule,
     FormsModule,
     NgxImageZoomModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
+    // http
+    HttpClientModule
     
     ],
   providers: [
