@@ -68,34 +68,42 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
-        this.user = user;
-        this.loggedIn = (user != null);
-        console.log(user.name);
-        console.log("user data from login",user);
-        if(this.loggedIn = (this.user != null)){
-            this.service.setData(user.name)
-            this.getData = this.service.data()
-            this.router.navigate(['/dashboard']);
-          } else(this.output == true)
-            {
-             this.service.setData(localStorage.getItem("username"))
-            } 
-        console.log("getdata from login",this.getData);
-        console.log(localStorage.getItem.name);
+    // this.authService.authState.subscribe((user) => {
+    //     this.user = user;
+    //     this.loggedIn = (user != null);
+    //     console.log(user.name);
+    //     console.log("user data from login",user);
+    //     if(this.loggedIn = (this.user != null)){
+    //         this.service.setData(user.name)
+    //         this.getData = this.service.data()
+    //         this.router.navigate(['/dashboard']);
+    //       } else(this.output == true)
+    //         {
+    //          this.service.setData(localStorage.getItem("username"))
+    //         } 
+    //     console.log("getdata from login",this.getData);
+    //     console.log(localStorage.getItem.name);
         
       
-    });
+    // });
   }
 
     // this is for email input field validation
-  email = new FormControl('', [Validators.required, Validators.email]);
+    public email = new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        '[^0-9]([a-zA-Z0-9+_.-])+[@]+[a-zA-Z0-9]+[.]+[a-z]{2,4}$'
+      ),
+    ]);
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+
+    return this.email.hasError('email')
+      ? 'Not a valid email'
+      : 'Not a valid email';
   }
 
   /**
@@ -115,7 +123,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.data1.loginPost(data).subscribe((info) =>{
-      // let xyz
       this.xyz = info
     console.log('from then',this.xyz.data);
     localStorage.setItem("firstName",this.xyz.data.firstName)
@@ -124,31 +131,20 @@ export class LoginComponent implements OnInit {
     localStorage.setItem("gender",this.xyz.data.gender)
     localStorage.setItem("mobile",this.xyz.data.mobile)
     localStorage.setItem("token",this.xyz.data.token)
-    localStorage.setItem("v","v")
+    // localStorage.setItem("v","v")
     this.router.navigate(['/dashboard']);
     },(error) => {
       alert('Invalid username or password')
           console.log('from catch')
     })
-
-    // this.data1.loginPost(uname,p)
-    // var output = this.service.checkusernameandpassword(uname, p);
-    // if(output == true)
-    // {
-    //   this.output = output
-    //   this.service.setData(localStorage.getItem("username"))
-    //   this.router.navigate(['/dashboard']);
-    // } 
-    // else if(this.loggedIn == (this.user != null)){
-    //   this.router.navigate(['/dashboard']);
-    // }
-    // else{
-    // this.msg ='Invalid username or password';
-    // alert(this.msg)
-    // console.log(this.msg);
-    
-    // }
   }
+
+  // public email = new FormControl('', [
+  //   Validators.required,
+  //   Validators.pattern(
+  //     '[^0-9]([a-zA-Z0-9+_.-])+[@]+[a-zA-Z0-9]+[.]+[a-z]{2,4}$'
+  //   ),
+  // ]);
 
   onRegisterClick(){
     this.router.navigate(['/registration']);

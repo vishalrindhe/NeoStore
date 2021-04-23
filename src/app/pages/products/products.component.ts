@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
   collection = Array();
   c = Array();
   c1 = Array();
-xyz =Array()
+  xyz = Array();
   public dataCategory = Array();
   public colorCategory = Array();
 
@@ -61,7 +61,8 @@ xyz =Array()
   // sortedData: Dessert[];
 
   @ViewChild(MatSort) sort: MatSort;
-  public productList = this.data.getProductList();
+  // public productList = this.data.getProductList();
+  public productList:any;
   public category1 = Array();
   public category = Array();
   public categoryColor1 = Array();
@@ -72,16 +73,26 @@ xyz =Array()
     console.log(this.productList);
     this.dataSource.sort = this.sort;
     // here we are pushing color and category of product in its respective array
-    for (let i = 0; i < this.productList.product_details.length; i++) {
-      this.category1.push(
-        this.productList.product_details[i].category_id.category_name
-      );
-      this.categoryColor1.push(
-        this.productList.product_details[i].Color_id.color_name
-      );
-      this.shown.push(false);
-    }
+    // for (let i = 0; i < this.productList.product_details.length; i++) {
+    //   this.category1.push(
+    //     this.productList.product_details[i].category_id.category_name
+    //   );
+    //   this.categoryColor1.push(
+    //     this.productList.product_details[i].Color_id.color_name
+    //   );
+    //   this.shown.push(false);
+    // }
 
+    this.data.listProductsGet().subscribe((info) => {
+      this.productList = info
+      console.log((this.productList.data.docs[0]));
+    });
+
+    this.data.listCategoryGet().subscribe((info) => {
+      // let a = info
+      console.log(info);
+    });
+    
     // taking distinct element from array
     this.category = this.category1.filter(
       (value, index, categoryArray) => categoryArray.indexOf(value) === index
@@ -104,7 +115,6 @@ xyz =Array()
 
     this.form = this.formBuilder.group({
       website: this.formBuilder.array([], [Validators.required]),
-      
     });
   }
 
@@ -118,27 +128,26 @@ xyz =Array()
       const index = website.controls.findIndex(
         (x) => x.value === e.target.value
       );
-      
+
       website.removeAt(index);
-      this.xyz.splice(index,1)
+      this.xyz.splice(index, 1);
     }
   }
 
   submit() {
     // this.dataCategory = this.form.value;
     console.log('datacategory', this.dataCategory);
-    console.log("xyz",this.xyz.length);
+    console.log('xyz', this.xyz.length);
 
-    for(let i=0; i<this.xyz.length;i++){
-      this.dataCategory[i] = this.xyz[i].value
+    for (let i = 0; i < this.xyz.length; i++) {
+      this.dataCategory[i] = this.xyz[i].value;
       console.log('i:', i);
     }
 
     console.log(this.form.value);
-    this.dataCategory = this.form.value
+    this.dataCategory = this.form.value;
     console.log(this.dataCategory);
     this.router.navigate(['/products']);
-    
   }
 
   //  collection = [1,2,3,45]
@@ -196,15 +205,25 @@ xyz =Array()
     this.colorCategory = this.c;
     this.router.navigate(['/products']);
   }
+  // listproduct(name: any,lastName: any,email: any,phone: any,gender: any,password: any,confirmPassword: any) {
+  //   let reg = {
+  //     firstName: name,
+  //     lastName: lastName,
+  //     email: email,
+  //     mobile: phone,
+  //     gender: gender,
+  //     password: password,
+  //     confirm_password: confirmPassword
+  // }
 
-
-  // websiteList: any = [
-
-  //   { id: 1, name: 'ItSolutionStuff.com' },
-
-  //   { id: 2, name: 'HDTuto.com' },
-
-  //   { id: 3, name: 'NiceSnippets.com' }
-
-  // ];
+  // this.data.registrationPost(reg).subscribe((info) =>{
+  //   console.log("data :",info);
+  //   this.router.navigate(['/login']);
+  //   },(error) => {
+  //     let msg
+  //     msg = error
+  //     console.log(error);
+  //     alert(msg.error.message)
+  //   })
+  // }
 }

@@ -102,7 +102,8 @@ import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
 
 // http
- import { HttpClientModule } from '@angular/common/http'
+ import { HttpClientModule } from '@angular/common/http';
+import { ThankyouComponent } from './thankyou/thankyou.component'
 
 
 @NgModule({
@@ -135,6 +136,7 @@ import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
     MyAccountComponent,
     ThankYouComponent,
     SortPipe,
+    ThankyouComponent,
     
 
   ],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from 'src/assets/services/data.service';
 import { Registration } from '../../../assets/data/registration';
 
 @Component({
@@ -19,14 +20,17 @@ export class RegistrationComponent implements OnInit {
 
   // registration = new Registration('','','','','',1)
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.match = ''
+  }
 
+  
   // validator for first name
   public name = new FormControl('', [
     Validators.required,
-    Validators.pattern('[a-zA-Z]*'),
+    Validators.pattern('[a-zA-Z]{3,20}$'),
   ]);
 
   getErrorMessageForName() {
@@ -36,13 +40,13 @@ export class RegistrationComponent implements OnInit {
 
     return this.name.hasError('name')
       ? 'Must include only alphabets'
-      : 'Must include only alphabets';
+      : 'Must include only 3-20 alphabets';
   }
 
   // validator for last name
   public lastName = new FormControl('', [
-    Validators.required,
-    Validators.pattern('[a-zA-Z]*'),
+    // Validators.required,Validators.minLength(3),
+    Validators.pattern('[a-zA-Z]{3,20}$'),
   ]);
 
   getErrorMessageForLastName() {
@@ -50,9 +54,13 @@ export class RegistrationComponent implements OnInit {
       return 'You must enter a value';
     }
 
+    // else if (this.lastName.hasError('minLength')){
+    //   return 'Name must have minimum 3 alphabets';
+    // }
+
     return this.lastName.hasError('lastName')
       ? 'Must include only alphabets'
-      : 'Must include only alphabets';
+      : 'Must include only 3-20 alphabets';
   }
 
   // validation for email field
@@ -126,7 +134,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // validator for gender
-  public gender = new FormControl('1', [Validators.required]);
+  public gender = new FormControl('male', [Validators.required]);
 
   getErrorMessageForGender() {
     // if (this.gender.hasError('required')) {
@@ -144,7 +152,7 @@ export class RegistrationComponent implements OnInit {
    */
   getPassword(pass: string) {
     this.pass = pass;
-    console.log(this.pass);
+    // console.log(this.pass);
   }
 
   /**
@@ -154,7 +162,7 @@ export class RegistrationComponent implements OnInit {
    */
   getConfirmPassword(confirmPass: string) {
     this.confirmPass = confirmPass;
-    console.log(this.confirmPass);
+    // console.log(this.confirmPass);
   }
 
   /**
@@ -164,13 +172,13 @@ export class RegistrationComponent implements OnInit {
   passwordcheck() {
     if (this.password.value == this.confirmPassword.value) {
       this.match = '';
-      console.log('match');
+      // console.log('match');
       // return false
       this.passMatch = true;
     } else {
       this.passMatch = false;
       this.match = 'password not matching';
-      console.log('not');
+      // console.log('not');
     }
   }
 
@@ -185,7 +193,25 @@ export class RegistrationComponent implements OnInit {
   //   this.match = 'password not matching';
   //   }
   //   }
-  registration() {
-    this.router.navigate(['/dashboard']);
+  registration(name: any,lastName: any,email: any,phone: any,gender: any,password: any,confirmPassword: any) {
+    let reg = {
+      firstName: name,
+      lastName: lastName,
+      email: email,
+      mobile: phone,
+      gender: gender,
+      password: password,
+      confirm_password: confirmPassword
+  }
+
+  this.data.registrationPost(reg).subscribe((info) =>{
+    console.log("data :",info);
+    this.router.navigate(['/login']);
+    },(error) => {
+      let msg
+      msg = error
+      console.log(error);
+      alert(msg.error.message)
+    })
   }
 }

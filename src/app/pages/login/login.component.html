@@ -15,13 +15,23 @@
                     <h1>Login to your account</h1>
                 </mat-label>
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>Enter your email</mat-label>
                     <input matInput placeholder="pat@example.com" required #email />
                     <mat-icon matSuffix>email</mat-icon>
-                    <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
-                <br />
+                <br /> -->
+                <mat-form-field>
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="email" required />
+                    <mat-icon matSuffix>email</mat-icon>
+        
+                    <mat-error *ngIf="email.invalid">{{
+                      getErrorMessage()
+                      }}</mat-error>
+                  </mat-form-field><br />
+
                 <mat-form-field>
                     <mat-label>Enter your password</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" required #password />
@@ -74,7 +84,7 @@
                             <span class="text-white">Login with Google</span>
                         </button>
                     </div>
-                    <button mat-raised-button (click)="signOut()">Sign Out</button>
+                    <!-- <button mat-raised-button (click)="signOut()">Sign Out</button> -->
                 </div>
                 {{ getData.name }}
                 <div>

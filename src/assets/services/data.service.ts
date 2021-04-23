@@ -15,38 +15,38 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-public url = "http://ce61dbbabdca.ngrok.io"
+public url = "http://17c1df199293.ngrok.io"
 public xyz:any
 
 loginPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/login', data)
 }
 
-// loginPost(email:string,pass:string){
-//   this.http
-//   .post(`${this.url}/api/auth/login`, {
-//     email: email,
-//     password: pass,
-//   })
-//   .toPromise()
-//   .then((res) => {
-//     this.xyz = res
-//     console.log('from then',this.xyz.data);
-//     localStorage.setItem("firstName",this.xyz.data.firstName)
-//     localStorage.setItem("lastName",this.xyz.data.lastName)
-//     localStorage.setItem("email",this.xyz.data.email)
-//     localStorage.setItem("gender",this.xyz.data.gender)
-//     localStorage.setItem("mobile",this.xyz.data.mobile)
-//     localStorage.setItem("token",this.xyz.data.token)
-//     localStorage.setItem("v","v")
-//     this.router.navigate(['/dashboard']);
-//   })
-//   .catch((res) => {
-//     alert('Invalid username or password')
-//     console.log('from catch',res)
-//   });
+registrationPost(data: any): Observable<any>{
+  return this.http.post(this.url + '/api/auth/register', data)
+}
 
+listProductsGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product')
+}
+
+listCategoryGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=5&page=1&category=6065c425f45ada6429eb42c9')
+}
+
+forgotPasswordPost(data: any): Observable<any>{
+  return this.http.post(this.url + '/api/auth/forgot-password', data)
+}
+
+resetPasswordPost(data: any): Observable<any>{
+  return this.http.post(this.url + '/api/auth/set-password', data)
+}
+
+// changePasswordPost(data: any): Observable<any>{
+//   return this.http.post(this.url + '/api/auth/set-password', data)
 // }
+
+
 
   public productOnDashboard: {
     success: boolean;

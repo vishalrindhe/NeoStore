@@ -22,23 +22,7 @@
               <!-- <mat-hint>Hint</mat-hint> -->
             </mat-form-field>
           <a  mat-button><mat-icon matBadge={{cartValue}} matBadgeColor="warn" (click)="onCartClick()">shopping_cart</mat-icon></a>
-          
-          <!-- <mat-accordion style="position: relative;">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false" style="width:15vh;">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-          <mat-icon>person</mat-icon>      </mat-panel-title>
-                <mat-panel-description>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p>Cart</p><hr>
-              <p>Setting</p><hr>
-              <p>Abc</p>
-          </mat-expansion-panel>
-          </mat-accordion> -->
-          <!--  -->
-          
+                    
           <!-- dropdown button -->
           <div class="btn-group">
             <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,7 +32,7 @@
                   viewBox="0 0 172 172"
                   style=" fill:#000000;"><g transform="translate(9.374,9.374) scale(0.891,0.891)"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="none" stroke-linecap="butt" stroke-linejoin="none" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g fill="#ffffff" stroke="#152f4f" stroke-width="21" stroke-linejoin="round"><path d="M120.4,51.6v5.73333c0,19.00027 -15.39973,34.4 -34.4,34.4c-19.00027,0 -34.4,-15.39973 -34.4,-34.4v-5.73333c0,-19.00027 15.39973,-34.4 34.4,-34.4c19.00027,0 34.4,15.39973 34.4,34.4zM86,120.4c8.5484,0 16.35344,-3.13193 22.37344,-8.29766c16.8216,4.39747 32.68949,12.66556 38.54323,20.27943c5.24027,6.81693 0.25182,16.68489 -8.34245,16.68489h-105.15964c-8.59427,0 -13.58271,-9.8625 -8.34245,-16.6737c5.85373,-7.61387 21.72709,-15.89316 38.55443,-20.29063c6.02,5.16 13.81931,8.29766 22.37344,8.29766z"></path></g><path d="M0,172v-172h172v172z" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path><g fill="#ffffff" stroke="none" stroke-width="1" stroke-linejoin="miter"><path d="M86,17.2c-19.00027,0 -34.4,15.39973 -34.4,34.4v5.73333c0,19.00027 15.39973,34.4 34.4,34.4c19.00027,0 34.4,-15.39973 34.4,-34.4v-5.73333c0,-19.00027 -15.39973,-34.4 -34.4,-34.4zM63.62656,112.10234c-16.82733,4.39747 -32.70069,12.67676 -38.55443,20.29063c-5.24027,6.8112 -0.25182,16.6737 8.34245,16.6737h105.15964c8.59427,0 13.58271,-9.86796 8.34245,-16.68489c-5.85373,-7.61387 -21.72163,-15.88196 -38.54323,-20.27943c-6.02,5.16573 -13.82504,8.29766 -22.37344,8.29766c-8.55413,0 -16.35344,-3.13766 -22.37344,-8.29766z"></path></g><path d="" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path><path d="" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path></g></g></svg>
               <!-- this accepts value from name variable from ts file -->
-                  {{name}}
+                  {{name| titlecase}}
             </button>
             <!-- content inside dropdown button -->
             <ul class="dropdown-menu">

@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
   // if user is logged in then only it will navigate to product page
   onProductClick() {
     // if(this.service.item){
-    this.router.navigate(['/productInfo']);
+    this.router.navigate(['/products']);
     // }
   }
 
@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
 
   onProfileClick() {
     // if(this.service.item){
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/my-account']);
     //  }
   }
 }

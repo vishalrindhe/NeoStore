@@ -42,7 +42,7 @@ const routes: Routes = [
 
   {path: 'change-password', canActivate : [AuthGuard] , component:ChangePasswordComponent},
   {path: 'change-address', canActivate : [AuthGuard] , component:ChangeAddressComponent},
-  {path: 'thank-you', canActivate : [AuthGuard] , component:ThankYouComponent },
+  {path: 'thank-you',  component:ThankYouComponent },
   {path: 'forget-password', canActivate : [AuthGuard] , component:ForgetPasswordComponent },
 
 
