@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   // public productList = this.data.getProductList();
-  public productList:any;
+  public productList: any;
   public category1 = Array();
   public category = Array();
   public categoryColor1 = Array();
@@ -70,38 +70,48 @@ export class ProductsComponent implements OnInit {
   checkBoxInstance: any;
   public a: any[] = ['a', 'b', 'c', 'd', 'e'];
   ngOnInit() {
-    console.log(this.productList);
+    // console.log(this.productList);
     this.dataSource.sort = this.sort;
+    // console.log(this.data.token);
+
+    this.data.listProductsInCartGet().subscribe(
+      (info) => {
+        console.log('cart data :', info);
+      },
+      (error) => {
+        let msg;
+        msg = error;
+        console.log(error);
+        // alert(msg.error.message);
+      }
+    );
+
     // here we are pushing color and category of product in its respective array
-    // for (let i = 0; i < this.productList.product_details.length; i++) {
-    //   this.category1.push(
-    //     this.productList.product_details[i].category_id.category_name
-    //   );
-    //   this.categoryColor1.push(
-    //     this.productList.product_details[i].Color_id.color_name
-    //   );
-    //   this.shown.push(false);
-    // }
 
     this.data.listProductsGet().subscribe((info) => {
-      this.productList = info
-      console.log((this.productList.data.docs[0]));
-    });
+      this.productList = info;
+      for (let i = 0; i < info.data.docs.length; i++) {
+        // getting color from product lists
+        this.categoryColor1.push(this.productList.data.docs[i].color.name);
 
-    this.data.listCategoryGet().subscribe((info) => {
-      // let a = info
-      console.log(info);
+        // getting category from product lists
+        this.category1.push(this.productList.data.docs[i].category.name);
+      }
+
+      // taking distinct color from array
+      this.categoryColor = this.categoryColor1.filter(
+        (value, index, categoryArray) => categoryArray.indexOf(value) === index
+      );
+
+      // taking distinct element from array
+      this.category = this.category1.filter(
+        (value, index, categoryArray) => categoryArray.indexOf(value) === index
+      );
+
+      console.log(this.category);
+      console.log(this.categoryColor);
+      console.log(this.productList.data.docs);
     });
-    
-    // taking distinct element from array
-    this.category = this.category1.filter(
-      (value, index, categoryArray) => categoryArray.indexOf(value) === index
-    );
-    console.log(this.category);
-    this.categoryColor = this.categoryColor1.filter(
-      (value, index, categoryArray) => categoryArray.indexOf(value) === index
-    );
-    console.log(this.categoryColor);
   }
 
   constructor(
@@ -116,6 +126,93 @@ export class ProductsComponent implements OnInit {
     this.form = this.formBuilder.group({
       website: this.formBuilder.array([], [Validators.required]),
     });
+  }
+
+  onPriceSortAsc() {
+    this.data.sortByPriceAscGet().subscribe((info) => {
+      this.productList = info;
+    });
+  }
+
+  onPriceSortDesc() {
+    this.data.sortByPriceDescGet().subscribe((info) => {
+      this.productList = info;
+    });
+  }
+
+  // onRatingSortAsc() {
+  //   this.data.sortByRatingAscGet().subscribe((info) => {
+  //     this.productList = info;
+  //   });
+  // }
+
+  onRatingSortDesc() {
+    this.data.sortByRatingDescGet().subscribe((info) => {
+      this.productList = info;
+    });
+  }
+
+  onCategoryClicked() {
+    this.data.listCategoryGet().subscribe(
+      (info) => {
+        console.log('data :', info);
+        this.productList = info;
+        // this.router.navigate(['/login']);
+      },
+      (error) => {
+        let msg;
+        msg = error;
+        console.log(error);
+        alert(msg.error.message);
+      }
+    );
+  }
+
+  onColorClicked() {
+    this.data.listColorGet().subscribe(
+      (info) => {
+        console.log('data :', info);
+        this.productList = info;
+        // this.router.navigate(['/login']);
+      },
+      (error) => {
+        let msg;
+        msg = error;
+        console.log(error);
+        alert(msg.error.message);
+      }
+    );
+  }
+
+  addToCart(productId: string) {
+    let data = {
+      productId: productId,
+      quantity: 1,
+    };
+    console.log('productId', productId);
+
+    this.data.addProductsInCartPost(data).subscribe(
+      (info) => {
+        console.log('data :', info);
+      },
+      (error) => {
+        let msg;
+        msg = error;
+        console.log(error);
+      }
+    );
+
+    // this.data.listProductsInCartGet().subscribe(
+    //   (info) => {
+    //     console.log('data :', info);
+    //   },
+    //   (error) => {
+    //     let msg;
+    //     msg = error;
+    //     console.log(error);
+    //     // alert(msg.error.message);
+    //   }
+    // );
   }
 
   onCheckboxChange(e: any) {
@@ -167,13 +264,8 @@ export class ProductsComponent implements OnInit {
     console.log($event);
 
     let a = document.getElementById('1');
-    // console.log($event);
-    // if($event == true){
-    // console.log("vishal");
-    // }
-    // console.log("isChecked",$event.isChecked);
+
     console.log(category);
-    // console.log(this.c.includes(category));
 
     this.c.push(category);
   }
@@ -205,25 +297,4 @@ export class ProductsComponent implements OnInit {
     this.colorCategory = this.c;
     this.router.navigate(['/products']);
   }
-  // listproduct(name: any,lastName: any,email: any,phone: any,gender: any,password: any,confirmPassword: any) {
-  //   let reg = {
-  //     firstName: name,
-  //     lastName: lastName,
-  //     email: email,
-  //     mobile: phone,
-  //     gender: gender,
-  //     password: password,
-  //     confirm_password: confirmPassword
-  // }
-
-  // this.data.registrationPost(reg).subscribe((info) =>{
-  //   console.log("data :",info);
-  //   this.router.navigate(['/login']);
-  //   },(error) => {
-  //     let msg
-  //     msg = error
-  //     console.log(error);
-  //     alert(msg.error.message)
-  //   })
-  // }
 }

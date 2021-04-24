@@ -15,8 +15,9 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-public url = "http://17c1df199293.ngrok.io"
+public url = "https://neostore-api.herokuapp.com"
 public xyz:any
+public token:any = localStorage.getItem('token')
 
 loginPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/login', data)
@@ -27,11 +28,38 @@ registrationPost(data: any): Observable<any>{
 }
 
 listProductsGet(): Observable<any>{
-  return this.http.get(this.url + '/api/product')
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000')
 }
 
 listCategoryGet(): Observable<any>{
-  return this.http.get(this.url + '/api/product?limit=5&page=1&category=6065c425f45ada6429eb42c9')
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&category=6065c425f45ada6429eb42c9')
+}
+
+listColorGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&color=6065ca24cec0196a6fe56e3d')
+}
+
+sortByPriceAscGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&sortby=price&orderby=asc')
+}
+
+sortByPriceDescGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&sortby=price&orderby=desc')
+}
+
+
+sortByRatingDescGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&sortby=rating&orderby=desc')
+}
+
+// list out products inside cart by get method and passing token to it
+listProductsInCartGet(): Observable<any>{
+  return this.http.get(this.url + '/api/cart',{ headers: { Authorization: this.token}})
+}
+
+// adding products inside cart by post method and passing body and token to it
+addProductsInCartPost(data:any): Observable<any>{
+  return this.http.post(this.url + '/api/cart',data,{ headers: { Authorization: this.token}})
 }
 
 forgotPasswordPost(data: any): Observable<any>{
