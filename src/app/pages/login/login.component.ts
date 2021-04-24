@@ -1,6 +1,8 @@
+import { TitleCasePipe } from '@angular/common';
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
@@ -24,11 +26,12 @@ export class LoginComponent implements OnInit {
   getData:any=''
   msg!: string;
   output:boolean
+public snackMsg:string
 
 
 
-
-  constructor(private authService: SocialAuthService, private service: CheckingService, private router: Router, private data1: DataService) {
+  constructor(private authService: SocialAuthService,    private _snackBar: MatSnackBar,
+    private service: CheckingService, private router: Router, private data1: DataService) {
     // console.log("from constructor",this.user)
    }
 
@@ -131,23 +134,38 @@ export class LoginComponent implements OnInit {
     localStorage.setItem("gender",this.xyz.data.gender)
     localStorage.setItem("mobile",this.xyz.data.mobile)
     localStorage.setItem("token",this.xyz.data.token)
-    // localStorage.setItem("v","v")
+    this.snackMsg = "Login Successful"
+    this.openSnackBar()
     this.router.navigate(['/dashboard']);
     },(error) => {
-      alert('Invalid username or password')
-          console.log('from catch')
+      // alert('Invalid username or password')
+      this.snackMsg = error.error.message
+      this.openSnackBarError()
+          console.log('from catch',error.error.message)
     })
   }
 
-  // public email = new FormControl('', [
-  //   Validators.required,
-  //   Validators.pattern(
-  //     '[^0-9]([a-zA-Z0-9+_.-])+[@]+[a-zA-Z0-9]+[.]+[a-z]{2,4}$'
-  //   ),
-  // ]);
-
   onRegisterClick(){
     this.router.navigate(['/registration']);
+  }
+
+  openSnackBar() {
+    this._snackBar.open(this.snackMsg, 'x', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 5000,
+      panelClass:['greenYesMatch']
+
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.open(this.snackMsg, 'x', {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      duration: 5000,
+      panelClass:['redNoMatch']
+        });
   }
 }
 

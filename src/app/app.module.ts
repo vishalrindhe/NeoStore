@@ -104,6 +104,8 @@ import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
 // http
  import { HttpClientModule } from '@angular/common/http';
 import { ThankyouComponent } from './thankyou/thankyou.component'
+// img galary
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 
 @NgModule({
@@ -207,7 +209,9 @@ import { ThankyouComponent } from './thankyou/thankyou.component'
     NgxPaginationModule,
 
     // http
-    HttpClientModule
+    HttpClientModule,
+    // gallary
+    NgxGalleryModule
     
     ],
   providers: [

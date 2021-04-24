@@ -76,14 +76,14 @@
               | filterColor: colorCategory:'Color_id':'color_name'
               | sort:['product_cost'] -->
           <mat-card class="example-card">
-            <img
+            <img 
               height="150vh"
               mat-card-image
               src="{{ product.mainImage }}"
-              alt=""
+              alt="" (click)="onCardClick(product.id)"
             />
             <mat-card-content>
-              <h2 style="text-align: center">
+              <h2 style="text-align: center" (click)="onCardClick(product.id)">
                 {{ product.name }}
               </h2>
 

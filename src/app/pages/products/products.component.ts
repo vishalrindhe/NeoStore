@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -68,6 +69,7 @@ export class ProductsComponent implements OnInit {
   public categoryColor1 = Array();
   public categoryColor = Array();
   checkBoxInstance: any;
+  public snackMsg:string
   public a: any[] = ['a', 'b', 'c', 'd', 'e'];
   ngOnInit() {
     // console.log(this.productList);
@@ -117,7 +119,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private data: DataService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {
     for (let i = 1; i <= 10; i++) {
       this.collection.push(`item ${i}`);
@@ -194,25 +197,36 @@ export class ProductsComponent implements OnInit {
     this.data.addProductsInCartPost(data).subscribe(
       (info) => {
         console.log('data :', info);
+        this.snackMsg = "Product Added"
+        this.openSnackBar()
       },
       (error) => {
         let msg;
         msg = error;
-        console.log(error);
+        this.snackMsg = error.error.message
+        this.openSnackBarError()
+        console.log(error.error.message);
       }
     );
+  }
 
-    // this.data.listProductsInCartGet().subscribe(
-    //   (info) => {
-    //     console.log('data :', info);
-    //   },
-    //   (error) => {
-    //     let msg;
-    //     msg = error;
-    //     console.log(error);
-    //     // alert(msg.error.message);
-    //   }
-    // );
+  openSnackBar() {
+    this._snackBar.open(this.snackMsg, 'x', {
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      duration: 5000,
+      panelClass:['greenYesMatch']
+
+    });
+  }
+
+  openSnackBarError() {
+    this._snackBar.open(this.snackMsg, 'x', {
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      duration: 5000,
+      panelClass:['redNoMatch']
+        });
   }
 
   onCheckboxChange(e: any) {
@@ -297,4 +311,9 @@ export class ProductsComponent implements OnInit {
     this.colorCategory = this.c;
     this.router.navigate(['/products']);
   }
+
+  onCardClick(id:string){
+    this.router.navigate(['/productInfo/'+id])
+  }
+
 }
