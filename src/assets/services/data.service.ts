@@ -62,6 +62,14 @@ addProductsInCartPost(data:any): Observable<any>{
   return this.http.post(this.url + '/api/cart',data,{ headers: { Authorization: this.token}})
 }
 
+updateProductQuantityInCartPut(data:any,i:any): Observable<any>{
+  return this.http.put(this.url + '/api/cart/'+i,data,{ headers: { Authorization: this.token}})
+}
+
+deleteProductInCartDelete(i:any): Observable<any>{
+  return this.http.delete(this.url + '/api/cart/'+i,{ headers: { Authorization: this.token}})
+}
+
 forgotPasswordPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/forgot-password', data)
 }

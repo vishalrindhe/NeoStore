@@ -22,7 +22,7 @@ export interface DialogData {
 export class ProductInfoComponent implements OnInit {
 
   public color:string = "black"
-  public productInfo:any
+  public productInfo:any={}
   public _id = this.activatedrouter.snapshot.params['_id'];
   public productDetail:any ={}
   public avgRating:number
