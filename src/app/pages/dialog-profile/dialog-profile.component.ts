@@ -46,13 +46,19 @@ export class DialogProfileComponent implements OnInit {
   //     ? 'Must include only alphabets'
   //     : 'Must include only alphabets';
   // }
-  firstName = this.userData.customer_proile.first_name;
-  lastName = this.userData.customer_proile.last_name;
-  email = this.userData.customer_proile.email;
-  phone = this.userData.customer_proile.phone_no;
-  gender = this.userData.customer_proile.gender;
-  dob = this.userData.customer_proile.dob;
-  profilePic = this.userData.customer_proile.profile_img;
+  // firstName = this.userData.customer_proile.first_name;
+  // lastName = this.userData.customer_proile.last_name;
+  // email = this.userData.customer_proile.email;
+  // phone = this.userData.customer_proile.phone_no;
+  // gender = this.userData.customer_proile.gender;
+  // dob = this.userData.customer_proile.dob;
+  // profilePic = this.userData.customer_proile.profile_img;
+  firstName = localStorage.getItem('firstName')
+    lastName = localStorage.getItem('lastName')
+    gender = localStorage.getItem('gender')
+    phone = localStorage.getItem('mobile')
+    email = localStorage.getItem('email')
+
 
   firstNameFormControl = new FormControl(this.firstName, [
     Validators.required,
@@ -80,11 +86,11 @@ export class DialogProfileComponent implements OnInit {
     Validators.required,
   ]);
 
-  dobFormControl = new FormControl(this.dob, [Validators.required]);
+  // dobFormControl = new FormControl(this.dob, [Validators.required]);
 
-  profilePicFormControl = new FormControl(this.profilePic, [
-    Validators.required,
-  ]);
+  // profilePicFormControl = new FormControl(this.profilePic, [
+  //   Validators.required,
+  // ]);
 
   // public firstName = new FormControl(this.f)
   // public lastName = new FormControl('')
@@ -97,7 +103,7 @@ export class DialogProfileComponent implements OnInit {
     fname: string,
     lname: string,
     gender: string,
-    dob: string,
+    // dob: string,
     email: string,
     phone: string
   ) {
@@ -106,7 +112,7 @@ export class DialogProfileComponent implements OnInit {
       first_name: fname,
       last_name: lname,
       gender: gender,
-      dob: dob,
+      // dob: dob,
       email: email,
       phone_no: phone,
       // "profile_img":"image_1574053862482_naveen.jpeg"

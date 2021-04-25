@@ -18,15 +18,14 @@
 
         <!-- profile pic -->
 
-        <div *ngIf="!file.value; else defaultPic">  
+        <!-- <div *ngIf="!file.value; else defaultPic">  
           <img src={{profilePic}} width="100%" height="100">
-          </div>
-          <ng-template #defaultPic>
+          </div> -->
+          <!-- <ng-template #defaultPic>
             <img [src]="imgURL" width="100%" height="100" *ngIf="imgURL">
-            <!-- <h1> {{profilePic1.value}} </h1> -->
-            </ng-template>
+            </ng-template> -->
   
-            <input
+            <!-- <input
               type="file"
               #file
               id="file-id"
@@ -34,7 +33,7 @@
               (change)="preview(file.files)"
               placeholder="Profile Pic"
             />
-            <br>
+            <br> -->
         <!-- first Name -->
         <mat-form-field class="example-full-width">
           <input
@@ -89,7 +88,7 @@
 
         <!-- Dob -->
 
-        <mat-form-field class="example-full-width">
+        <!-- <mat-form-field class="example-full-width">
           <mat-label>Date of Birth</mat-label>
           <input
             id="dob"
@@ -105,7 +104,7 @@
             Date is required
           </mat-error>
         </mat-form-field>
-        <br />
+        <br /> -->
 
         <!-- Email -->
         <mat-form-field class="example-full-width">
@@ -170,11 +169,10 @@
       lastNameFormControl.invalid ||
       firstNameFormControl.invalid ||
       genderFormControl.invalid ||
-      dobFormControl.invalid ||
       emailFormControl.invalid ||
       phoneFormControl.invalid
     "
-    (click)="onSubmit(firstNameFormControl.value,lastNameFormControl.value,genderFormControl.value,dobFormControl.value,emailFormControl.value,phoneFormControl.value)"
+    (click)="onSubmit(firstNameFormControl.value,lastNameFormControl.value,genderFormControl.value,emailFormControl.value,phoneFormControl.value)"
   >
     Ok
   </button>

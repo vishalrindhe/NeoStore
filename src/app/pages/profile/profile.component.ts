@@ -53,16 +53,24 @@ export class ProfileComponent implements OnInit {
 
 
 
-  public userData = this.data.getUserProfile()
+  // public userData = this.data.getUserProfile()
+  public userData ={
+    firstName : localStorage.getItem('firstName'),
+    lastName : localStorage.getItem('lastName'),
+    gender : localStorage.getItem('gender'),
+    mobile : localStorage.getItem('mobile'),
+    email : localStorage.getItem('email')
 
-  public dataS: PeriodicElement[]=[
-        {field:"First Name",data:this.userData.customer_proile.first_name},
-        {field:"Last Name",data:this.userData.customer_proile.last_name},
-        {field:"Gender",data:this.userData.customer_proile.gender},
-        {field:"Date Of Birth",data:this.userData.customer_proile.dob},
-        {field:"Mobile Number",data:this.userData.customer_proile.phone_no},
-        {field:"Email",data:this.userData.customer_proile.email},
-]
+  }
+
+//   public dataS: PeriodicElement[]=[
+//         {field:"First Name",data:this.userData.customer_proile.first_name},
+//         {field:"Last Name",data:this.userData.customer_proile.last_name},
+//         {field:"Gender",data:this.userData.customer_proile.gender},
+//         {field:"Date Of Birth",data:this.userData.customer_proile.dob},
+//         {field:"Mobile Number",data:this.userData.customer_proile.phone_no},
+//         {field:"Email",data:this.userData.customer_proile.email},
+// ]
 
 displayedColumns: string[] = ['field','data'];
 dataSource = ELEMENT_DATA;

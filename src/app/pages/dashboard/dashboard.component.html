@@ -41,7 +41,13 @@
               <li><a class="dropdown-item" (click)="onOrderClick()">Order</a></li>
               <li><a class="dropdown-item" (click)="onProfileClick()">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item"  (click)="signOut()">Logout</a></li>
+              <ng-template [ngIf]="token == null" [ngIfElse]="logout">
+              <li ><a class="dropdown-item" (click)="signIn()">LogIn</a></li>
+            </ng-template>
+              <!-- *ngIf="token == null;else logout" -->
+              <ng-template #logout>
+                <li><a class="dropdown-item" (click)="signOut()">Logout</a></li>
+              </ng-template>
             </ul>
           </div>
       </div>
@@ -82,7 +88,11 @@
               <li><a class="dropdown-item">Order</a></li>
               <li><a class="dropdown-item">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click)="signOut()">Logout</a></li>
+              <li   *ngIf="token == null;else login"><a class="dropdown-item" (click)="signOut()">LogIn</a></li>
+
+              <ng-template #login>
+                <li><a class="dropdown-item" (click)="signOut()">Logout</a></li>
+              </ng-template>
             </ul>
           </div>
         </mat-nav-list>

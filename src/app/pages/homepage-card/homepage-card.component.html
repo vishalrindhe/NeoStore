@@ -1,35 +1,47 @@
 
  <div class="container  " style="align-items: center;" >
-    <div class="row">
-      <div class="col-sm-6 col-lg-4 mb-4 card-margin" *ngFor="let product of dataFromDataservice.category_details" (click)="onCardClick(product.category_id)">
-        <mat-card class="example-card">
-            <!-- <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-            </mat-card-header> -->
-            <img mat-card-image src={{product.product_image}} alt="Photo of a Shiba Inu">
-            <mat-card-content>
-            <h2 style="text-align: center;">
-              {{product.category_name}}
-                        </h2>
-            <h3 style="text-align: center;">
-                &#8377; 5000
-            </h3>
+  <div class="row">
+    <div
+      class="col-sm-6 col-lg-4 mb-4 card-margin"
+      *ngFor="let product of topFive?.data.docs"
+    >
+      <!-- | filter: dataCategory:'category_id':'category_name'
+          | filterColor: colorCategory:'Color_id':'color_name'
+          | sort:['product_cost'] -->
+      <mat-card class="example-card">
+        <img 
+          height="150vh"
+          mat-card-image
+          src="{{ product.mainImage }}"
+          alt="" (click)="onCardClick(product.id)"
+        />
+        <mat-card-content>
+          <h2 style="text-align: center" (click)="onCardClick(product.id)">
+            {{ product.name }}
+          </h2>
 
-            <div style="text-align:center">
-                <h1>
-                
-                </h1>
-                <star-rating  [value]="4.7"   checkedcolor="#ffcc00" uncheckedcolor="#ffff99" size="24px" [readonly]='true' (rate)="onRate($event)"></star-rating>
-              </div>
-            </mat-card-content>
-            <mat-card-actions>
-            <!-- <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button> -->
-            </mat-card-actions>
-        </mat-card>
-        
-      </div>
+          <div style="text-align: center">
+            <star-rating
+              [value]="product.avgRating"
+              checkedcolor="#ffcc00"
+              uncheckedcolor="#ffff99"
+              size="24px"
+              [readonly]="true"
+            ></star-rating>
+            <h3 style="text-align: center">&#8377; {{ product.price }}</h3>
+            <button
+              mat-raised-button
+              color="primary"
+              style="text-align: center"
+              (click)="addToCart(product._id)"
+              [disabled]="token == null"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </mat-card-content>
+        <mat-card-actions> </mat-card-actions>
+      </mat-card>
     </div>
+  </div>
 </div>

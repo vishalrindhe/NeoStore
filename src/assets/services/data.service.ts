@@ -18,6 +18,7 @@ export class DataService {
 public url = "https://neostore-api.herokuapp.com"
 public xyz:any
 public token:any = localStorage.getItem('token')
+public cartValue:number
 
 loginPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/login', data)
@@ -29,6 +30,10 @@ registrationPost(data: any): Observable<any>{
 
 listProductsGet(): Observable<any>{
   return this.http.get(this.url + '/api/product?limit=100000&page=1..1000')
+}
+
+listAllCategoryGet(): Observable<any>{
+  return this.http.get(this.url + '/api/category')
 }
 
 listCategoryGet(): Observable<any>{
@@ -50,6 +55,10 @@ sortByPriceDescGet(): Observable<any>{
 
 sortByRatingDescGet(): Observable<any>{
   return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&sortby=rating&orderby=desc')
+}
+
+topFiveProductGet(): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=5&page=1..1000&sortby=rating&orderby=desc')
 }
 
 // list out products inside cart by get method and passing token to it

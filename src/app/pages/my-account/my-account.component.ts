@@ -30,6 +30,8 @@ export class MyAccountComponent implements OnInit {
   isAddress=false;
   isOrder=false;
   key=1;
+  firstName = localStorage.getItem('firstName')
+  lastName = localStorage.getItem('lastName')
 
   constructor(private service:DataService) { }
 

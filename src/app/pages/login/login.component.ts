@@ -135,8 +135,12 @@ public snackMsg:string
     localStorage.setItem("mobile",this.xyz.data.mobile)
     localStorage.setItem("token",this.xyz.data.token)
     this.snackMsg = "Login Successful"
-    this.openSnackBar()
-    this.router.navigate(['/dashboard']);
+    
+    this.router.navigate(['/dashboard']) .then(() => {
+      window.location.reload();
+      this.openSnackBar()
+    });
+  ;
     },(error) => {
       // alert('Invalid username or password')
       this.snackMsg = error.error.message

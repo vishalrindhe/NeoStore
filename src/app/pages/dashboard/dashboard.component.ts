@@ -20,8 +20,13 @@ export class DashboardComponent implements OnInit {
   // public url: string = 'http://ce61dbbabdca.ngrok.io';
   public xyz:any
   name: any = localStorage.getItem("firstName")
-  cartValue: number = 5;
+  cartValue: number
+  // = this.data.cartValue
   panelOpenState = false;
+  public token:any
+  public b:any
+
+
 
   title = 'NeoStore';
 
@@ -29,16 +34,54 @@ export class DashboardComponent implements OnInit {
     private authService: SocialAuthService,
     private service: CheckingService,
     private router: Router,
-    private cartCount: DataService,
+    private data: DataService,
     private http: HttpClient
+
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(){
      console.log("firstname: ",localStorage.getItem("firstName"));
     
+      // if(this.token != null){
+        // this.interval()
+    // this.b = this.interval()
+      // }
+     
+      
+    
+      this.b = setInterval(() =>{ 
+        this.data.listProductsInCartGet().subscribe((info) =>{
+          this.data.cartValue = info.data.products.length
+          // this.cartValue = this.data.cartValue
+          this.cartValue! = info.data.products.length
+          console.log(this.cartValue);  
+          this.token = localStorage.getItem('token')
+          console.log(this.token);
+          
+        })}, 3000);
+
+        if(this.token == null){
+        }
+
+        setTimeout(() => {
+          // this.pauseTimeLine()
+        }, 5000);
+
+      
   }
 
-  public count = this.cartCount.getCartCount();
+  pauseTimeLine() {
+    clearInterval(this.b);
+    console.log("stopeed");
+    
+    
+}
+
+  // interval(){
+    
+  // }
+
+  // public count = this.cartCount.getCartCount();
 
   // console the text inside entered in search bar
   abc(input: string) {
@@ -75,6 +118,12 @@ export class DashboardComponent implements OnInit {
   onCartClick() {
     // if(this.service.item){
     this.router.navigate(['/cart']);
+    //  }
+  }
+
+  signIn() {
+    // if(this.service.item){
+    this.router.navigate(['/login']);
     //  }
   }
 
