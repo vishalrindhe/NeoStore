@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
 // import { NgxImgZoomService } from 'ngx-img-zoom';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { DataService } from 'src/assets/services/data.service';
+import { RateProductComponent } from '../rate-product/rate-product.component';
 
 
+export interface DialogData {
+  name: string;
+  img:any
+}
 
 @Component({
   selector: 'app-product-info',
@@ -21,7 +28,10 @@ export class ProductInfoComponent implements OnInit {
   public avgRating:number
   public src:any
 public mainImage:any
-  constructor(private data: DataService, private router: Router,private activatedrouter:ActivatedRoute){}
+public snackMsg:string
+
+  constructor(private data: DataService,public dialog: MatDialog, private router: Router,private activatedrouter:ActivatedRoute,private _snackBar: MatSnackBar
+    ){}
 
   ngOnInit(){
       this.data.listProductsGet().subscribe((info) => {
@@ -37,6 +47,8 @@ public mainImage:any
         }
       }
       });
+
+      
    
      
   }
@@ -56,9 +68,58 @@ public mainImage:any
 //       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
 //   }
 
-  addToCart(){
-    this.router.navigate(['/cart']);
-  }
+
+// rate product dialog
+openDialog() {
+  let xyz: string = '';
+  const dialogRef = this.dialog.open(RateProductComponent, {
+    width: 'auto',
+    data: {name: this.productDetail.name,
+      img: this.productDetail.mainImage}
+  });
+}
+
+addToCart(productId: string) {
+  let data = {
+    productId: productId,
+    quantity: 1,
+  };
+  console.log('productId', productId);
+
+  this.data.addProductsInCartPost(data).subscribe(
+    (info) => {
+      console.log('data :', info);
+      this.snackMsg = "Product Added"
+      this.openSnackBar()
+    },
+    (error) => {
+      let msg;
+      msg = error;
+      this.snackMsg = error.error.message
+      this.openSnackBarError()
+      console.log(error.error.message);
+    }
+  );
+}
+
+openSnackBar() {
+  this._snackBar.open(this.snackMsg, 'x', {
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    duration: 5000,
+    panelClass:['greenYesMatch']
+
+  });
+}
+
+openSnackBarError() {
+  this._snackBar.open(this.snackMsg, 'x', {
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    duration: 5000,
+    panelClass:['redNoMatch']
+      });
+}
 
   onMainImgClick(){
     this.mainImage = this.productDetail.mainImage

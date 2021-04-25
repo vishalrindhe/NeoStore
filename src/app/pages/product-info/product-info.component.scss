@@ -45,7 +45,7 @@
 
 .oopsImg{
   width: 70vh;
-  height: 60vh
+  height: 45vh
 }
 
 .thumbnailImg{
@@ -60,4 +60,18 @@
   font-size: 4vw;
   font-weight: bold;
   color: red;
+}
+
+::ng-deep .redNoMatch
+{
+    font-weight: bold;
+  color:white;
+  background: #fc1201 !important;
+}
+
+::ng-deep .greenYesMatch
+{
+    font-weight: bold;
+  color:white;
+  background: rgb(22, 181, 22) !important;
 }

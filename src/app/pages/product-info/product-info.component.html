@@ -136,14 +136,14 @@
           <div class="col center">
             <button
               class="addToCartButton"
-              (click)="addToCart()"
+              (click)="addToCart(productDetail.id)"
               mat-raised-button
             >
               Add to Cart</button
             >&nbsp;
             <!-- </div> -->
             <!-- <div class="col"> -->
-            <button class="rateProductButton" mat-raised-button>
+            <button class="rateProductButton" mat-raised-button (click)="openDialog()">
               Rate Product
             </button>
           </div>

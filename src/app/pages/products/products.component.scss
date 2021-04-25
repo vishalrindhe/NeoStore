@@ -33,15 +33,15 @@ mat-expansion-panel{
  {cursor: pointer;}
 
  ::ng-deep .redNoMatch
-{
-    font-weight: bold;
-  color:white;
-  background: #fc1201 !important;
-}
-
-::ng-deep .greenYesMatch
-{
-    font-weight: bold;
-  color:white;
-  background: rgb(22, 181, 22) !important;
-}
+ {
+     font-weight: bold;
+   color:white;
+   background: #fc1201 !important;
+ }
+ 
+ ::ng-deep .greenYesMatch
+ {
+     font-weight: bold;
+   color:white;
+   background: rgb(22, 181, 22) !important;
+ }

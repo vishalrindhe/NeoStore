@@ -12,3 +12,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 text-align: center;
 }
 
+::ng-deep .redNoMatch
+{
+    font-weight: bold;
+  color:white;
+  background: #fc1201 !important;
+}
+
+::ng-deep .greenYesMatch
+{
+    font-weight: bold;
+  color:white;
+  background: rgb(22, 181, 22) !important;
+}
