@@ -14,21 +14,28 @@
                 zoomMode="hover"> 
                 <img src= {{item.product_image}}  class="img-fluid">
                 </lib-ngx-image-zoom> -->
-      <div class="row textCenter" >
-        <div class="col">
-          <img src="{{productDetail.mainImage}}" class="thumbnailImg" alt="" (click)="onMainImgClick()">
+        <div class="row textCenter">
+          <div class="col">
+            <img
+              src="{{ productDetail.mainImage }}"
+              class="thumbnailImg"
+              alt=""
+              (click)="onMainImgClick()"
+            />
+          </div>
+          <div
+            class="col"
+            *ngFor="let image of productDetail.subImages; let i = index"
+          >
+            <img
+              src="{{ image }}"
+              class="thumbnailImg"
+              id="{{ i }}"
+              alt=""
+              (click)="onImgClick(i)"
+            />
+          </div>
         </div>
-        <div class="col" *ngFor="let image of productDetail.subImages; let i=index">
-          <img src="{{image}}" class="thumbnailImg" id={{i}} alt="" (click)="onImgClick(i)">
-        </div>
-        <!-- <div class="col">
-          <img src="{{productDetail.mainImage}}" class="thumbnailImg" alt="">
-        </div>
-        <div class="col">
-          <img src="{{productDetail.mainImage}}" class="thumbnailImg" alt="" (click)="onImgClick(src.path)">
-        </div> -->
-        
-      </div>
       </div>
 
       <div class="col-lg-4 offset-lg-1 col-sm">
@@ -37,9 +44,8 @@
         </h1>
 
         <div class="col offset-sm-0">
-          <!-- <star-rating  [value]="productDetail.avgRating"   checkedcolor="#ffcc00" uncheckedcolor="#ffff99" size="24px" [readonly]='true' (rate)="onRate($event)"></star-rating> -->
           <star-rating
-            [value]= "productDetail.avgRating"
+            [value]="productDetail.avgRating"
             checkedcolor="#ffcc00"
             uncheckedcolor="#ffff99"
             size="24px"
@@ -51,11 +57,9 @@
             <span>Price:</span
             ><span>&nbsp; &#8377; {{ productDetail.price }} </span>
           </div>
-          <!-- <p> -->
           <div>
             <div class="mb-2">
               <span>Color: &nbsp;</span>
-              <!-- <span class="colorBox">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> -->
               <button
                 mat-button
                 [style.background-color]="productDetail.color.name"
@@ -88,11 +92,7 @@
               >
                 <i class="fa fa-twitter" aria-hidden="true"></i></button
               >&nbsp;
-              <!-- <button mat-fab shareButton="linkedin"
-                                        #lkBtn="shareButton"
-                                        [style.backgroundColor]="lkBtn?.color">
-                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </button> -->
+
               <button
                 mat-fab
                 shareButton="telegram"
@@ -113,12 +113,6 @@
               >
                 <i class="fa fa-whatsapp" aria-hidden="true"></i></button
               >&nbsp;
-
-              <!-- <button mat-fab shareButton="copy"
-                                    #msgBtn="shareButton"
-                                    [style.backgroundColor]="msgBtn?.color">
-                                    <i class="fa fa-clipboard" aria-hidden="true"></i>
-                            </button> -->
 
               <button
                 mat-fab
@@ -141,9 +135,11 @@
             >
               Add to Cart</button
             >&nbsp;
-            <!-- </div> -->
-            <!-- <div class="col"> -->
-            <button class="rateProductButton" mat-raised-button (click)="openDialog()">
+            <button
+              class="rateProductButton"
+              mat-raised-button
+              (click)="openDialog()"
+            >
               Rate Product
             </button>
           </div>
@@ -185,24 +181,11 @@
                 <th scope="row">Color</th>
                 <td>{{ productDetail.color.name }}</td>
               </tr>
-              <!-- <tr>
-                        <th scope="row">Produced By</th>
-                      <td>{{productDetail.product_producer}}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Material Used</th>
-                          <td>{{item.product_material}}</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">Dimensions</th>
-                              <td>{{item.product_dimension}}</td>
-                              </tr> -->
             </tbody>
           </table>
         </div>
       </mat-tab>
     </mat-tab-group>
-    <!-- </div> -->
     <ng-template #elseBlock>
       <h1 class="textCenter">
         <img class="oopsImg" src="../../../assets/images/no-product.png" />
@@ -211,7 +194,4 @@
       </h1>
     </ng-template>
   </mat-card>
-  <!--  -->
-
-  <!--  -->
 </div>
