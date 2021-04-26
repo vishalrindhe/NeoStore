@@ -19,6 +19,10 @@ public url = "https://neostore-api.herokuapp.com"
 public xyz:any
 public token:any = localStorage.getItem('token')
 public cartValue:number
+public isProfile=true;
+public isChangePassword=false;
+public isAddress=false;
+public isOrder=false;
 
 loginPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/login', data)
@@ -77,6 +81,34 @@ updateProductQuantityInCartPut(data:any,i:any): Observable<any>{
 
 deleteProductInCartDelete(i:any): Observable<any>{
   return this.http.delete(this.url + '/api/cart/'+i,{ headers: { Authorization: this.token}})
+}
+
+changePassword(data:object):Observable<any>{
+  return this.http.post(this.url + '/api/user/change-password',data,{ headers: { Authorization: this.token}})
+}
+
+listAdress(){
+  return this.http.get(this.url + '/api/user/address',{ headers: { Authorization: this.token}})
+}
+
+addAddress(data:any){
+  return this.http.post(this.url + '/api/user/address/',data,{ headers: { Authorization: this.token}})
+}
+
+updateAddress(data:any , id:string){
+  return this.http.put(this.url + '/api/user/address/'+id,data,{ headers: { Authorization: this.token}})
+}
+
+deleteAddress(id:string){
+  return this.http.delete(this.url + '/api/user/address/'+id,{ headers: { Authorization: this.token}})
+}
+
+orderList(){
+  return this.http.get(this.url + '/api/order',{ headers: { Authorization: this.token}})    
+}
+
+forgetPasswordP1(data:any):Observable<any>{
+  return this.http.post(this.url + '/api/auth/forgot-password',data )
 }
 
 forgotPasswordPost(data: any): Observable<any>{

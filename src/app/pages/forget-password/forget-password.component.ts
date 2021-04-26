@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators , ValidatorFn, AbstractControl } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-
+import { DataService } from 'src/assets/services/data.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -9,23 +9,18 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
+
   error: string = "";
-  hide = true;
-  hide1 = true;
-  
+
   form: FormGroup = new FormGroup({
-    v_code: new FormControl(''),
-    password: new FormControl(''),
-    confirm_password: new FormControl(''),
+    email: new FormControl(''),
   });
-  
-  constructor() { }
+
+  constructor(private routes:Router , private data:DataService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      v_code: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9\s]+')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern('[a-zA-Z0-9\s]+')]),
-      confirm_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(14), Validators.pattern('[a-zA-Z0-9\s]+')]),
+      email: new FormControl('', [Validators.required, Validators.email]),
     }
     );
   }
@@ -35,6 +30,14 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   submit(){
-    console.log("Saved");
-}
+    let formdata = this.form.value;
+    this.data.forgetPasswordP1(formdata).subscribe(
+      ((res:any) => {
+      this.routes.navigate(['/forget-password-next']);
+      console.log(res);
+    }),(error)=>{
+      alert('Email Does not exist')
+      console.log('from catch');
+    })
+  }
 }

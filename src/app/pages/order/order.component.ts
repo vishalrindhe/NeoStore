@@ -8,20 +8,21 @@ import { DataService } from 'src/assets/services/data.service';
 })
 export class OrderComponent implements OnInit {
 
-  public order_list:any =[]; 
-  public a:any
+  public order_list:any =[];
+  public order_listing:any =[];
 
-  constructor(private service:DataService) { }
+  constructor( private data:DataService) { }
 
   ngOnInit():void{
-    // this.receivedata()
-    this.a = this.service.sendOrderData();
-    this.order_list = this.a.product_details;
+    this.receivedata()
   }
 
-// receivedata(){
-//   this.order_list = this.service.sendOrderData();
-//   console.log(this.order_list);
-// }
+receivedata(){
+  this.data.orderList().subscribe((data)=>{
+    this.order_list = data;
+    this.order_listing = this.order_list.data.orders[0].items;
+    console.log(this.order_listing);
+  });
+}
 
 }

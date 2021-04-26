@@ -111,7 +111,11 @@ export class DashboardComponent implements OnInit {
   // if user is logged in then only it will navigate to order page
   onOrderClick() {
     // if(this.service.item){
-    this.router.navigate(['/order']);
+      this.data.isProfile=false;
+  this.data.isChangePassword=false;
+  this.data.isAddress=false;
+  this.data.isOrder=true;
+    this.router.navigate(['/my-account']);
     // }
   }
 
@@ -129,6 +133,10 @@ export class DashboardComponent implements OnInit {
 
   onProfileClick() {
     // if(this.service.item){
+      this.data.isProfile=true;
+      this.data.isChangePassword=false;
+      this.data.isAddress=false;
+      this.data.isOrder=false;
     this.router.navigate(['/my-account']);
     //  }
   }

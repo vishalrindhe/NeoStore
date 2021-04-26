@@ -106,6 +106,9 @@ import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
 import { ThankyouComponent } from './thankyou/thankyou.component'
 // img galary
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { AddressListComponent } from './pages/address-list/address-list.component';
+import { AddAddressComponent } from './pages/add-address/add-address.component';
+import { ForgetPasswordNextComponent } from './pages/forget-password-next/forget-password-next.component';
 
 
 @NgModule({
@@ -139,6 +142,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     ThankYouComponent,
     SortPipe,
     ThankyouComponent,
+    AddressListComponent,
+    AddAddressComponent,
+    ForgetPasswordNextComponent,
     
 
   ],

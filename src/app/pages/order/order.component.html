@@ -1,21 +1,34 @@
-<div *ngFor="let orders of order_list;let i=index;">
-    <mat-card class="mb-3">
-<div class="row">
-    <h3>{{orders._id}}</h3>
-</div>
-<div *ngFor="let product_list of orders.product_details;let i=index;">
-<div class="row">
-    <h5>{{product_list.total_cartCost}}</h5>
- </div>   
-<div *ngFor="let product_list2 of product_list.product_details;let i=index;">
-<div class="row">
-    <h5>{{product_list2.product_image}}</h5>
-</div>
-</div>    
-</div>
-<div class="row">
-    <button mat-button>Download Invoice</button>
-</div>
+<div class="profileHeading textCenter">
+    <h1 class="text p-3">Orders</h1>
+  </div>
+<div class="m-3" *ngFor="let orders of order_listing;let i=index;">
+    <mat-card>
+        <!-- <div class="row"> -->
+            <span class="m-2 orderFont"><b>Order ID / {{orders._id}}</b></span><br>
+        <!-- </div> -->
+        <div clas="row">
+            <!-- <div class="col"> -->
+            <span class="m-2 dateFont">Placed At: {{orders.productId.createdAt | date}} for</span>
+            <span  class=" greenFont">&#8377;{{orders.productId.price}} </span>
+        <!-- </div> -->
+            
+        </div>
+        <div clas="row">
+        </div>
+        <hr>
+        <!-- <br> -->
+        <div class="row">
+            <div class="col">
+                <img src={{orders.productId.mainImage}} height="50vh" width="50vh" />
+                <span class="mx-2"><b>{{orders.productId.name}}</b></span>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col">
+                <button mat-raised-button color=primary >Download Invoice</button>
+            </div>
+            
+        </div>
 
     </mat-card>
 </div>
