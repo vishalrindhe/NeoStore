@@ -91,6 +91,7 @@ addToCart(productId: string) {
       console.log('data :', info);
       this.snackMsg = "Product Added"
       this.openSnackBar()
+      
     },
     (error) => {
       let msg;

@@ -5,6 +5,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DataService } from 'src/assets/services/data.service';
 import { DialogCartComponent } from '../dialog-cart/dialog-cart.component';
 // import {} from '../../../assets/services/data.service'
@@ -32,7 +33,7 @@ export class CartComponent implements OnInit {
   name: any;
   animal: any;
 
-  constructor(private data: DataService, public dialog: MatDialog, ) {}
+  constructor(private data: DataService, public dialog: MatDialog, private router: Router ) {}
   total2: number;
   ngOnInit() {
     // trying to share quantity to dataservice
@@ -295,5 +296,9 @@ export class CartComponent implements OnInit {
 
     //   console.log('product json', this.cartData.product_details);
     // }
+  }
+
+  checkout(){
+    this.router.navigate(['/checkout']);
   }
 }

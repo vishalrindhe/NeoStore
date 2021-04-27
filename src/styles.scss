@@ -4,6 +4,11 @@
 
 @import '~ngx-sharebuttons/themes/default/default-theme';
 
+@import '~ngx-red-zoom/styles/base.scss';
+@import '~ngx-red-zoom/styles/style-window.scss';
+@import '~ngx-red-zoom/styles/style-magnifier.scss';
+@import '~ngx-red-zoom/styles/style-overlay.scss';
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

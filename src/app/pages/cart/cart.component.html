@@ -90,7 +90,7 @@
                     </tbody>
                 </table>
             <div class="textCenter">
-                <button class="proceedToPayButton textCenter" [disabled]="cartInfo?.data.grandTotal == 0" mat-raised-button color="primary">Proceed to Pay</button>
+                <button class="proceedToPayButton textCenter" [disabled]="cartInfo?.data.grandTotal == 0" mat-raised-button color="primary" (click)="checkout()">Proceed to Pay</button>
             </div>
             </mat-card>
         </div>

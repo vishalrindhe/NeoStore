@@ -4,9 +4,9 @@
     <!-- <div *ngIf="_id == item.id; else elseBlock"> -->
     <div class="row">
       <div class="col-lg-5 offset-lg-1 col-sm-12 mb-4">
-        <pinch-zoom>
-          <img src="{{ mainImage }}" class="oopsImg" />
-        </pinch-zoom>
+        <!-- <pinch-zoom> -->
+          <img src="{{ mainImage }}" class="oopsImg" redZoom="{{mainImage}}" redZoomClass="red-zoom--style--overlay"/>
+        <!-- </pinch-zoom> -->
         <br />
         <!-- <lib-ngx-image-zoom
                 [thumbImage]=item.product_image

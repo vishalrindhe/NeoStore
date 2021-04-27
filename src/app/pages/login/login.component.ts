@@ -30,6 +30,7 @@ public snackMsg:string
 
 
 
+
   constructor(private authService: SocialAuthService,    private _snackBar: MatSnackBar,
     private service: CheckingService, private router: Router, private data1: DataService) {
     // console.log("from constructor",this.user)
@@ -151,6 +152,10 @@ public snackMsg:string
 
   onRegisterClick(){
     this.router.navigate(['/registration']);
+  }
+
+  onForgetPasswordClick(){
+    this.router.navigate(['/forget-password']);
   }
 
   openSnackBar() {

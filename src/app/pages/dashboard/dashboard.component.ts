@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
       this.b = setInterval(() =>{ 
         this.data.listProductsInCartGet().subscribe((info) =>{
           this.data.cartValue = info.data.products.length
-          // this.cartValue = this.data.cartValue
+          // this.cartValue = this.data.cartValues
           this.cartValue! = info.data.products.length
           console.log(this.cartValue);  
           this.token = localStorage.getItem('token')

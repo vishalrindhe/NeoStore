@@ -107,6 +107,9 @@ orderList(){
   return this.http.get(this.url + '/api/order',{ headers: { Authorization: this.token}})    
 }
 
+placeOrder(data:any){
+  return this.http.post(this.url + '/api/order/place',data,{ headers: { Authorization: this.token}})
+}
 forgetPasswordP1(data:any):Observable<any>{
   return this.http.post(this.url + '/api/auth/forgot-password',data )
 }

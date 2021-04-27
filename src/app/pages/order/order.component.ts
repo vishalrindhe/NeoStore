@@ -20,7 +20,7 @@ export class OrderComponent implements OnInit {
 receivedata(){
   this.data.orderList().subscribe((data)=>{
     this.order_list = data;
-    this.order_listing = this.order_list.data.orders[0].items;
+    this.order_listing = this.order_list.data.orders[1].items;
     console.log(this.order_listing);
   });
 }

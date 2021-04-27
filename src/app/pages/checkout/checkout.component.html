@@ -1,1 +1,118 @@
-<p>checkout works!</p>
+<div class="container mt-5" style="align-items: center">
+  <div class="row">
+    <div class="profileHeading textCenter OrderFont">
+      <p class="text p-3 m-2">Checkout</p>
+    </div>
+    <!-- <span class="col-* textCenter headFont">My Acount</span> -->
+    <div class="col-sm-12 col-lg-8 mt-5">
+      <mat-card class="example-card textCenter">
+        <div class="row">
+          <div class="col-2">
+            <span>Product</span>
+          </div>
+          <div class="col-4">
+            <span></span>
+          </div>
+          <div class="col-3">
+            <span>Quantity</span>
+          </div>
+
+          <div class="col-1">
+            <span>Total</span>
+          </div>
+
+        </div>
+        <div *ngFor="let item of cartInfo?.data.products; let i = index">
+          <hr />
+
+          <div class="row">
+            <div class="col-2 mb-1">
+              <img class="productImage" src="{{ item.productId.mainImage }}" />
+            </div>
+            <div
+              class="col-lg-4 col-xs-8 col-md-4 mb-1"
+              style="text-align: left"
+            >
+              <span class="m-1 productName">{{ item.productId.name }} </span
+              ><br />
+              <!-- <span class="m-1 creator text-muted">By {{item.product_id.product_producer}} </span><br /> -->
+              <span class="m-1">Status:</span
+              ><span class="stock">
+                {{ item.quantity > 0 ? "In Stock" : "Out of Stock" }}
+              </span>
+            </div>
+            <div class="col-4 col-lg-3 col-sm-4 col-md-3 mb-1">
+
+              <span
+                ><b>&nbsp; {{ item.quantity }} &nbsp;</b></span
+              >
+
+            </div>
+
+
+            <!-- total price of single product -->
+            <div class="col-3 col-lg-1 col-xs-2 col-sm-3 col-md-1">
+              <span #total> {{ item.totalAmount }} </span>
+            </div>
+
+          </div>
+          <!-- <hr /> -->
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-sm-12 col-lg-4 mt-5 textCenter">
+      <div class="container mt-2 mb-3">
+        <span class="reviewOrderFont">Select Address</span>
+      </div>
+      <!-- <hr> -->
+
+      <!-- <div class="textCenter">
+              <button class="proceedToPayButton textCenter" [disabled]="cartInfo?.data.grandTotal == 0" mat-raised-button color="primary">Proceed to Pay</button>
+          </div> -->
+
+      <mat-button-toggle-group #group="matButtonToggleGroup" vertical>
+        <mat-button-toggle
+          [value]="season._id"
+          *ngFor="let season of addresses; let i = index"
+        >
+          <div style="text-align: left; line-height: 1.5" class="my-2">
+            <p>
+              <b>Address {{ i }}: </b>
+            </p>
+
+            {{ season.addressLine | titlecase }}, <br />
+            {{ season.city | titlecase }},<br />
+            {{ season.state | titlecase }},<br />
+            {{ season.country | titlecase }}, {{ season.pincode }}<br />
+          </div>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <!-- <div class="example-selected-value">
+        Selected value: {{ group.value }}
+      </div> -->
+    </div>
+  </div>
+
+  <div class="row textCenter">
+      <div class="col-12">
+          <p class="subTotalFont m-3"><b>Total Amount: &#8377;{{cartInfo?.data.grandTotal}}</b></p>
+        <button
+        mat-raised-button
+        color="primary"
+        class="submitButton textCenter"
+        (click)="onSubmit(group.value)"
+        [disabled]="group.value == null"
+      >
+        Place Order
+      </button>
+      </div>
+  </div>
+</div>
+
+<!-- <div class="container my-5">
+  <div class="row"></div>
+
+  <div>Your favorite season is: {{ favoriteSeason }}</div>
+</div>
+{{ firstName }}
+{{ lastName }} -->

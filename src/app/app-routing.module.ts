@@ -5,6 +5,7 @@ import { AddressComponent } from './pages/address/address.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ChangeAddressComponent } from './pages/change-address/change-address.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
@@ -44,6 +45,8 @@ const routes: Routes = [
   {path: 'change-address', canActivate : [AuthGuard] , component:ChangeAddressComponent},
   {path: 'thank-you',  component:ThankYouComponent },
   {path: 'forget-password', canActivate : [AuthGuard] , component:ForgetPasswordComponent },
+  {path: 'checkout', canActivate : [AuthGuard] , component:CheckoutComponent },
+
 
 
 

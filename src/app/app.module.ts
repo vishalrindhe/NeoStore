@@ -105,11 +105,13 @@ import { SortPipe } from './pipes/sort.pipe'; // <-- import the module
  import { HttpClientModule } from '@angular/common/http';
 import { ThankyouComponent } from './thankyou/thankyou.component'
 // img galary
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';//waste not using it
 import { AddressListComponent } from './pages/address-list/address-list.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ForgetPasswordNextComponent } from './pages/forget-password-next/forget-password-next.component';
 
+// image zoom
+import { RedZoomModule } from 'ngx-red-zoom';
 
 @NgModule({
   declarations: [
@@ -217,8 +219,9 @@ import { ForgetPasswordNextComponent } from './pages/forget-password-next/forget
     // http
     HttpClientModule,
     // gallary
-    NgxGalleryModule
-    
+    NgxGalleryModule,
+    //img zoom
+    RedZoomModule,
     ],
   providers: [
     {

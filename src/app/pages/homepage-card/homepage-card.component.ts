@@ -66,6 +66,7 @@ onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}
           // this.cartValue = this.data.cartValue
           // console.log(this.cartValue);
           
+          
         })
         this.openSnackBar()
       },
