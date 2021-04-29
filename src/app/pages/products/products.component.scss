@@ -45,3 +45,13 @@ mat-expansion-panel{
    color:white;
    background: rgb(22, 181, 22) !important;
  }
+
+ .box{
+    background-color: #fff;
+    // box-shadow: 2px 2px 10px #246756;
+    overflow: hidden;
+    // padding: 2em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: auto;
+  }

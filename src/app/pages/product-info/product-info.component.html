@@ -1,11 +1,11 @@
 <div class="container">
-  <mat-card class="mt-5">
+  <mat-card class="my-5">
     <!--  -->
     <!-- <div *ngIf="_id == item.id; else elseBlock"> -->
     <div class="row">
-      <div class="col-lg-5 offset-lg-1 col-sm-12 mb-4">
+      <div class="col-lg-5 offset-lg-1  col-sm-* mb-4 textCenter">
         <!-- <pinch-zoom> -->
-          <img src="{{ mainImage }}" class="oopsImg" redZoom="{{mainImage}}" redZoomClass="red-zoom--style--overlay"/>
+          <img src="{{ mainImage }}" class="oopsImg " redZoom="{{mainImage}}" redZoomClass="red-zoom--style--overlay"/>
         <!-- </pinch-zoom> -->
         <br />
         <!-- <lib-ngx-image-zoom
@@ -14,33 +14,37 @@
                 zoomMode="hover"> 
                 <img src= {{item.product_image}}  class="img-fluid">
                 </lib-ngx-image-zoom> -->
-        <div class="row textCenter">
-          <div class="col">
-            <img
-              src="{{ productDetail.mainImage }}"
-              class="thumbnailImg"
-              alt=""
-              (click)="onMainImgClick()"
-            />
-          </div>
-          <div
-            class="col"
-            *ngFor="let image of productDetail.subImages; let i = index"
-          >
-            <img
-              src="{{ image }}"
-              class="thumbnailImg"
-              id="{{ i }}"
-              alt=""
-              (click)="onImgClick(i)"
-            />
-          </div>
-        </div>
+                <div class="row textCenter">
+                  <div class="col">
+                    <mat-button-toggle-group color="primary textCenter" #group="matButtonToggleGroup">
+                      <mat-button-toggle color="primary" value="center" aria-label="Text align center">
+                        <div class="col py-3 ">
+                          <img
+                            src="{{ productDetail?.mainImage }}"
+                            class="thumbnailImg"
+                            alt=""
+                            (click)="onMainImgClick()"
+                          />
+                        </div>
+                      </mat-button-toggle>
+                      <mat-button-toggle class="py-3 px-2" value="right" aria-label="Text align right" *ngFor="let image of productDetail.subImages; let i = index">
+                        <img
+                          src="{{ image }}"
+                          class="thumbnailImg"
+                          id="{{ i }}"
+                          alt=""
+                          (click)="onImgClick(i)"
+                        />
+                      </mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+
+                </div>
       </div>
 
-      <div class="col-lg-4 offset-lg-1 col-sm">
+      <div class="col-lg-4 offset-lg-1  col-sm-*">
         <h1 class="col offset-sm-5 headFont">
-          <b> {{ productDetail.name }} </b>
+          <b> {{ productDetail?.name }} </b>
         </h1>
 
         <div class="col offset-sm-0">
@@ -62,7 +66,7 @@
               <span>Color: &nbsp;</span>
               <button
                 mat-button
-                [style.background-color]="productDetail.color.name"
+                [style.background-color]="productDetail?.color.name "
                 disabled
                 title="{{ productDetail.color.name }}"
               >

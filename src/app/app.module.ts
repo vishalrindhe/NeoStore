@@ -113,6 +113,8 @@ import { ForgetPasswordNextComponent } from './pages/forget-password-next/forget
 // image zoom
 import { RedZoomModule } from 'ngx-red-zoom';
 
+// loader
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -222,6 +224,8 @@ import { RedZoomModule } from 'ngx-red-zoom';
     NgxGalleryModule,
     //img zoom
     RedZoomModule,
+
+    //loader
     ],
   providers: [
     {

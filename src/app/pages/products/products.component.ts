@@ -68,6 +68,8 @@ export class ProductsComponent implements OnInit {
   public category = Array();
   public categoryColor1 = Array();
   public categoryColor = Array();
+  public cat:any
+  public color:any
   checkBoxInstance: any;
   public snackMsg:string
   public a: any[] = ['a', 'b', 'c', 'd', 'e'];
@@ -75,6 +77,18 @@ export class ProductsComponent implements OnInit {
     // console.log(this.productList);
     this.dataSource.sort = this.sort;
     // console.log(this.data.token);
+
+    this.data.listAllCategoryGet().subscribe(
+      (info) =>{
+        this.cat = info
+      }
+    )
+
+    this.data.listAllColorGet().subscribe(
+      (info) =>{
+        this.color = info
+      }
+    )
 
     this.data.listProductsInCartGet().subscribe(
       (info) => {
@@ -155,8 +169,9 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onCategoryClicked() {
-    this.data.listCategoryGet().subscribe(
+  onCategoryClicked(id:any) {
+
+    this.data.listCategoryGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;
@@ -171,8 +186,8 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  onColorClicked() {
-    this.data.listColorGet().subscribe(
+  onColorClicked(id:any) {
+    this.data.listColorGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;

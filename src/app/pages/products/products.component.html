@@ -14,10 +14,10 @@
                 <mat-panel-title> Categories </mat-panel-title>
               </mat-expansion-panel-header>
 
-              <div *ngFor="let subtask of category; let i = index">
+              <div *ngFor="let subtask of cat.data; let i = index">
                 <!-- <form #myForm="ngForm"> -->
-                <p class="m-2 p-1 pointer" (click)="onCategoryClicked()">
-                  {{ subtask }}
+                <p class="m-2 p-1 pointer" (click)="onCategoryClicked(subtask._id)">
+                  {{ subtask.name }}
                 </p>
                 <!-- </form> -->
               </div>
@@ -31,12 +31,17 @@
               <mat-expansion-panel-header>
                 <mat-panel-title> Color </mat-panel-title>
               </mat-expansion-panel-header>
-
-              <div *ngFor="let subtask of categoryColor; let i = index">
-                <p class="m-2 p-1 pointer" (click)="onColorClicked()">
-                  {{ subtask }}
-                </p>
+              <div class="row">
+                <div class="col-4" *ngFor="let subtask of color.data; let i = index">
+                  <!-- <div class="col-12" [style.background-color]="subtask?.name " style="width: 3vh; height: 3vh; border: black;"></div> -->
+                  <!-- <div class="col-4" [style.background-color]="subtask?.name " style="width: 3vh; height: 3vh; border: black;"></div> -->
+                  <div class="my-2 pointer" [style.background-color]="subtask?.name " style="width: 6vh; height: 6vh; border-style: solid ;border-width: 1px;" (click)="onColorClicked(subtask._id)"></div>
+                  <!-- <p class="m-2 p-1 pointer" (click)="onColorClicked(subtask._id)">
+                    {{ subtask.name }}
+                  </p> -->
+                </div>
               </div>
+
 
               <!-- <button mat-raised-button (click)="applyColor()">Apply</button> -->
             </mat-expansion-panel>
@@ -76,14 +81,19 @@
               | filterColor: colorCategory:'Color_id':'color_name'
               | sort:['product_cost'] -->
           <mat-card class="example-card">
-            <img 
+            <img
               height="150vh"
               mat-card-image
               src="{{ product.mainImage }}"
-              alt="" (click)="onCardClick(product.id)"
+              alt=""
+              (click)="onCardClick(product.id)"
             />
             <mat-card-content>
-              <h2 style="text-align: center" (click)="onCardClick(product.id)">
+              <h2
+                class="box"
+                style="text-align: center"
+                (click)="onCardClick(product.id)"
+              >
                 {{ product.name }}
               </h2>
 

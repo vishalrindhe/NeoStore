@@ -40,12 +40,16 @@ listAllCategoryGet(): Observable<any>{
   return this.http.get(this.url + '/api/category')
 }
 
-listCategoryGet(): Observable<any>{
-  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&category=6065c425f45ada6429eb42c9')
+listAllColorGet(): Observable<any>{
+  return this.http.get(this.url + '/api/color')
 }
 
-listColorGet(): Observable<any>{
-  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&color=6065ca24cec0196a6fe56e3d')
+listCategoryGet(id:any): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&category='+id)
+}
+
+listColorGet(id:any): Observable<any>{
+  return this.http.get(this.url + '/api/product?limit=100000&page=1..1000&color='+id)
 }
 
 sortByPriceAscGet(): Observable<any>{

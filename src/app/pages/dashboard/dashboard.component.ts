@@ -18,15 +18,13 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   // public url: string = 'http://ce61dbbabdca.ngrok.io';
-  public xyz:any
-  name: any = localStorage.getItem("firstName")
-  cartValue: number
+  public xyz: any;
+  name: any = localStorage.getItem('firstName');
+  cartValue: number;
   // = this.data.cartValue
   panelOpenState = false;
-  public token:any
-  public b:any
-
-
+  public token = this.data.token;
+  public b: any;
 
   title = 'NeoStore';
 
@@ -35,51 +33,48 @@ export class DashboardComponent implements OnInit {
     private service: CheckingService,
     private router: Router,
     private data: DataService,
-    private http: HttpClient
+    private http: HttpClient,
 
   ) {}
 
-  ngOnInit(){
-     console.log("firstname: ",localStorage.getItem("firstName"));
-    
-      // if(this.token != null){
-        // this.interval()
+  ngOnInit() {
+    console.log('firstname: ', localStorage.getItem('firstName'));
+
+    // if(this.token != null){
+    // this.interval()
     // this.b = this.interval()
-      // }
-     
-      
+    // }
+    this.initData()
     
-      this.b = setInterval(() =>{ 
-        this.data.listProductsInCartGet().subscribe((info) =>{
-          this.data.cartValue = info.data.products.length
-          // this.cartValue = this.data.cartValues
-          this.cartValue! = info.data.products.length
-          console.log(this.cartValue);  
-          this.token = localStorage.getItem('token')
-          console.log(this.token);
-          
-        })}, 3000);
+    console.log('token form dashboard', this.token);
 
-        if(this.token == null){
-        }
+    this.b = setInterval(() => {
+      this.initData();
+    }, 1000);
 
-        setTimeout(() => {
-          // this.pauseTimeLine()
-        }, 5000);
-
-      
+    if (!this.token) {
+      console.log('token is unavailable');
+      // clearInterval(this.b);
+      this.pauseTimeLine();
+    }
   }
 
   pauseTimeLine() {
     clearInterval(this.b);
-    console.log("stopeed");
-    
-    
-}
+    console.log('stopeed');
+  }
 
-  // interval(){
-    
-  // }
+  initData() {
+    this.data.listProductsInCartGet().subscribe((info) => {
+      this.data.cartValue = info.data.products.length;
+      // this.cartValue = this.data.cartValues
+      this.cartValue! = info.data.products.length;
+      console.log(this.cartValue);
+
+      // this.token = localStorage.getItem('token')
+      // console.log("this.token",this.token);
+    });
+  }
 
   // public count = this.cartCount.getCartCount();
 
@@ -89,16 +84,15 @@ export class DashboardComponent implements OnInit {
   }
 
   /**
-   *this signOut functin clear all localhost 
+   *this signOut functin clear all localhost
    * and reload it
    * @memberof DashboardComponent
    */
   signOut() {
     // this.service.signOut();
-    localStorage.clear()
+    localStorage.clear();
     // this.router.navigate(['/dashboard']);
-    location.reload(); 
-
+    location.reload();
   }
 
   // if user is logged in then only it will navigate to product page
@@ -111,10 +105,10 @@ export class DashboardComponent implements OnInit {
   // if user is logged in then only it will navigate to order page
   onOrderClick() {
     // if(this.service.item){
-      this.data.isProfile=false;
-  this.data.isChangePassword=false;
-  this.data.isAddress=false;
-  this.data.isOrder=true;
+    this.data.isProfile = false;
+    this.data.isChangePassword = false;
+    this.data.isAddress = false;
+    this.data.isOrder = true;
     this.router.navigate(['/my-account']);
     // }
   }
@@ -133,10 +127,10 @@ export class DashboardComponent implements OnInit {
 
   onProfileClick() {
     // if(this.service.item){
-      this.data.isProfile=true;
-      this.data.isChangePassword=false;
-      this.data.isAddress=false;
-      this.data.isOrder=false;
+    this.data.isProfile = true;
+    this.data.isChangePassword = false;
+    this.data.isAddress = false;
+    this.data.isOrder = false;
     this.router.navigate(['/my-account']);
     //  }
   }

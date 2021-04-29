@@ -20,7 +20,6 @@
           <div class="col-1">
             <span>Total</span>
           </div>
-
         </div>
         <div *ngFor="let item of cartInfo?.data.products; let i = index">
           <hr />
@@ -42,19 +41,15 @@
               </span>
             </div>
             <div class="col-4 col-lg-3 col-sm-4 col-md-3 mb-1">
-
               <span
                 ><b>&nbsp; {{ item.quantity }} &nbsp;</b></span
               >
-
             </div>
-
 
             <!-- total price of single product -->
             <div class="col-3 col-lg-1 col-xs-2 col-sm-3 col-md-1">
               <span #total> {{ item.totalAmount }} </span>
             </div>
-
           </div>
           <!-- <hr /> -->
         </div>
@@ -75,7 +70,7 @@
           [value]="season._id"
           *ngFor="let season of addresses; let i = index"
         >
-          <div style="text-align: left; line-height: 1.5" class="my-2">
+          <div style="text-align: left; line-height: 1.5; width:300px" class="my-2">
             <p>
               <b>Address {{ i }}: </b>
             </p>
@@ -94,9 +89,11 @@
   </div>
 
   <div class="row textCenter">
-      <div class="col-12">
-          <p class="subTotalFont m-3"><b>Total Amount: &#8377;{{cartInfo?.data.grandTotal}}</b></p>
-        <button
+    <div class="col-12">
+      <p class="subTotalFont m-3">
+        <b>Total Amount: &#8377;{{ cartInfo?.data.grandTotal }}</b>
+      </p>
+      <button
         mat-raised-button
         color="primary"
         class="submitButton textCenter"
@@ -105,7 +102,7 @@
       >
         Place Order
       </button>
-      </div>
+    </div>
   </div>
 </div>
 
