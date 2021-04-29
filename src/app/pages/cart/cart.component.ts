@@ -6,6 +6,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/assets/services/data.service';
 import { DialogCartComponent } from '../dialog-cart/dialog-cart.component';
 // import {} from '../../../assets/services/data.service'
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
   name: any;
   animal: any;
 
-  constructor(private data: DataService, public dialog: MatDialog, private router: Router ) {}
+  constructor(private data: DataService, public dialog: MatDialog, private router: Router,private spinner: NgxSpinnerService  ) {}
   total2: number;
   ngOnInit() {
     // trying to share quantity to dataservice
@@ -43,12 +44,14 @@ export class CartComponent implements OnInit {
     // this.reload()
     
     // setInterval('this.reload()', 5000)
+    this.spinner.show();
     this.data.listProductsInCartGet().subscribe(
       (info) => {
         console.log('data :', info);
         this.cartInfo = info;
         console.log(this.cartInfo);
         // location.reload()
+        this.spinner.hide();
       },
       (error) => {
         console.log(error.error.message);
@@ -103,7 +106,7 @@ export class CartComponent implements OnInit {
           console.log('length true');
           this.subTotal = 0;
         }
-
+        this.spinner.show();
         this.data.deleteProductInCartDelete(i).subscribe(
           (info) => 
           {
@@ -118,7 +121,7 @@ export class CartComponent implements OnInit {
                   (error) => {
                     console.log(error.error.message);
                   });
-          
+                  this.spinner.hide();
           });
         // console.log('subtotal', this.subTotal);
         // console.log('product json', this.cartData.product_details);

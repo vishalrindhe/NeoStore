@@ -112,8 +112,13 @@ import { ForgetPasswordNextComponent } from './pages/forget-password-next/forget
 
 // image zoom
 import { RedZoomModule } from 'ngx-red-zoom';
+import { DialogDeleteAddressComponent } from './pages/dialog-delete-address/dialog-delete-address.component';
 
 // loader
+import { NgxSpinnerModule } from "ngx-spinner";
+
+
+
 
 @NgModule({
   declarations: [
@@ -149,6 +154,7 @@ import { RedZoomModule } from 'ngx-red-zoom';
     AddressListComponent,
     AddAddressComponent,
     ForgetPasswordNextComponent,
+    DialogDeleteAddressComponent,
     
 
   ],
@@ -226,6 +232,8 @@ import { RedZoomModule } from 'ngx-red-zoom';
     RedZoomModule,
 
     //loader
+
+    NgxSpinnerModule
     ],
   providers: [
     {

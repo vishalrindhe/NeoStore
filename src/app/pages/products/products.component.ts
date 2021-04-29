@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DataService } from 'src/assets/services/data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 export interface Dessert {
   calories: number;
@@ -81,6 +82,7 @@ export class ProductsComponent implements OnInit {
     this.data.listAllCategoryGet().subscribe(
       (info) =>{
         this.cat = info
+
       }
     )
 
@@ -103,7 +105,28 @@ export class ProductsComponent implements OnInit {
     );
 
     // here we are pushing color and category of product in its respective array
+    this.allProduct()
+  
+  }
 
+  constructor(
+    private data: DataService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService 
+  ) {
+    for (let i = 1; i <= 10; i++) {
+      this.collection.push(`item ${i}`);
+    }
+
+    this.form = this.formBuilder.group({
+      website: this.formBuilder.array([], [Validators.required]),
+    });
+  }
+
+  allProduct(){
+    this.spinner.show();
     this.data.listProductsGet().subscribe((info) => {
       this.productList = info;
       for (let i = 0; i < info.data.docs.length; i++) {
@@ -127,33 +150,26 @@ export class ProductsComponent implements OnInit {
       console.log(this.category);
       console.log(this.categoryColor);
       console.log(this.productList.data.docs);
-    });
-  }
+      this.spinner.hide();
 
-  constructor(
-    private data: DataService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar
-  ) {
-    for (let i = 1; i <= 10; i++) {
-      this.collection.push(`item ${i}`);
-    }
-
-    this.form = this.formBuilder.group({
-      website: this.formBuilder.array([], [Validators.required]),
     });
   }
 
   onPriceSortAsc() {
+    this.spinner.show();
     this.data.sortByPriceAscGet().subscribe((info) => {
       this.productList = info;
+      this.spinner.hide();
+      this.p =1
     });
   }
 
   onPriceSortDesc() {
+    this.spinner.show();
     this.data.sortByPriceDescGet().subscribe((info) => {
       this.productList = info;
+      this.spinner.hide();
+      this.p =1
     });
   }
 
@@ -164,17 +180,24 @@ export class ProductsComponent implements OnInit {
   // }
 
   onRatingSortDesc() {
+    this.spinner.show();
     this.data.sortByRatingDescGet().subscribe((info) => {
       this.productList = info;
+      this.spinner.hide();
+      this.p =1
     });
   }
 
   onCategoryClicked(id:any) {
 
+    this.spinner.show();
     this.data.listCategoryGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;
+        this.spinner.hide();
+        this.p =1
+
         // this.router.navigate(['/login']);
       },
       (error) => {
@@ -187,11 +210,15 @@ export class ProductsComponent implements OnInit {
   }
 
   onColorClicked(id:any) {
+    this.spinner.show();
     this.data.listColorGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;
         // this.router.navigate(['/login']);
+        this.spinner.hide();
+        this.p =1
+
       },
       (error) => {
         let msg;
@@ -329,6 +356,10 @@ export class ProductsComponent implements OnInit {
 
   onCardClick(id:string){
     this.router.navigate(['/productInfo/'+id])
+  }
+
+  onAllProductClick(){
+    this.router.navigate(['/products'])
   }
 
 }

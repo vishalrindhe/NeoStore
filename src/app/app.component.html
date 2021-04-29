@@ -1,3 +1,4 @@
+
 <div ngxUiLoaderBlurred>
     <mat-toolbar style="color: white;background-color: #152F4F;">
       <mat-toolbar-row>
@@ -6,8 +7,8 @@
           <mat-icon>menu</mat-icon>
         </button>
         <!-- NeoStore Branding -->
-        <span class="pointer" (click)="onHomeClick()">Neo</span>
-        <span class="pointer" style="color: red;" (click)="onHomeClick()">Store</span>
+        <span class="pointer" style="font-size: x-large;" (click)="onHomeClick()"><b>Neo</b></span>
+        <span class="pointer" style="color: red; font-size: x-large;" (click)="onHomeClick()"><b>Store</b></span>
         <span class="menu-spacer"></span>
   
           <!-- The following menu items will be hidden on both SM and XS screen sizes -->
@@ -21,7 +22,7 @@
               <mat-icon matPrefix (click)="abc(input.value)" style="cursor: pointer;">search</mat-icon>
               <!-- <mat-hint>Hint</mat-hint> -->
             </mat-form-field>
-          <a  mat-button><mat-icon matBadge={{cartValue}} matBadgeColor="warn" (click)="onCartClick()">shopping_cart</mat-icon></a>
+          <a (click)="onCartClick()" mat-button><mat-icon matBadge={{cartValue}} matBadgeColor="warn" >shopping_cart</mat-icon></a>
                     
           <!-- dropdown button -->
           <div class="btn-group">
@@ -107,6 +108,7 @@
         <!-- <app-carousel></app-carousel> -->
        <!-- <br> -->
 <router-outlet></router-outlet>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
        
         <!-- product card component -->
         <!-- <app-homepage-card></app-homepage-card> -->

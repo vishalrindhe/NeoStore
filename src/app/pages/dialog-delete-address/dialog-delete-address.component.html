@@ -1,0 +1,24 @@
+<!-- <p>dialog-delete-address works!</p> -->
+
+<div class="container">
+  <div class="row textCenter">
+    <div class="col">
+      <p style="font-size: large">Do you want to delete Address?</p>
+    </div>
+  </div>
+</div>
+<div class="textCenter">
+  <button mat-raised-button class="m-2" (click)="onNoClick()">No Thanks</button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="m-2"
+    (click)="onSubmit()"
+    (click)="onNoClick()"
+    [mat-dialog-close]
+  >
+    Submit
+  </button>
+</div>
+
+<!-- {{ data.id }} -->

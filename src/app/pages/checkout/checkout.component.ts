@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/assets/services/data.service';
 
 @Component({
@@ -21,12 +22,14 @@ export class CheckoutComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private data: DataService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService 
   ) {}
 
   ngOnInit(): void {
     this.receivedata();
 
+    this.spinner.show();
     this.data.listProductsInCartGet().subscribe(
       (info) => {
         console.log('data :', info);
@@ -34,6 +37,7 @@ export class CheckoutComponent implements OnInit {
         // cartInfo hold object of products
         console.log('cartInfo: ', this.cartInfo);
         // location.reload()
+        this.spinner.hide();
       },
       (error) => {
         console.log(error.error.message);

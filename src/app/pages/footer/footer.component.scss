@@ -29,3 +29,22 @@
     }
     .copyright {border-top:1px solid rgba(255,255,255,.8); text-align: center;} 
   }
+  ::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+    }
+    
+    
+    $color-outline: white;
+
+mat-form-field {
+  
+      // to change border color
+      ::ng-deep .mat-form-field-outline {
+           color: $color-outline !important;
+      }
+      // to change label color
+      ::ng-deep .mat-form-field-label {
+           color: $color-outline !important;
+      }
+}

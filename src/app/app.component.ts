@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { CheckingService } from 'src/assets/services/checking.service';
 import { DataService } from 'src/assets/services/data.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-root',
@@ -30,16 +31,18 @@ export class AppComponent {
     private service: CheckingService,
     private router: Router,
     private data: DataService,
-    private http: HttpClient  ) {}
+    private http: HttpClient,
+    private spinner: NgxSpinnerService  ) {}
 
   ngOnInit() {
     console.log('firstname: ', localStorage.getItem('firstName'));
-    
+    this.spinner.show();
     this.data.listProductsInCartGet().subscribe((info) => {
       this.data.cartValue = info.data.products.length;
       // this.cartValue = this.data.cartValues
       this.cartValue! = info.data.products.length;
       console.log(this.cartValue);
+      this.spinner.hide();
     })
     
     // if(this.token != null){

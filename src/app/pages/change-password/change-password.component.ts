@@ -9,6 +9,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ApiService } from '../../../assets/services/data.service';
 import { RouterModule, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/assets/services/data.service';
 
 @Component({
@@ -34,7 +35,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private data: DataService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private spinner: NgxSpinnerService 
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +84,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.newPassword.value,
     };
     console.log("formdata",formdata); 
+    this.spinner.show();
     this.data.changePassword(formdata).subscribe(
       (res: any) => {
         console.log(res);
@@ -89,6 +92,7 @@ export class ChangePasswordComponent implements OnInit {
       this.data.isChangePassword=false;
       this.data.isAddress=false;
       this.data.isOrder=false;
+      this.spinner.hide();
     this.router.navigate(['/']).then(() =>{
         this.snackMsg = "Password changed successfully"
         this.openSnackBar()

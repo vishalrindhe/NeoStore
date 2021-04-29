@@ -3,6 +3,7 @@ import { DataService } from 'src/assets/services/data.service';
 import { DialogProfileComponent } from '../dialog-profile/dialog-profile.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface PeriodicElement {
   field: string;
@@ -27,10 +28,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private data: DataService, public dialog: MatDialog, private router: Router) { }
+  constructor(private data: DataService, public dialog: MatDialog, private router: Router,private spinner: NgxSpinnerService ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     console.log(this.userData);
+    this.spinner.hide();
     
   }
 
@@ -60,6 +63,7 @@ export class ProfileComponent implements OnInit {
     gender : localStorage.getItem('gender'),
     mobile : localStorage.getItem('mobile'),
     email : localStorage.getItem('email')
+    
 
   }
 

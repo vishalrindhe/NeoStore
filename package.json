@@ -43,6 +43,7 @@
     "ngx-pinch-zoom": "^2.5.5",
     "ngx-red-zoom": "^0.6.0",
     "ngx-sharebuttons": "^8.0.5",
+    "ngx-spinner": "^11.0.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

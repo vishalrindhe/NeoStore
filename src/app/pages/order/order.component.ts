@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/assets/services/data.service';
 
 @Component({
@@ -11,9 +12,10 @@ export class OrderComponent implements OnInit {
   public order_list:any =[];
   public order_listing:any =[];
 
-  constructor( private data:DataService) { }
+  constructor( private data:DataService,private spinner: NgxSpinnerService ) { }
 
   ngOnInit():void{
+    this.spinner.show();
     this.receivedata()
   }
 
@@ -22,6 +24,7 @@ receivedata(){
     this.order_list = data;
     this.order_listing = this.order_list.data.orders[1].items;
     console.log(this.order_listing);
+    this.spinner.hide();
   });
 }
 

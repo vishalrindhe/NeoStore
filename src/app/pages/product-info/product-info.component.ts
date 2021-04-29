@@ -8,6 +8,7 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { DataService } from 'src/assets/services/data.service';
 import { RateProductComponent } from '../rate-product/rate-product.component';
 import { HttpClient } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface DialogData {
   name: string;
@@ -36,6 +37,7 @@ export class ProductInfoComponent implements OnInit {
     private activatedrouter: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private http: HttpClient,
+    private spinner: NgxSpinnerService 
   ) {}
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class ProductInfoComponent implements OnInit {
     
     // this.ngxLoader.start();
     // setti
+    this.spinner.show();
     this.data.listProductsGet().subscribe((info) => {
       console.log(info);
       this.productInfo = info;
@@ -55,6 +58,7 @@ export class ProductInfoComponent implements OnInit {
           this.avgRating = i.avgRating;
         }
       }
+      this.spinner.hide();
       // this.ngxLoader.stop();
     });
   }
