@@ -1,34 +1,36 @@
 <div class="profileHeading textCenter">
-    <h1 class="text p-3">Orders</h1>
-  </div>
-<div class="m-3" *ngFor="let orders of order_listing;let i=index;">
-    <mat-card>
-        <!-- <div class="row"> -->
-            <span class="m-2 orderFont"><b>Order ID / {{orders._id}}</b></span><br>
-        <!-- </div> -->
-        <div clas="row">
-            <!-- <div class="col"> -->
-            <span class="m-2 dateFont">Placed At: {{orders.productId.createdAt | date}} for</span>
-            <span  class=" greenFont">&#8377;{{orders.productId.price}} </span>
-        <!-- </div> -->
-            
-        </div>
-        <div clas="row">
-        </div>
-        <hr>
-        <!-- <br> -->
-        <div class="row">
-            <div class="col">
-                <img src={{orders.productId.mainImage}} height="50vh" width="50vh" />
-                <span class="mx-2"><b>{{orders.productId.name}}</b></span>
-            </div>
-        </div><br>
-        <div class="row">
-            <div class="col">
-                <button mat-raised-button color=primary >Download Invoice</button>
-            </div>
-            
-        </div>
-
-    </mat-card>
+  <h1 class="text p-3">Orders</h1>
+</div>
+<div
+  class="m-3"
+  *ngFor="let orders of order_list?.data?.orders; let i = index; let p"
+>
+  <mat-card>
+    <span class="m-2 orderFont"
+      ><b>Order ID / {{ orders?._id }}</b></span
+    ><br />
+    <div clas="row">
+      <span class="m-2 dateFont"
+        >Placed At: {{ orders?.updatedAt | date }}</span
+      >
+    </div>
+    <div clas="row"></div>
+    <hr />
+    <!-- <br> -->
+    <div class="row" *ngFor="let item of orders.items">
+      <div class="col">
+        <img src="{{ item?.productId.mainImage }}" height="50vh" width="50vh" />
+        <span class="mx-2"
+          ><b>{{ item?.productId.name }}</b> for</span
+        >
+        <span class="greenFont">&#8377;{{ item?.productId.price }} </span>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary">Download Invoice</button>
+      </div>
+    </div>
+  </mat-card>
 </div>

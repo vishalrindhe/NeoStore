@@ -34,12 +34,9 @@
               </mat-expansion-panel-header>
               <div class="row">
                 <div class="col-4" *ngFor="let subtask of color?.data; let i = index">
-                  <!-- <div class="col-12" [style.background-color]="subtask?.name " style="width: 3vh; height: 3vh; border: black;"></div> -->
-                  <!-- <div class="col-4" [style.background-color]="subtask?.name " style="width: 3vh; height: 3vh; border: black;"></div> -->
+                 
                   <div class="my-2 pointer" [style.background-color]="subtask?.name " style="width: 6vh; height: 6vh; border-style: solid ;border-width: 1px;" (click)="onColorClicked(subtask._id)"></div>
-                  <!-- <p class="m-2 p-1 pointer" (click)="onColorClicked(subtask._id)">
-                    {{ subtask.name }}
-                  </p> -->
+                 
                 </div>
               </div>
 
