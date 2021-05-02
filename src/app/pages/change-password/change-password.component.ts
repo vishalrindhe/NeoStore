@@ -23,8 +23,9 @@ export class ChangePasswordComponent implements OnInit {
   hide1 = true;
   hide2 = true;
   match = '';
-  passMatch: boolean;
   public snackMsg: string;
+  public passMatch: boolean = false;
+
 
   // form: FormGroup = new FormGroup({
   //   password: new FormControl(''),
@@ -55,6 +56,7 @@ export class ChangePasswordComponent implements OnInit {
     //     Validators.pattern('[a-zA-Z0-9s]+'),
     //   ]),
     // });
+    this.match=''
   }
 
   password = new FormControl('', [
@@ -71,6 +73,23 @@ export class ChangePasswordComponent implements OnInit {
     Validators.required,
     Validators.pattern('^(?=.*[0-9])(?=.*[a-z A-Z]).{8,12}$'),
   ]);
+
+  passwordcheck() {
+    if (this.newPassword.value == this.confirmPassword.value) {
+      console.log("no");
+      
+      this.match = '';
+      // console.log('match');
+      // return false
+      this.passMatch = true;
+    } else {
+      console.log('match');
+      
+      this.passMatch = false;
+      this.match = 'password not matching';
+      // console.log('not');
+    }
+  }
 
   // public checkError = (controlName: string, errorName: string) => {
   //   return this.form.controls[controlName].hasError(errorName);

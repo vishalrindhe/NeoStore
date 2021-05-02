@@ -37,18 +37,14 @@ export class AppComponent {
   ngOnInit() {
     console.log('firstname: ', localStorage.getItem('firstName'));
     this.spinner.show();
-    this.data.listProductsInCartGet().subscribe((info) => {
-      this.data.cartValue = info.data.products.length;
-      // this.cartValue = this.data.cartValues
-      this.cartValue! = info.data.products.length;
-      console.log(this.cartValue);
-      this.spinner.hide();
-    })
-    
-    // if(this.token != null){
-    // this.interval()
-    // this.b = this.interval()
-    // }
+
+    // this.data.listProductsInCartGet().subscribe((info) => {
+    //   this.data.cartValue = info?.data?.products?.length;
+    //   // this.cartValue = this.data.cartValues
+    //   this.cartValue! = info.data.products.length;
+    //   console.log(this.cartValue);
+    // })
+
     console.log('token form dashboard', this.token);
 
     this.b = setInterval(() => {
@@ -65,16 +61,21 @@ export class AppComponent {
   pauseTimeLine() {
     clearInterval(this.b);
     console.log('stopeed');
+    this.spinner.hide();
   }
 
   initData() {
+    // this.spinner.show();
+
     this.data.listProductsInCartGet().subscribe((info) => {
-      this.data.cartValue = info.data.products.length;
+      this.data.cartValue = info?.data.products.length;
       // this.cartValue = this.data.cartValues
-      this.cartValue! = info.data.products.length;
-      console.log(this.cartValue);
+      this.cartValue! = info?.data.products.length;
+      // console.log(this.cartValue);
       // this.token = localStorage.getItem('token')
       // console.log("this.token",this.token);
+      this.spinner.hide();
+
     });
   }
 
@@ -126,8 +127,11 @@ export class AppComponent {
     this.router.navigate(['/login']);
     //  }
   }
-
-  onProfileClick() {
+/**
+ * change values of varibale from dataService; so order page in switch case of myAccount page will selected and navigate to myaccount page
+ * @memberof AppComponent
+ */
+onProfileClick() {
     // if(this.service.item){
     this.data.isProfile = true;
     this.data.isChangePassword = false;
@@ -138,6 +142,6 @@ export class AppComponent {
   }
 
   onHomeClick(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 }

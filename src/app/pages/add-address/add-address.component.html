@@ -1,107 +1,77 @@
-<!-- <div mat-dialog-content> -->
-<!-- <div class="container"> -->
-  <div class="row" style="text-align: center;">
-    <h1><b>Add Address</b></h1>
-    <div class="col-*">
-      <!-- First Name -->
-      <mat-form-field class="example-full-width">
-        <input
-          type="text"
-          matInput
-          [formControl]="AddressFormControl"
-          placeholder="Address"
-        />
-        <mat-error *ngIf="AddressFormControl.hasError('required')">
-          Address required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <br />
-    <!-- City -->
-    <div class="col-*">
-      <mat-form-field class="example-full-width">
-        <input
-          type="text"
-          matInput
-          [formControl]="CityFormControl"
-          placeholder="City"
-        />
-        <mat-error *ngIf="CityFormControl.hasError('required')">
-          City required
-        </mat-error>
-        <mat-error *ngIf="CityFormControl.hasError('pattern')">
-          City must include only 3-20 alphabets only.
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <br />
-    <div class="col-*">
-      <mat-form-field class="example-full-width">
-        <input
-          type="text"
-          matInput
-          [formControl]="PincodeFormControl"
-          placeholder="Pincode"
-        />
-        <mat-error *ngIf="PincodeFormControl.hasError('required')">
-          Pincode required
-        </mat-error>
-        <mat-error *ngIf="PincodeFormControl.hasError('pattern')">
-          Pincode must be of only 6 digits.
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-*">
-      <mat-form-field class="example-full-width">
-        <input
-          type="text"
-          matInput
-          [formControl]="StateFormControl"
-          placeholder="State"
-        />
-        <mat-error *ngIf="StateFormControl.hasError('required')">
-          State required
-        </mat-error>
-        <mat-error *ngIf="StateFormControl.hasError('pattern')">
-          State must include only 3-20 alphabets only.
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div class="col-*">
-      <mat-form-field class="example-full-width">
-        <input
-          type="text"
-          matInput
-          [formControl]="CountryFormControl"
-          placeholder="Country"
-        />
-        <mat-error *ngIf="CountryFormControl.hasError('required')">
-          Country required
-        </mat-error>
-        <mat-error *ngIf="CountryFormControl.hasError('pattern')">
-          Country must include only 3-20 alphabets only.
-        </mat-error>
-      </mat-form-field>
-    </div>
+<div class="row" style="text-align: center">
+  <h1><b>Add Address</b></h1>
+  <div class="col-*">
+    <!-- First Name -->
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [formControl]="AddressFormControl" placeholder="Address" />
+      <mat-error *ngIf="AddressFormControl.hasError('required')">
+        Address required
+      </mat-error>
+    </mat-form-field>
   </div>
-<!-- </div> -->
-<!-- </div> -->
+  <br />
+  <!-- City -->
+  <div class="col-*">
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [formControl]="CityFormControl" placeholder="City" />
+      <mat-error *ngIf="CityFormControl.hasError('required')">
+        City required
+      </mat-error>
+      <mat-error *ngIf="CityFormControl.hasError('pattern')">
+        City must include only 3-20 alphabets only.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <br />
+  <!-- pincode -->
+  <div class="col-*">
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [formControl]="PincodeFormControl" placeholder="Pincode" />
+      <mat-error *ngIf="PincodeFormControl.hasError('required')">
+        Pincode required
+      </mat-error>
+      <mat-error *ngIf="PincodeFormControl.hasError('pattern')">
+        Pincode must be of only 6 digits.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <!-- state -->
+  <div class="col-*">
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [formControl]="StateFormControl" placeholder="State" />
+      <mat-error *ngIf="StateFormControl.hasError('required')">
+        State required
+      </mat-error>
+      <mat-error *ngIf="StateFormControl.hasError('pattern')">
+        State must include only 3-20 alphabets only.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <!-- country -->
+  <div class="col-*">
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput [formControl]="CountryFormControl" placeholder="Country" />
+      <mat-error *ngIf="CountryFormControl.hasError('required')">
+        Country required
+      </mat-error>
+      <mat-error *ngIf="CountryFormControl.hasError('pattern')">
+        Country must include only 3-20 alphabets only.
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
 
-<!-- Show this demonstrate to mentor that value is not visible in matInput -->
-
-<div  class="textCenter">
+<div class="textCenter">
   <button mat-raised-button class="m-2" (click)="onNoClick()">No Thanks</button>
-  <button
-    mat-raised-button color=primary
-    class="m-2"
-    [disabled]="
+  <!-- Submit button will disable if all input fields are not filled properly -->
+  <!-- It accept parameter as addressline, city, state, country, pincode -->
+  <button mat-raised-button color="primary" class="m-2" [disabled]="
       AddressFormControl.invalid ||
       CityFormControl.invalid ||
       PincodeFormControl.invalid ||
       StateFormControl.invalid ||
       CountryFormControl.invalid
-    "
-    (click)="
+    " (click)="
       onSubmit(
         AddressFormControl.value,
         CityFormControl.value,
@@ -109,9 +79,7 @@
         StateFormControl.value,
         CountryFormControl.value
       )
-    "
-    (click)="onNoClick()"
-  >
+    " (click)="onNoClick()">
     Submit
   </button>
 </div>
