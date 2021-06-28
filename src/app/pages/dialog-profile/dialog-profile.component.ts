@@ -29,47 +29,35 @@ export class DialogProfileComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // public userModel = new EditInfo("","");
+  // getting data from localhost which is already stored
+  firstName = localStorage.getItem('firstName');
+  lastName = localStorage.getItem('lastName');
+  gender = localStorage.getItem('gender');
+  phone = localStorage.getItem('mobile');
+  email = localStorage.getItem('email');
 
-  // validator for first name
-  // public name = new FormControl('', [
-  //   Validators.required,
-  //   Validators.pattern('[a-zA-Z]*'),
-  // ]);
-
-  // getErrorMessageForName() {
-  //   if (this.name.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-
-  //   return this.name.hasError('name')
-  //     ? 'Must include only alphabets'
-  //     : 'Must include only alphabets';
-  // }
-  // firstName = this.userData.customer_proile.first_name;
-  // lastName = this.userData.customer_proile.last_name;
-  // email = this.userData.customer_proile.email;
-  // phone = this.userData.customer_proile.phone_no;
-  // gender = this.userData.customer_proile.gender;
-  // dob = this.userData.customer_proile.dob;
-  // profilePic = this.userData.customer_proile.profile_img;
-  firstName = localStorage.getItem('firstName')
-    lastName = localStorage.getItem('lastName')
-    gender = localStorage.getItem('gender')
-    phone = localStorage.getItem('mobile')
-    email = localStorage.getItem('email')
-
-
+  /**
+   * input required and pattern validation 
+   * @memberof DialogProfileComponent
+   */
   firstNameFormControl = new FormControl(this.firstName, [
     Validators.required,
     Validators.pattern('[a-zA-Z]*'),
   ]);
 
+  /**
+   * input required and pattern validation 
+   * @memberof DialogProfileComponent
+   */
   lastNameFormControl = new FormControl(this.lastName, [
     Validators.required,
     Validators.pattern('[a-zA-Z]*'),
   ]);
 
+  /**
+   * input required and pattern validation 
+   * @memberof DialogProfileComponent
+   */
   emailFormControl = new FormControl(this.email, [
     Validators.required,
     Validators.pattern(
@@ -77,29 +65,33 @@ export class DialogProfileComponent implements OnInit {
     ),
   ]);
 
+  /**
+   * input required and pattern validation 
+   * @memberof DialogProfileComponent
+   */
   phoneFormControl = new FormControl(this.phone, [
     Validators.required,
     Validators.pattern('^[6-9][0-9]{9}$'),
   ]);
 
+  /**
+   * input required validation 
+   * @memberof DialogProfileComponent
+   */
   public genderFormControl = new FormControl(this.gender, [
     Validators.required,
   ]);
 
-  // dobFormControl = new FormControl(this.dob, [Validators.required]);
-
-  // profilePicFormControl = new FormControl(this.profilePic, [
-  //   Validators.required,
-  // ]);
-
-  // public firstName = new FormControl(this.f)
-  // public lastName = new FormControl('')
-  // public gender = new FormControl('')
-  // public dob = new FormControl('')
-  // public email = new FormControl('')
-  // public phone = new FormControl('')
-
-  onSubmit(
+/**
+ *  needs 5 parameters for editing
+ * @param {string} fname
+ * @param {string} lname
+ * @param {string} gender
+ * @param {string} email
+ * @param {string} phone
+ * @memberof DialogProfileComponent
+ */
+onSubmit(
     fname: string,
     lname: string,
     gender: string,
@@ -120,27 +112,34 @@ export class DialogProfileComponent implements OnInit {
     console.log(editInfo);
   }
 
-   
-  imagePath:any;
+  imagePath: any;
   imgURL: any;
   public message: string | undefined;
-  preview(files:any) {
-    if (files.length === 0)
-    return;
-    
+
+  /**
+   * code for image preview 
+   * @param {*} files
+   * @return {*} 
+   * @memberof DialogProfileComponent
+   */
+  preview(files: any) {
+    if (files.length === 0) return;
+
     var mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-    this.message = "Only images are supported.";
-    return;
+      this.message = 'Only images are supported.';
+      return;
     }
-    
+
     var reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-    this.imgURL = reader.result;
-    }
-    }
+      this.imgURL = reader.result;
+    };
+  }
+
+  // from below this code is unecessary code not needed now
 
   /**
    * just redirect to order page

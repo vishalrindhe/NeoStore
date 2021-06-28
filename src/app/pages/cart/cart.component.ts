@@ -34,23 +34,31 @@ export class CartComponent implements OnInit {
   name: any;
   animal: any;
 
-  constructor(private data: DataService, public dialog: MatDialog, private router: Router,private spinner: NgxSpinnerService  ) {}
+  constructor(
+    private data: DataService,
+    public dialog: MatDialog,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
   total2: number;
   ngOnInit() {
     // trying to share quantity to dataservice
     this.data.setCartCount(this.cartData.product_details[0].quantity);
     console.log(this.quantity);
     console.log(this.quantity[1]);
-    // this.reload()
-    
-    // setInterval('this.reload()', 5000)
+
+    // start loader
     this.spinner.show();
+
+    // api call for list products in cart
+    // on successful call store cart products data into cartInfo local var
     this.data.listProductsInCartGet().subscribe(
       (info) => {
         console.log('data :', info);
         this.cartInfo = info;
         console.log(this.cartInfo);
-        // location.reload()
+
+        // stop loader
         this.spinner.hide();
       },
       (error) => {
@@ -81,11 +89,11 @@ export class CartComponent implements OnInit {
 
   /**
    * here dialog box will open on delete product click
-   * if user click remove then it will return true else false and from that basis it will slice the array of products
+   * if user click remove then it will return true else false and from that basis it will make api call for delete cart product
    * @param {number} i
    * @memberof CartComponent
    */
-  openDialog(name:string,img:any,i:string) {
+  openDialog(name: string, img: any, i: string) {
     let xyz: string = '';
     const dialogRef = this.dialog.open(DialogCartComponent, {
       width: '50vh',
@@ -107,24 +115,20 @@ export class CartComponent implements OnInit {
           this.subTotal = 0;
         }
         this.spinner.show();
-        this.data.deleteProductInCartDelete(i).subscribe(
-          (info) => 
-          {
-            console.log('product quantity add success :', info);
-                this.data.listProductsInCartGet().subscribe(
-                  (info) => {
-                    console.log('data :', info);
-                    this.cartInfo = info;
-                    console.log(this.cartInfo);
-                    // location.reload()
-                  },
-                  (error) => {
-                    console.log(error.error.message);
-                  });
-                  this.spinner.hide();
-          });
-        // console.log('subtotal', this.subTotal);
-        // console.log('product json', this.cartData.product_details);
+        this.data.deleteProductInCartDelete(i).subscribe((info) => {
+          console.log('product quantity add success :', info);
+          this.data.listProductsInCartGet().subscribe(
+            (info) => {
+              console.log('data :', info);
+              this.cartInfo = info;
+              console.log(this.cartInfo);
+            },
+            (error) => {
+              console.log(error.error.message);
+            }
+          );
+          this.spinner.hide();
+        });
       }
     });
   }
@@ -138,7 +142,7 @@ export class CartComponent implements OnInit {
     // this.i = i;
 
     let data = {
-      "quantity": quantity + 1,
+      quantity: quantity + 1,
     };
 
     this.data.updateProductQuantityInCartPut(data, i).subscribe(
@@ -157,31 +161,11 @@ export class CartComponent implements OnInit {
             console.log(error.error.message);
           }
         );
-    
       },
       (error) => {
         console.log('product quantity add success :', error.error.message);
-      } 
+      }
     );
-
-    
-    // if (this.stock > 0) {
-    //   this.quantity[i] = this.quantity[i] + 1;
-    //   // this.quantity = this.quantity + 1;
-    //   this.stock = this.stock - 1;
-    //   console.log('array quantity from add method', this.quantity);
-
-    //   let j = this.quantity.length;
-    //   console.log('array length', this.quantity.length);
-    //   let subTotal1: number = 0;
-    //   for (let y = 0; y < j; y++) {
-    //     subTotal1 =
-    //       subTotal1 +
-    //       this.quantity[y] * this.cartData.product_details[y].product_cost;
-    //     this.subTotal = subTotal1;
-    //     console.log('subtotal', this.subTotal);
-    //   }
-    // }
   }
 
   /**
@@ -193,115 +177,46 @@ export class CartComponent implements OnInit {
     console.log(quantity);
 
     let data = {
-      "quantity": quantity - 1,
+      quantity: quantity - 1,
     };
 
     this.data.updateProductQuantityInCartPut(data, i).subscribe(
       (info) => {
         console.log('product quantity delete success :', info);
-        // this.cartInfo = info
-        // console.log(this.cartInfo);
+
         this.data.listProductsInCartGet().subscribe(
           (info) => {
             console.log('data :', info);
             this.cartInfo = info;
             console.log(this.cartInfo);
-            // location.reload()
           },
           (error) => {
             console.log(error.error.message);
           }
         );
-    
       },
       (error) => {
         console.log('product quantity add success :', error.error.message);
       }
     );
-
-    // if (quantity > 1) {
-    //   console.log(
-    //     'before   this.quantity[i] = this.quantity[i] - 1;',
-    //     i,
-    //     this.quantity[i]
-    //   );
-    //   this.quantity[i] = this.quantity[i] - 1;
-    //   this.stock = this.stock + 1;
-
-    //   let j = this.quantity.length;
-    //   console.log('array length from upper remove', this.quantity.length);
-    //   let subTotal1: number = 0;
-    //   console.log('quantity array', this.quantity);
-    //   for (let y = 0; y < j; y++) {
-    //     console.log('p ', i, ':', this.quantity[i]);
-    //     subTotal1 =
-    //       subTotal1 +
-    //       this.quantity[y] * this.cartData.product_details[y].product_cost;
-    //     this.subTotal = subTotal1;
-    //     console.log('subtotal', this.subTotal);
-    //   }
-    // }
-    // // else{
-    //   if(this.quantity.length == 1){
-    //     console.log("length true");
-    //     this.subTotal = 0
-    //   }
-    //   console.log("array length before splicing",this.quantity.length);
-    //     console.log("quantity array before splicing",this.quantity);
-    //   this.quantity.splice(i,1);
-    //   console.log("array length after splicing",this.quantity.length);
-    //     console.log("quantity array after splicing",this.quantity);
-    //     this.cartData.product_details.splice(i, 1);
-    //     console.log("product json",this.cartData.product_details);
-    //     console.log("array length",this.quantity.length);
-    //     console.log("quantity array",this.quantity);
-    //   let j = this.quantity.length
-    //   let subTotal1:number = 0
-    //     for (let y = 0; y < j; y++) {
-    //       subTotal1 = subTotal1 + (this.quantity[y] * this.cartData.product_details[y].product_cost);
-    //       this.subTotal = subTotal1
-    //       console.log('subtotal', this.subTotal);
-    //     }
-    //     console.log('subtotal', this.subTotal);
-    // }
+  }
+  /**
+   * here dialog box will open on delete product click
+   * if user click remove then it will return true else false and from that basis it will make api call for delete cart product
+   * @param {string} name
+   * @param {*} img
+   * @param {string} i
+   * @memberof CartComponent
+   */
+  onDeleteClick(name: string, img: any, i: string) {
+    this.openDialog(name, img, i);
   }
 
-  onDeleteClick(name:string,img:any,i:string) {
-    this.openDialog(name,img,i);
-
-    // if (this.abcd == "true") {
-
-    //   if (this.quantity.length == 1) {
-    //     console.log('length true');
-    //     this.subTotal = 0;
-    //   }
-    //   console.log('array length before splicing', this.quantity.length);
-    //   console.log('quantity array before splicing', this.quantity);
-    //   this.quantity[i] = this.quantity[i];
-    //   this.quantity.splice(i, 1);
-    //   console.log('i inside delete click', i);
-    //   console.log('array quantity', this.quantity);
-    //   this.cartData.product_details.splice(i, 1);
-    //   console.log('product json', this.cartData.product_details);
-
-    //   // this.quantity = 0
-    //   console.log('array length', this.quantity.length);
-    //   let subTotal1: number = 0;
-    //   let j = this.quantity.length;
-    //   for (let y = 0; y < j; y++) {
-    //     subTotal1 =
-    //       subTotal1 +
-    //       this.quantity[y] * this.cartData.product_details[y].product_cost;
-    //     this.subTotal = subTotal1;
-    //     console.log('subtotal', this.subTotal);
-    //   }
-    //   console.log('subtotal', this.subTotal);
-
-    //   console.log('product json', this.cartData.product_details);
-    // }
-  }
-
-  checkout(){
+  /**
+   * navigate to checkout page
+   * @memberof CartComponent
+   */
+  checkout() {
     this.router.navigate(['/checkout']);
   }
 }

@@ -26,107 +26,92 @@ export class ChangePasswordComponent implements OnInit {
   public snackMsg: string;
   public passMatch: boolean = false;
 
-
-  // form: FormGroup = new FormGroup({
-  //   password: new FormControl(''),
-  //   new_password: new FormControl(''),
-  //   confirm_password: new FormControl(''),
-  // });
-
   constructor(
     private data: DataService,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private spinner: NgxSpinnerService 
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
-    // this.form = new FormGroup({
-    //   password: new FormControl('', [Validators.required]),
-    //   new_password: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(6),
-    //     Validators.maxLength(14),
-    //     Validators.pattern('[a-zA-Z0-9s]+'),
-    //   ]),
-    //   confirm_password: new FormControl('', [
-    //     Validators.required,
-    //     Validators.minLength(6),
-    //     Validators.maxLength(14),
-    //     Validators.pattern('[a-zA-Z0-9s]+'),
-    //   ]),
-    // });
-    this.match=''
+    this.match = '';
   }
 
+  // validation for old password input field
   password = new FormControl('', [
     Validators.required,
     Validators.pattern('^(?=.*[0-9])(?=.*[a-z A-Z]).{8,12}$'),
   ]);
 
+  // validation for new password input field
   newPassword = new FormControl('', [
     Validators.required,
     Validators.pattern('^(?=.*[0-9])(?=.*[a-z A-Z]).{8,12}$'),
   ]);
 
+  // validation for confirm password input field
   confirmPassword = new FormControl('', [
     Validators.required,
     Validators.pattern('^(?=.*[0-9])(?=.*[a-z A-Z]).{8,12}$'),
   ]);
-
+  /**
+   * checks new password and confirm password field
+   * @memberof ChangePasswordComponent
+   */
   passwordcheck() {
     if (this.newPassword.value == this.confirmPassword.value) {
-      console.log("no");
-      
+      console.log('no');
+
       this.match = '';
       // console.log('match');
       // return false
       this.passMatch = true;
     } else {
       console.log('match');
-      
+
       this.passMatch = false;
       this.match = 'password not matching';
       // console.log('not');
     }
   }
 
-  // public checkError = (controlName: string, errorName: string) => {
-  //   return this.form.controls[controlName].hasError(errorName);
-  // };
-
+  /**
+   * sends old password and new password to api as an object form
+   * @param {string} password
+   * @param {string} newPassword
+   * @memberof ChangePasswordComponent
+   */
   onSubmit(password: string, newPassword: string) {
-    console.log('password',password);
+    console.log('password', password);
     let token = localStorage.getItem('user.data.token');
     let formdata = {
       password: this.password.value,
       newPassword: this.newPassword.value,
     };
-    console.log("formdata",formdata); 
+    console.log('formdata', formdata);
     this.spinner.show();
     this.data.changePassword(formdata).subscribe(
       (res: any) => {
         console.log(res);
-        this.data.isProfile=true;
-      this.data.isChangePassword=false;
-      this.data.isAddress=false;
-      this.data.isOrder=false;
-      this.spinner.hide();
-    this.router.navigate(['/']).then(() =>{
-        this.snackMsg = "Password changed successfully"
-        this.openSnackBar()
-        }
-        );
+        this.data.isProfile = true;
+        this.data.isChangePassword = false;
+        this.data.isAddress = false;
+        this.data.isOrder = false;
+        this.spinner.hide();
+        this.router.navigate(['/']).then(() => {
+          this.snackMsg = 'Password changed successfully';
+          this.openSnackBar();
+        });
       },
       (error) => {
-        // alert('Invalid Password');
-        console.log('from catch',error.error.message);
-        this.snackMsg = error.error.message
-        this.openSnackBarError()
+        console.log('from catch', error.error.message);
+        this.snackMsg = error.error.message;
+        this.openSnackBarError();
       }
     );
   }
 
+  // if password changed successfully the this green snackbar will displayed
   openSnackBar() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'right',
@@ -136,6 +121,7 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
+  // if there is any error occur while changing password then red snackbar will displaed wwith the error message
   openSnackBarError() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'right',
@@ -144,14 +130,4 @@ export class ChangePasswordComponent implements OnInit {
       panelClass: ['redNoMatch'],
     });
   }
-
-  // passwordcheck() {
-  //   if (this.password == this.confirmPassword) {
-  //     this.match = '';
-  //     this.passMatch = true;
-  //   } else {
-  //     this.passMatch = false;
-  //     this.match = 'password not matching';
-  //   }
-  // }
 }

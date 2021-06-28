@@ -1,7 +1,10 @@
 <div class="container" style="text-align: center">
   <div class="row">
     <div class="col">
+      <!-- product name -->
       <h2>Rate "{{ data.name }}"</h2>
+
+      <!-- product image -->
       <img class="img" src="{{ data.img }}" alt="" />
     </div>
   </div>
@@ -9,6 +12,7 @@
   <div class="row m-2 p-2">
     <div class="col">
       <div style="text-align: center">
+        <!-- start rating for product -->
         <star-rating
           [value]="5"
           [totalstars]="5"
@@ -23,12 +27,10 @@
   </div>
   <div class="row" style="text-align: center">
     <div class="col" style="text-align: center">
-      <!-- <div mat-dialog-actions style="text-align: center"> -->
-        <button class="m-2" mat-button [mat-dialog-close] >Cancel</button>
-        <button class="m-2" mat-raised-button color="primary" [mat-dialog-close] >
-          Submit
-        </button>
-      <!-- </div> -->
+      <button class="m-2" mat-button [mat-dialog-close]>Cancel</button>
+      <button class="m-2" mat-raised-button color="primary" [mat-dialog-close]>
+        Submit
+      </button>
     </div>
   </div>
 </div>

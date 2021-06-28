@@ -1,53 +1,64 @@
 <div class="container">
   <mat-card class="my-5">
-    <!--  -->
-    <!-- <div *ngIf="_id == item.id; else elseBlock"> -->
     <div class="row">
-      <div class="col-lg-5 offset-lg-1  col-sm-* mb-4 textCenter">
-        <!-- <pinch-zoom> -->
-          <img src="{{ mainImage }}" class="oopsImg " redZoom="{{mainImage}}" redZoomClass="red-zoom--style--overlay"/>
-        <!-- </pinch-zoom> -->
+      <div class="col-lg-5 offset-lg-1 col-sm-* mb-4 textCenter">
+        <!-- main image of product with zoom in on hover functionality-->
+        <img
+          src="{{ mainImage }}"
+          class="oopsImg"
+          redZoom="{{ mainImage }}"
+          redZoomClass="red-zoom--style--overlay"
+        />
         <br />
-        <!-- <lib-ngx-image-zoom
-                [thumbImage]=item.product_image
-                [fullImage]=item.product_image
-                zoomMode="hover"> 
-                <img src= {{item.product_image}}  class="img-fluid">
-                </lib-ngx-image-zoom> -->
-                <div class="row textCenter">
-                  <div class="col">
-                    <mat-button-toggle-group color="primary textCenter" #group="matButtonToggleGroup">
-                      <mat-button-toggle color="primary" value="center" aria-label="Text align center">
-                        <div class="col py-3 ">
-                          <img
-                            src="{{ productDetail.mainImage }}"
-                            class="thumbnailImg"
-                            alt=""
-                            (click)="onMainImgClick()"
-                          />
-                        </div>
-                      </mat-button-toggle>
-                      <mat-button-toggle class="py-3 px-2" value="right" aria-label="Text align right" *ngFor="let image of productDetail?.subImages; let i = index">
-                        <img
-                          src="{{ image }}"
-                          class="thumbnailImg"
-                          id="{{ i }}"
-                          alt=""
-                          (click)="onImgClick(i)"
-                        />
-                      </mat-button-toggle>
-                    </mat-button-toggle-group>
-                  </div>
 
+        <!-- thumbnail images of product -->
+        <div class="row textCenter">
+          <div class="col">
+            <mat-button-toggle-group
+              color="primary textCenter"
+              #group="matButtonToggleGroup"
+            >
+              <mat-button-toggle
+                color="primary"
+                value="center"
+                aria-label="Text align center"
+              >
+                <div class="col py-3">
+                  <img
+                    src="{{ productDetail.mainImage }}"
+                    class="thumbnailImg"
+                    alt=""
+                    (click)="onMainImgClick()"
+                  />
                 </div>
+              </mat-button-toggle>
+              <mat-button-toggle
+                class="py-3 px-2"
+                value="right"
+                aria-label="Text align right"
+                *ngFor="let image of productDetail?.subImages; let i = index"
+              >
+                <img
+                  src="{{ image }}"
+                  class="thumbnailImg"
+                  id="{{ i }}"
+                  alt=""
+                  (click)="onImgClick(i)"
+                />
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </div>
       </div>
 
-      <div class="col-lg-4 offset-lg-1  col-sm-*">
+      <div class="col-lg-4 offset-lg-1 col-sm-*">
+        <!-- product name -->
         <h1 class="col offset-sm-5 headFont">
           <b> {{ productDetail?.name }} </b>
         </h1>
 
         <div class="col offset-sm-0">
+          <!-- avberage product rating -->
           <star-rating
             [value]="productDetail?.avgRating"
             checkedcolor="#ffcc00"
@@ -64,9 +75,10 @@
           <div>
             <div class="mb-2">
               <span>Color: &nbsp;</span>
+              <!-- product color name -->
               <button
                 mat-button
-                [style.background-color]="productDetail?.color?.name "
+                [style.background-color]="productDetail?.color?.name"
                 disabled
                 title="{{ productDetail?.color?.name }}"
               >
@@ -74,6 +86,7 @@
               </button>
             </div>
             <div class="mb-2">
+              <!-- social media share buttons -->
               <span> Share:</span>
               <button mat-button style="background: none">
                 <mat-icon>share</mat-icon>
@@ -132,6 +145,7 @@
         </div>
         <div class="row">
           <div class="col center">
+            <!-- add to cart button if product add successfully then green snackbar will display or if any error occur then red snack bar will be display  -->
             <button
               class="addToCartButton"
               (click)="addToCart(productDetail.id)"
@@ -139,6 +153,8 @@
             >
               Add to Cart</button
             >&nbsp;
+
+            <!-- rate to product by user give star rating -->
             <button
               class="rateProductButton"
               mat-raised-button
@@ -158,6 +174,7 @@
       mat-align-tabs="center"
       backgroundColor="accent"
     >
+      <!-- product description -->
       <mat-tab label="Description">
         <div class="example-small-box mat-elevation-z4 m-1 p-2">
           <ul>
@@ -167,6 +184,8 @@
           </ul>
         </div>
       </mat-tab>
+
+      <!-- features of product -->
       <mat-tab label="Features">
         <div class="example-large-box mat-elevation-z4 center m-1 p-2">
           <table class="table table-bordered">

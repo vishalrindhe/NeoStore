@@ -2,10 +2,13 @@
   <h1 class="text p-3">Address</h1>
 </div>
 <div class="col-3">
+  <!-- button for add address dialog box -->
   <button mat-stroked-button (click)="openDialog2()">
     <mat-icon>add</mat-icon>Add
   </button>
 </div>
+
+<!-- display all addresses from api call  -->
 <div class="row m-3" *ngFor="let address of addresses; let i = index">
   <mat-card>
     <div class="row">
@@ -31,6 +34,7 @@
           </div>
         </div>
 
+        <!-- button for edit address dialog box -->
         <button
           mat-stroked-button
           (click)="
@@ -48,7 +52,7 @@
         </button>
       </div>
       <div class="col-3">
-        <!-- (click)="del_address(address._id)" -->
+        <!-- button for delete address dialog box -->
         <button
           mat-stroked-button
           (click)="

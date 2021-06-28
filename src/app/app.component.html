@@ -30,7 +30,6 @@
           <mat-icon matPrefix (click)="abc(input.value)" style="cursor: pointer"
             >search</mat-icon
           >
-          <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>
         <a (click)="onCartClick()" mat-button
           ><mat-icon matBadge="{{ cartValue }}" matBadgeColor="warn"
@@ -185,10 +184,9 @@
 
     <!-- whatever content will display on page will come inside this mat-sidenav-content -->
     <mat-sidenav-content fxFlexFill>
-      <!-- carousel component -->
-      <!-- <app-carousel></app-carousel> -->
-      <!-- <br> -->
+      <!-- router outlet will allow all routing  -->
       <router-outlet></router-outlet>
+
       <ngx-spinner
         bdColor="rgba(0, 0, 0, 0.8)"
         size="medium"
@@ -197,13 +195,9 @@
         [fullScreen]="true"
         ><p style="color: white">Loading...</p></ngx-spinner
       >
-
-      <!-- product card component -->
-      <!-- <app-homepage-card></app-homepage-card> -->
-
-      <!-- footer -->
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <!-- <app-footer></app-footer> -->
 </div>
+
+<!-- footer -->
 <app-footer></app-footer>

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { CheckingService } from 'src/assets/services/checking.service';
 import { DataService } from 'src/assets/services/data.service';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -32,21 +32,18 @@ export class AppComponent {
     private router: Router,
     private data: DataService,
     private http: HttpClient,
-    private spinner: NgxSpinnerService  ) {}
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     console.log('firstname: ', localStorage.getItem('firstName'));
-    this.spinner.show();
 
-    // this.data.listProductsInCartGet().subscribe((info) => {
-    //   this.data.cartValue = info?.data?.products?.length;
-    //   // this.cartValue = this.data.cartValues
-    //   this.cartValue! = info.data.products.length;
-    //   console.log(this.cartValue);
-    // })
+    // start loader
+    this.spinner.show();
 
     console.log('token form dashboard', this.token);
 
+    //
     this.b = setInterval(() => {
       this.initData();
     }, 1000);
@@ -64,24 +61,19 @@ export class AppComponent {
     this.spinner.hide();
   }
 
+  /**
+   * api call for length of products in cart
+   * @memberof AppComponent
+   */
   initData() {
-    // this.spinner.show();
-
     this.data.listProductsInCartGet().subscribe((info) => {
       this.data.cartValue = info?.data.products.length;
-      // this.cartValue = this.data.cartValues
       this.cartValue! = info?.data.products.length;
-      // console.log(this.cartValue);
-      // this.token = localStorage.getItem('token')
-      // console.log("this.token",this.token);
-      this.spinner.hide();
 
+      this.spinner.hide();
     });
   }
 
-  // public count = this.cartCount.getCartCount();
-
-  // console the text inside entered in search bar
   abc(input: string) {
     console.log('msg in search bar', input);
   }
@@ -92,56 +84,44 @@ export class AppComponent {
    * @memberof DashboardComponent
    */
   signOut() {
-    // this.service.signOut();
     localStorage.clear();
-    // this.router.navigate(['/dashboard']);
     location.reload();
   }
 
   // if user is logged in then only it will navigate to product page
   onProductClick() {
-    // if(this.service.item){
     this.router.navigate(['/products']);
-    // }
   }
 
   // if user is logged in then only it will navigate to order page
   onOrderClick() {
-    // if(this.service.item){
     this.data.isProfile = false;
     this.data.isChangePassword = false;
     this.data.isAddress = false;
     this.data.isOrder = true;
     this.router.navigate(['/my-account']);
-    // }
   }
 
   onCartClick() {
-    // if(this.service.item){
     this.router.navigate(['/cart']);
-    //  }
   }
 
   signIn() {
-    // if(this.service.item){
     this.router.navigate(['/login']);
-    //  }
   }
-/**
- * change values of varibale from dataService; so order page in switch case of myAccount page will selected and navigate to myaccount page
- * @memberof AppComponent
- */
-onProfileClick() {
-    // if(this.service.item){
+  /**
+   * change values of varibale from dataService; so order page in switch case of myAccount page will selected and navigate to myaccount page
+   * @memberof AppComponent
+   */
+  onProfileClick() {
     this.data.isProfile = true;
     this.data.isChangePassword = false;
     this.data.isAddress = false;
     this.data.isOrder = false;
     this.router.navigate(['/my-account']);
-    //  }
   }
 
-  onHomeClick(){
+  onHomeClick() {
     this.router.navigate(['/dashboard']);
   }
 }

@@ -23,10 +23,9 @@ export class RegistrationComponent implements OnInit {
   constructor(private router: Router, private data: DataService) {}
 
   ngOnInit(): void {
-    this.match = ''
+    this.match = '';
   }
 
-  
   // validator for first name
   public name = new FormControl('', [
     Validators.required,
@@ -53,10 +52,6 @@ export class RegistrationComponent implements OnInit {
     if (this.lastName.hasError('required')) {
       return 'You must enter a value';
     }
-
-    // else if (this.lastName.hasError('minLength')){
-    //   return 'Name must have minimum 3 alphabets';
-    // }
 
     return this.lastName.hasError('lastName')
       ? 'Must include only alphabets'
@@ -98,24 +93,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   //  validator for confirm password
-  public confirmPassword = new FormControl('', [
-    Validators.required,
-    // , Validators.pattern('^(?=.*[0-9])(?=.*[a-z A-Z]).{8,12}$')
-  ]);
+  public confirmPassword = new FormControl('', [Validators.required]);
 
   getErrorMessageForConfirmPassword() {
     if (this.confirmPassword.hasError('required')) {
       return 'You must enter a value';
     } else return;
-
-    //  if(this.pass != this.confirmPass){
-    //     return 'Password does not matched';
-    //   }
   }
-
-  
-
-  //  return this.password.hasError('confirmPassword') ? '' : 'Password does not matched';
 
   // validator for phone
   public phone = new FormControl('', [
@@ -172,28 +156,33 @@ export class RegistrationComponent implements OnInit {
   passwordcheck() {
     if (this.password.value == this.confirmPassword.value) {
       this.match = '';
-      // console.log('match');
-      // return false
+
       this.passMatch = true;
     } else {
       this.passMatch = false;
       this.match = 'password not matching';
-      // console.log('not');
     }
   }
-
-
-  // passwordcheck() {
-  //   if (this.form.value.password == this.form.value.confirm_password) {
-  //   this.match = '';
-  //   // return false
-  //   this.pass_match = true;
-  //   } else {
-  //   this.pass_match = false;
-  //   this.match = 'password not matching';
-  //   }
-  //   }
-  registration(name: any,lastName: any,email: any,phone: any,gender: any,password: any,confirmPassword: any) {
+  /**
+   * registration function will accept below parameters and if registration is successful then it will redirect to login page
+   * @param {*} name
+   * @param {*} lastName
+   * @param {*} email
+   * @param {*} phone
+   * @param {*} gender
+   * @param {*} password
+   * @param {*} confirmPassword
+   * @memberof RegistrationComponent
+   */
+  registration(
+    name: any,
+    lastName: any,
+    email: any,
+    phone: any,
+    gender: any,
+    password: any,
+    confirmPassword: any
+  ) {
     let reg = {
       firstName: name,
       lastName: lastName,
@@ -201,17 +190,21 @@ export class RegistrationComponent implements OnInit {
       mobile: phone,
       gender: gender,
       password: password,
-      confirm_password: confirmPassword
-  }
+      confirm_password: confirmPassword,
+    };
 
-  this.data.registrationPost(reg).subscribe((info) =>{
-    console.log("data :",info);
-    this.router.navigate(['/login']);
-    },(error) => {
-      let msg
-      msg = error
-      console.log(error);
-      alert(msg.error.message)
-    })
+    // if api call from registration is successful then it will redirect to login page
+    this.data.registrationPost(reg).subscribe(
+      (info) => {
+        console.log('data :', info);
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        let msg;
+        msg = error;
+        console.log(error);
+        alert(msg.error.message);
+      }
+    );
   }
 }

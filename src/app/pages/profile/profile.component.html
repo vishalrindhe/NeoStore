@@ -1,58 +1,51 @@
 <div class="container" style="align-items: center">
   <div class="row">
-      <!-- <span class="col-* textCenter headFont">My Acount</span> -->
-      <!-- <div class="col-sm-12 col-lg-5  mt-5 ">
-        <mat-card class="example-card textCenter"> 
-          <img class="profilePic mb-2" src={{userData.customer_proile.profile_img}}><br>
-          <mat-label class="nameFont m-3"> {{userData.customer_proile.first_name}}&nbsp;{{userData.customer_proile.last_name}} </mat-label><br>
-          <button class="button m-1" mat-stroked-button color="basic" (click)="onOrderClick()" ><mat-icon>data_usage</mat-icon>Order</button><br>
-          <button class="button m-1" mat-stroked-button color="basic" (click)="onProfileClick()"><mat-icon>person</mat-icon>Profile</button><br>
-          <button class="button m-1" mat-stroked-button color="basic" (click)="onAddressClick()"><mat-icon>format_align_justify</mat-icon>Address</button><br>
-          <button class="button m-1" mat-stroked-button color="basic" (click)="onChangePasswordClick()"><mat-icon>transform</mat-icon>Change Password</button><br>
-
-      </mat-card>
-      </div> -->
     <div class="col-sm-12 col-lg-12">
-        <mat-card class="example-card"> 
-            <div class="profileHeading p-2">
-                <h1 class="textCenter">Profile</h1>
-            </div>
-            <hr>
-            <table class="table">
-              <tbody>
-                  <tr>
-                    <td class="boldFont">First Name</td>
-                    <td>{{userData.firstName| titlecase}}</td>
-                  </tr>
-                  <tr>
-                    <td class="boldFont">Last Name</td>
-                    <td>{{userData.lastName | titlecase}}</td>
-                  </tr>
-                  <tr>
-                    <td class="boldFont">Gender</td>
-                    <td>{{userData.gender}}</td>
-                  </tr>
-                  <!-- <tr>
+      <mat-card class="example-card">
+        <div class="profileHeading p-2">
+          <h1 class="textCenter">Profile</h1>
+        </div>
+        <hr />
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="boldFont">First Name</td>
+              <!-- diplay firstName -->
+              <td>{{ userData.firstName | titlecase }}</td>
+            </tr>
+            <tr>
+              <td class="boldFont">Last Name</td>
+              <!-- display Last name -->
+              <td>{{ userData.lastName | titlecase }}</td>
+            </tr>
+            <tr>
+              <td class="boldFont">Gender</td>
+              <!-- display gender -->
+              <td>{{ userData.gender }}</td>
+            </tr>
+            <!-- <tr>
                     <td class="boldFont">Date Of Birth</td>
                     <td>{{userData.customer_proile.dob | date}}</td>
                   </tr> -->
-                  <tr>
-                    <td class="boldFont">Email</td>
-                    <td>{{userData.email}}</td>
-                  </tr>
-                  <tr>
-                    <td class="boldFont">Phone</td>
-                    <td>{{userData.mobile}}</td>
-                  </tr>
-              </tbody>
-            </table>
+            <tr>
+              <td class="boldFont">Email</td>
+              <!-- display email -->
+              <td>{{ userData.email }}</td>
+            </tr>
+            <tr>
+              <td class="boldFont">Phone</td>
+              <!-- display phone number -->
+              <td>{{ userData.mobile }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <hr>
-
-        <button mat-stroked-button (click)="openDialog()"><mat-icon>edit</mat-icon>Edit</button>
-              
-              
+        <hr />
+        <!-- dialog box for edit profile details -->
+        <button mat-stroked-button (click)="openDialog()">
+          <mat-icon>edit</mat-icon>Edit
+        </button>
       </mat-card>
-      </div>
+    </div>
   </div>
 </div>

@@ -4,14 +4,16 @@ import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+  /**
+   * input field for email validation
+   * @memberof FooterComponent
+   */
   public email = new FormControl('', [
     Validators.required,
     Validators.pattern(
@@ -19,6 +21,11 @@ export class FooterComponent implements OnInit {
     ),
   ]);
 
+  /**
+   * email validation error
+   * @return {*}
+   * @memberof FooterComponent
+   */
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';

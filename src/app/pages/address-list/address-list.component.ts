@@ -32,40 +32,57 @@ export class AddressListComponent implements OnInit {
   country: any;
   id: string = '';
   public addresses: any = [];
-  constructor(public dialog: MatDialog, private data: DataService,private spinner: NgxSpinnerService ) {}
+  constructor(
+    public dialog: MatDialog,
+    private data: DataService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.receivedata();
   }
 
   receivedata() {
+    // start loader
     this.spinner.show();
+
+    // api call for get lists of address of particular user
+    // after successful call it subscribe address list data into "address_list" local variable
     this.data.listAdress().subscribe((data) => {
       this.address_list = data;
       console.log(this.address_list.data.address);
       this.addresses = this.address_list.data.address;
+
+      // stop loader
       this.spinner.hide();
     });
-    // this.address_list = this.address_service.senddata();
   }
 
-  // sendindex(i:number){
-
-  // }
-
+  /**
+   * takes address _id as input and make api call for delete address
+   * @param {string} id
+   * @memberof AddressListComponent
+   */
   del_address(id: string) {
     this.data.deleteAddress(id).subscribe((data) => {
       console.log(data);
+
+      // function calling for address list api
       this.receivedata();
     });
   }
 
-  // edit_address(i:number){
-  //   this.address_service.editItem(i);
-  // }
-  // onclick(addressLine:string , city:string , pincode:number ,state:string , country:string ,id:string){
-
-  // }
+  /**
+   * this is to open dialog box for change address
+   * after closing dialog box it again call recievedata() to load and get change address details
+   * @param {string} addressLine
+   * @param {string} city
+   * @param {number} pincode
+   * @param {string} state
+   * @param {string} country
+   * @param {string} id
+   * @memberof AddressListComponent
+   */
   openDialog(
     addressLine: string,
     city: string,
@@ -88,9 +105,13 @@ export class AddressListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.receivedata();
     });
-    // this.sendindex(i);
   }
-
+  /**
+   * this is to open dialog box for add address
+   * after closing dialog box it again call recievedata() to load and get changed addresses
+   *
+   * @memberof AddressListComponent
+   */
   openDialog2(): void {
     const dialogRef = this.dialog.open(AddAddressComponent, {
       width: '60vh',
@@ -105,8 +126,21 @@ export class AddressListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.receivedata();
     });
-    // this.sendindex(i);
   }
+
+  /**
+   * this is to open dialog box for delete address
+   * It just pass address id to for api call as an object
+   * after closing dialog box it again call recievedata() with timer of 3 sec to load and get change address details
+   *
+   * @param {string} addressLine
+   * @param {string} city
+   * @param {number} pincode
+   * @param {string} state
+   * @param {string} country
+   * @param {string} id
+   * @memberof AddressListComponent
+   */
   openDialogForDelete(
     addressLine: string,
     city: string,
@@ -126,6 +160,8 @@ export class AddressListComponent implements OnInit {
         id: id,
       },
     });
+
+    // after closing dialog box of delete address
     dialogRef.afterClosed().subscribe((result) => {
       this.data.listAdress().subscribe((data) => {
         this.address_list = data;
@@ -143,6 +179,5 @@ export class AddressListComponent implements OnInit {
     console.log('2');
 
     this.receivedata();
-    // this.sendindex(i);
   }
 }

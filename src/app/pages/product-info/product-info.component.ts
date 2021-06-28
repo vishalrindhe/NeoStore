@@ -37,19 +37,20 @@ export class ProductInfoComponent implements OnInit {
     private activatedrouter: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private http: HttpClient,
-    private spinner: NgxSpinnerService 
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
-  
-    
-    // this.ngxLoader.start();
-    // setti
+    // start loader
     this.spinner.show();
+
+    // display all product list
     this.data.listProductsGet().subscribe((info) => {
       console.log(info);
       this.productInfo = info;
       console.log('productInfo: ', this.productInfo);
+
+      // here we are getting product info of particular product whose product id is at url
       for (let i of this.productInfo.data.docs) {
         if (this._id == i.id) {
           this.productDetail = i;
@@ -58,6 +59,8 @@ export class ProductInfoComponent implements OnInit {
           this.avgRating = i.avgRating;
         }
       }
+
+      // stop loader
       this.spinner.hide();
       // this.ngxLoader.stop();
     });
@@ -89,6 +92,11 @@ export class ProductInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * add product to cart
+   * @param {string} productId
+   * @memberof ProductInfoComponent
+   */
   addToCart(productId: string) {
     let data = {
       productId: productId,
@@ -112,6 +120,10 @@ export class ProductInfoComponent implements OnInit {
     );
   }
 
+  /**
+   * if product added to cart then display green snack bar
+   * @memberof ProductInfoComponent
+   */
   openSnackBar() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'right',
@@ -121,6 +133,10 @@ export class ProductInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * if product not added to cart then display red snack bar
+   * @memberof ProductInfoComponent
+   */
   openSnackBarError() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'right',
@@ -129,13 +145,20 @@ export class ProductInfoComponent implements OnInit {
       panelClass: ['redNoMatch'],
     });
   }
-
+  /**
+   * on click of thumbnail image of mainImage display it to big view
+   * @memberof ProductInfoComponent
+   */
   onMainImgClick() {
     this.mainImage = this.productDetail.mainImage;
   }
-
+  /**
+   * image id will came to this function and by that image id pass respective image to that mainImage variable
+   * image will pass to mainImage var of onClick of thumbnail images
+   * @param {*} id
+   * @memberof ProductInfoComponent
+   */
   onImgClick(id: any) {
-    // for(let i=0; i< this.productDetail.data.docs.subImages; i++){
     let j = 0;
     for (let i of this.productDetail.subImages) {
       if (j == id) {
@@ -146,7 +169,5 @@ export class ProductInfoComponent implements OnInit {
       }
       j++;
     }
-    // this.src = id
-    // console.log(id);
   }
 }

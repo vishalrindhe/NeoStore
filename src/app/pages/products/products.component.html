@@ -1,10 +1,11 @@
-
 <div class="m-5">
   <div class="row">
     <div class="col-sm-12 col-lg-3">
       <div class="row">
         <div class="col">
-          <span class="headFont m-2 pointer" (click)="allProduct()">All Products</span>
+          <span class="headFont m-2 pointer" (click)="allProduct()"
+            >All Products</span
+          >
         </div>
       </div>
       <div class="row">
@@ -14,10 +15,14 @@
               <mat-expansion-panel-header>
                 <mat-panel-title> Categories </mat-panel-title>
               </mat-expansion-panel-header>
-
+              <!-- diplay categories of products from api call -->
+              <!-- filter it by onclick by passing category id to api  -->
               <div *ngFor="let subtask of cat?.data; let i = index">
                 <!-- <form #myForm="ngForm"> -->
-                <p class="m-2 p-1 pointer" (click)="onCategoryClicked(subtask._id)">
+                <p
+                  class="m-2 p-1 pointer"
+                  (click)="onCategoryClicked(subtask._id)"
+                >
                   {{ subtask.name }}
                 </p>
                 <!-- </form> -->
@@ -33,15 +38,25 @@
                 <mat-panel-title> Color </mat-panel-title>
               </mat-expansion-panel-header>
               <div class="row">
-                <div class="col-4" *ngFor="let subtask of color?.data; let i = index">
-                 
-                  <div class="my-2 pointer" [style.background-color]="subtask?.name " style="width: 6vh; height: 6vh; border-style: solid ;border-width: 1px;" (click)="onColorClicked(subtask._id)"></div>
-                 
+                <!-- diplay colors of products from api call -->
+                <!-- filter it by onclick by passing color id to api  -->
+                <div
+                  class="col-4"
+                  *ngFor="let subtask of color?.data; let i = index"
+                >
+                  <div
+                    class="my-2 pointer"
+                    [style.background-color]="subtask?.name"
+                    style="
+                      width: 6vh;
+                      height: 6vh;
+                      border-style: solid;
+                      border-width: 1px;
+                    "
+                    (click)="onColorClicked(subtask._id)"
+                  ></div>
                 </div>
               </div>
-
-
-              <!-- <button mat-raised-button (click)="applyColor()">Apply</button> -->
             </mat-expansion-panel>
           </mat-accordion>
         </div>
@@ -50,24 +65,24 @@
     <div class="col-lg-9 col-sm-12">
       <div class="row m-4">
         <div style="text-align: end">
-          <!-- <div class="col" > -->
-
+          <!-- sorting by highest rating -->
           <span class="m-2 pointer" (click)="onRatingSortDesc()"
             ><i class="far fa-star" style="font-size: 4vh"></i>
           </span>
+          <!-- sorting by ascending order of price  -->
           <span class="m-2 pointer" (click)="onPriceSortAsc()"
             ><i class="fas fa-sort-amount-up-alt" style="font-size: 4vh"></i>
           </span>
+          <!-- sorting by descending order of price  -->
           <span class="m-2 pointer" (click)="onPriceSortDesc()"
             ><i class="fas fa-sort-amount-down-alt" style="font-size: 4vh"></i>
           </span>
-
-          <!-- </div> -->
         </div>
       </div>
 
-      <!-- <app-homepage-card></app-homepage-card> -->
       <div class="row">
+        <!-- display alll products  -->
+        <!-- pass array to pagination and display number of products you want to display  -->
         <div
           class="col-sm-6 col-lg-4 mb-4 card-margin"
           *ngFor="
@@ -79,6 +94,7 @@
               | filterColor: colorCategory:'Color_id':'color_name'
               | sort:['product_cost'] -->
           <mat-card class="example-card">
+            <!-- product image -->
             <img
               height="150vh"
               mat-card-image
@@ -87,6 +103,7 @@
               (click)="onCardClick(product.id)"
             />
             <mat-card-content>
+              <!-- product name -->
               <h2
                 class="box"
                 style="text-align: center"
@@ -95,6 +112,7 @@
                 {{ product.name }}
               </h2>
 
+              <!-- product avg rating -->
               <div style="text-align: center">
                 <star-rating
                   [value]="product.avgRating"
@@ -103,6 +121,7 @@
                   size="24px"
                   [readonly]="true"
                 ></star-rating>
+                <!-- product price -->
                 <h3 style="text-align: center">&#8377; {{ product.price }}</h3>
                 <button
                   mat-raised-button
@@ -118,6 +137,8 @@
           </mat-card>
         </div>
       </div>
+
+      <!-- pagination bar at bottom -->
       <pagination-controls
         class="textCenter"
         (pageChange)="p = $event"

@@ -122,27 +122,12 @@
             >
             <mat-error *ngIf="confirmPassword.invalid">{{
               getErrorMessageForConfirmPassword()
-            }}</mat-error>
-            <!-- <mat-error *ngIf="confirmPassword.valid">Abc</mat-error> -->
-            <!-- <mat-error>{{passwordcheck()}}{{match}}</mat-error> -->
-
-            <!-- <mat-error *ngIf="!(password1.value == confirmPassword1.value)">abc</mat-error> -->
-            <!-- <mat-error>{{ match ? "abc":"xyz" }}</mat-error> --> </mat-form-field
+            }}</mat-error> </mat-form-field
           ><br />
           <span *ngIf="match !== ''">
             <small class="" style="color: red">{{ match }}</small
             ><br />
           </span>
-
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Confirm Password" formControlName="confirm_password">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            
-            <mat-error>{{passwordcheck()}}{{match}}</mat-error>
-            </mat-form-field> -->
 
           <!-- phone field -->
           <mat-form-field>
@@ -162,14 +147,13 @@
           ><br />
 
           <!-- radio buttons for gender -->
-          <!-- <mat-label><span>Gender</span></mat-label> -->
           <mat-radio-group aria-label="Gender" [formControl]="gender">
             <mat-radio-button value="male" checked>Male</mat-radio-button>
             <mat-radio-button value="female">Female</mat-radio-button>
-            <!-- <mat-error *ngIf="gender.invalid">{{getErrorMessageForGender()}}</mat-error> -->
           </mat-radio-group>
           <br />
 
+          <!-- registration page sends 6 parameter to registration method -->
           <button
             mat-raised-button
             color="primary"

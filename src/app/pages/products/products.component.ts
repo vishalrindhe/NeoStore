@@ -11,7 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DataService } from 'src/assets/services/data.service';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface Dessert {
   calories: number;
@@ -69,29 +69,25 @@ export class ProductsComponent implements OnInit {
   public category = Array();
   public categoryColor1 = Array();
   public categoryColor = Array();
-  public cat:any
-  public color:any
+  public cat: any;
+  public color: any;
   checkBoxInstance: any;
-  public snackMsg:string
+  public snackMsg: string;
   public a: any[] = ['a', 'b', 'c', 'd', 'e'];
   ngOnInit() {
-    // console.log(this.productList);
     this.dataSource.sort = this.sort;
-    // console.log(this.data.token);
 
-    this.data.listAllCategoryGet().subscribe(
-      (info) =>{
-        this.cat = info
+    // api call for all category
+    this.data.listAllCategoryGet().subscribe((info) => {
+      this.cat = info;
+    });
 
-      }
-    )
+    // api call for all colors
+    this.data.listAllColorGet().subscribe((info) => {
+      this.color = info;
+    });
 
-    this.data.listAllColorGet().subscribe(
-      (info) =>{
-        this.color = info
-      }
-    )
-
+    // api call for products in cart
     this.data.listProductsInCartGet().subscribe(
       (info) => {
         console.log('cart data :', info);
@@ -100,13 +96,10 @@ export class ProductsComponent implements OnInit {
         let msg;
         msg = error;
         console.log(error);
-        // alert(msg.error.message);
       }
     );
 
-    // here we are pushing color and category of product in its respective array
-    this.allProduct()
-  
+    this.allProduct();
   }
 
   constructor(
@@ -114,7 +107,7 @@ export class ProductsComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    private spinner: NgxSpinnerService 
+    private spinner: NgxSpinnerService
   ) {
     for (let i = 1; i <= 10; i++) {
       this.collection.push(`item ${i}`);
@@ -125,7 +118,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  allProduct(){
+  allProduct() {
     this.spinner.show();
     this.data.listProductsGet().subscribe((info) => {
       this.productList = info;
@@ -151,54 +144,70 @@ export class ProductsComponent implements OnInit {
       console.log(this.categoryColor);
       console.log(this.productList.data.docs);
       this.spinner.hide();
-
     });
   }
-
+  /**
+   * api call for sorting products by ascending price
+   * @memberof ProductsComponent
+   */
   onPriceSortAsc() {
+    // start loader
     this.spinner.show();
     this.data.sortByPriceAscGet().subscribe((info) => {
       this.productList = info;
+
+      // stop loader
       this.spinner.hide();
-      this.p =1
+      this.p = 1;
     });
   }
 
+  /**
+   * api call for sorting products by descending price
+   * @memberof ProductsComponent
+   */
   onPriceSortDesc() {
+    // strat loader
     this.spinner.show();
     this.data.sortByPriceDescGet().subscribe((info) => {
       this.productList = info;
+
+      // stop loader
       this.spinner.hide();
-      this.p =1
+      this.p = 1;
     });
   }
 
-  // onRatingSortAsc() {
-  //   this.data.sortByRatingAscGet().subscribe((info) => {
-  //     this.productList = info;
-  //   });
-  // }
-
+  /**
+   * api call for sorting rating by descending price
+   * @memberof ProductsComponent
+   */
   onRatingSortDesc() {
+    // start loader
     this.spinner.show();
     this.data.sortByRatingDescGet().subscribe((info) => {
       this.productList = info;
+
+      // stop loader
       this.spinner.hide();
-      this.p =1
+      this.p = 1;
     });
   }
 
-  onCategoryClicked(id:any) {
-
+  /**
+   * it make api call for filter out products with respective category
+   * pass category id to api
+   * @param {*} id
+   * @memberof ProductsComponent
+   */
+  onCategoryClicked(id: any) {
     this.spinner.show();
     this.data.listCategoryGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;
         this.spinner.hide();
-        this.p =1
-
-        // this.router.navigate(['/login']);
+        this.p = 1;
       },
       (error) => {
         let msg;
@@ -209,16 +218,19 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  onColorClicked(id:any) {
+  /**
+   * it make api call for filter out products with respective color
+   * @param {*} id
+   * @memberof ProductsComponent
+   */
+  onColorClicked(id: any) {
     this.spinner.show();
     this.data.listColorGet(id).subscribe(
       (info) => {
         console.log('data :', info);
         this.productList = info;
-        // this.router.navigate(['/login']);
         this.spinner.hide();
-        this.p =1
-
+        this.p = 1;
       },
       (error) => {
         let msg;
@@ -228,7 +240,11 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
-
+  /**
+   * add product to cart and display grren snack bar if added
+   * @param {string} productId
+   * @memberof ProductsComponent
+   */
   addToCart(productId: string) {
     let data = {
       productId: productId,
@@ -239,36 +255,43 @@ export class ProductsComponent implements OnInit {
     this.data.addProductsInCartPost(data).subscribe(
       (info) => {
         console.log('data :', info);
-        this.snackMsg = "Product Added"
-        this.openSnackBar()
+        this.snackMsg = 'Product Added';
+        this.openSnackBar();
       },
       (error) => {
         let msg;
         msg = error;
-        this.snackMsg = error.error.message
-        this.openSnackBarError()
+        this.snackMsg = error.error.message;
+        this.openSnackBarError();
         console.log(error.error.message);
       }
     );
   }
 
+  /**
+   * green snack bar for successful product addition
+   * @memberof ProductsComponent
+   */
   openSnackBar() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
       duration: 5000,
-      panelClass:['greenYesMatch']
-
+      panelClass: ['greenYesMatch'],
     });
   }
 
+  /**
+   * red snack bar for fail product addition
+   * @memberof ProductsComponent
+   */
   openSnackBarError() {
     this._snackBar.open(this.snackMsg, 'x', {
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
       duration: 5000,
-      panelClass:['redNoMatch']
-        });
+      panelClass: ['redNoMatch'],
+    });
   }
 
   onCheckboxChange(e: any) {
@@ -354,12 +377,20 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
-  onCardClick(id:string){
-    this.router.navigate(['/productInfo/'+id])
+  /**
+   * navigate to product Info page with product id in url
+   * @param {string} id
+   * @memberof ProductsComponent
+   */
+  onCardClick(id: string) {
+    this.router.navigate(['/productInfo/' + id]);
   }
 
-  onAllProductClick(){
-    this.router.navigate(['/products'])
+  /**
+   * navigate to product list page
+   * @memberof ProductsComponent
+   */
+  onAllProductClick() {
+    this.router.navigate(['/products']);
   }
-
 }
