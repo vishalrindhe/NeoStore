@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "neostore-73c72": {
+      "hosting": {
+        "NeoStore": [
+          "neostore-73c72"
+        ]
+      }
+    }
+  }
+}

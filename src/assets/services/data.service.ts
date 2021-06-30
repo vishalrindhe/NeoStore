@@ -32,6 +32,8 @@ public isProfile=true;
 public isChangePassword=false;
 public isAddress=false;
 public isOrder=false;
+public fireStoreToken:any;
+public fireToken="key=AAAA0W_Jefs:APA91bH4QsaccBIB8PDajBGTpkOe87odx3505emW7By3wvWL3czIdD-WjwsGztupZDhH-rhACqpsMArf4s3n0Mdlws5kFIb5kOCSnrv6asamHbhW0cn0M3uUpdkn2_Cnn1yS7mPSWRl8"
 
 loginPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/login', data)
@@ -135,6 +137,10 @@ resetPasswordPost(data: any): Observable<any>{
   return this.http.post(this.url + '/api/auth/set-password', data)
 }
 
+pushNotification(data:any){
+  return this.http.post("https://fcm.googleapis.com/fcm/send",data,{ headers: {Authorization:this.fireToken}})
+}
+
 // changePasswordPost(data: any): Observable<any>{
 //   return this.http.post(this.url + '/api/auth/set-password', data)
 // }
@@ -174,7 +180,10 @@ resetPasswordPost(data: any): Observable<any>{
   } = userProfile;
   myFirstPromise: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    console.log("firestoretoken:",this.fireStoreToken);
+    
+  }
 
   public cart: {
     success: boolean;

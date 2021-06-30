@@ -117,7 +117,10 @@ import { DialogDeleteAddressComponent } from './pages/dialog-delete-address/dial
 // loader
 import { NgxSpinnerModule } from "ngx-spinner";
 
-
+// push notification
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -233,7 +236,11 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
     //loader
 
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
+    // push notification
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireMessagingModule
     ],
   providers: [
     {

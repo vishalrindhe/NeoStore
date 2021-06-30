@@ -32,6 +32,8 @@ mat-expansion-panel{
  .pointer
  {cursor: pointer;}
 
+
+//  fail/error snack bar
  ::ng-deep .redNoMatch
  {
      font-weight: bold;
@@ -39,6 +41,7 @@ mat-expansion-panel{
    background: #fc1201 !important;
  }
  
+//  success snack bar
  ::ng-deep .greenYesMatch
  {
      font-weight: bold;

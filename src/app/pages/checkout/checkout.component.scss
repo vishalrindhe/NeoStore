@@ -17,3 +17,12 @@
     width: 40vw;
     text-align: center;
 }
+
+
+//  success snack bar
+ ::ng-deep .greenYesMatch
+ {
+     font-weight: bold;
+   color:white;
+   background: rgb(14, 137, 14) !important;
+ }
