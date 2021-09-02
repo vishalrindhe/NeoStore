@@ -259,7 +259,8 @@ export class CheckoutComponent implements OnInit {
     let data1 = {
       "notification": {
       "title": "Order PLaced Successfully", 
-      "body": "Subscribe to might ghost hack youtube channel",
+
+      "body": "Click for order details",
       "icon":"../assets/images/n.png",
      "click_action" : "http://localhost:4200/my-account"
       },
